@@ -5,8 +5,6 @@ editnotes Bwork
 -Security GlobalData added to security
 -User bootstrap _initsecure added for array map GlobalData
 
-- Bwork_Data_Pdo added try catch around connect to avoid passwords visible on PDOException thrown
-
 - assign array in http request
 
 - paginator added to helper
