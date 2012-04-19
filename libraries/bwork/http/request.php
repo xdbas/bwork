@@ -80,7 +80,8 @@ class Bwork_Http_Request {
      */
     public function getParam($param, $default = "") {
         if(array_key_exists($param, $this->params) === false) {
-            if(isset($default)) {
+            if(isset($default) 
+                || $default === null) {
                 return $default;
             }
             throw new Bwork_Exception_HttpException(sprintf("Param: %s was undifined in URI Params.", $param));
