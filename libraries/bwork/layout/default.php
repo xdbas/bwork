@@ -127,7 +127,7 @@ class Bwork_Layout_Default implements Bwork_Layout_ILayout {
      * @return void 
      */
     public function __get($key) {
-        return $this->variables[$key];
+        return isset($this->variables[$key])? $this->variables[$key] : null;
     }
     
     /**

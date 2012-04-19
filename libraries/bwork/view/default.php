@@ -111,7 +111,7 @@ class Bwork_View_Default implements Bwork_View_IView {
      * @return void 
      */
     public function __get($key) {
-        return $this->variables[$key];
+        return isset($this->variables[$key])? $this->variables[$key] : null;
     }
     
     /**

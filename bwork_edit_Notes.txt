@@ -1,6 +1,5 @@
 editnotes Bwork
 
--__get edit on layout+view return null when empty
 -Directory handeling(ACtion, Dispatcher, Layouts)
 -HTTP REQUEST $default === NULL;
 -Security GlobalData added to security
