@@ -11,7 +11,3 @@ editnotes Bwork
 
 - NEED TO FIX TYPo IN VALIDATOR MIN/MAX LENGTH
 -Bwork_Validation_Validator_MaxLenght was set to lower than instead of <=
-
-
-Bugs Bwork
--Header does not work without EXIT(); after it

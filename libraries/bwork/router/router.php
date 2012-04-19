@@ -94,27 +94,25 @@ class Bwork_Router_Router {
      * @return void
      */
     public function route() {   
-        if(count($this->handlers) == 0) {
-            throw new Bwork_Exception_RouterException("There is no default Router Handler set for Bwork_Router_Router");
-        }
-        
         $routed = false;
-        foreach($this->handlers as $handler) {
-            if($handler->checkRoute($this->requestUri)) {
-                $params = $handler->getParams($this->requestUri);
-                
-                $this->controller   = $params['controller'];
-                $this->action       = $params['action'];
-                $this->mockParams   = $params['mockParams'];
-                $routed = true;
-                break;
+
+        if(count($this->handlers) > 0) {
+            foreach($this->handlers as $handler) {
+                if($handler->checkRoute($this->uriParams)) {
+                    $params = $handler->getParams($this->requestUri);
+                    
+                    $this->controller   = $params['controller'];
+                    $this->action       = $params['action'];
+                    $this->mockParams   = $params['mockParams'];
+                    $routed = true;
+                    break;
+                }
             }
         }
         
-        if($routed == false) {
+        if($routed === false) {
             $this->checkDefaultSegments();
         }
-        
     }
     
     /**
