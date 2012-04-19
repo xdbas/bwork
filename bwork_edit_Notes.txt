@@ -5,17 +5,14 @@ editnotes Bwork
 -Security GlobalData added to security
 -User bootstrap _initsecure added for array map GlobalData
 
--Bwork_View_Default $value =null -> $value value should never be null
--interface Bwork_View_IView edited as $value = null -> $value
+- Bwork_Data_Pdo added try catch around connect to avoid passwords visible on PDOException thrown
 
--Bwork_Validation_Validator_MaxLenght was set to lower than instead of <=
--strtolower changed in the Helper Handler
--Space at start of Bwork_Controller_Action
--Bwork_Data_Pdo added try catch around connect to avoid passwords visible on PDOException thrown
 - assign array in http request
-- paginator added to helper
-- NEED TO FIX TYPE IN VALIDATOR MIN/MAX LENGTH
 
+- paginator added to helper
+
+- NEED TO FIX TYPo IN VALIDATOR MIN/MAX LENGTH
+-Bwork_Validation_Validator_MaxLenght was set to lower than instead of <=
 
 
 Bugs Bwork
