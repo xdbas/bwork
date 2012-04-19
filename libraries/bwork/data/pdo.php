@@ -6,6 +6,7 @@
  * @subpackage Bwork_Data
  * @author Bas van Manen <basje1[at]gmail.com>
  * @version $id: Bwork Framework v 0.1
+ * @license http://creativecommons.org/licenses/by-nc-sa/3.0/
  */
 
 /**
@@ -34,15 +35,23 @@ abstract class Bwork_Data_PDO implements Bwork_Data_Interface {
      * @return void
      */
     public function  __construct() {
-        $dbParams = Bwork_Core_Registry::GetInstance()->getResource("Bwork_Config_Confighandler")->get("database");
-        $dsn = sprintf("mysql:dbname=%s;host=%s;port=%s", $dbParams["dbname"], $dbParams["host"], $dbParams["port"]);
+
+        $dbParams   = Bwork_Core_Registry::GetInstance()
+                        ->getResource("Bwork_Config_Confighandler")
+                        ->get("database");
+        $dsn        = sprintf("mysql:dbname=%s;host=%s;port=%s", $dbParams["dbname"], $dbParams["host"], $dbParams["port"]);
         
         $username = $dbParams["username"];
         $password = $dbParams["password"];
 
-        $this->db = new PDO($dsn, $username, $password);
-        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $this->db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+        try {
+            $this->db = new PDO($dsn, $username, $password);
+            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+        }
+        catch(PDOException $e) {
+            throw new Exception("PDO Error: Failed connecting to database.");
+        }
     }
 
     /**
