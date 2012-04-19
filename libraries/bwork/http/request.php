@@ -6,6 +6,7 @@
  * @subpackage Bwork_Http
  * @author Bas van Manen <basje1[at]gmail.com>
  * @version $id: Bwork Framework v 0.1
+ * @license http://creativecommons.org/licenses/by-nc-sa/3.0/
  */
 
 /**
@@ -45,7 +46,6 @@ class Bwork_Http_Request {
         $this->uri = substr($url, -1) == "/"? substr($url, 0 , -1) : $url;
         if(strpos($this->uri, "/") !== false) {
             $this->params = explode("/", $this->uri);
-                    
         } 
         else {
             if($this->uri != "") {
@@ -116,8 +116,7 @@ class Bwork_Http_Request {
      * @param string $key
      * @return string
      */
-    public function getArg($key)
-    {
+    public function getArg($key) {
         $args = $this->getArgs();
         if(count($args) == 0) {
             throw new Bwork_Exception_HttpException("No arguments found in Http URI.");
@@ -128,6 +127,15 @@ class Bwork_Http_Request {
         }
 
         return $args[$key];
+    }
+
+    /**
+     * 
+     *
+     *
+     */
+    public function create($url) {
+
     }
     
     /**
