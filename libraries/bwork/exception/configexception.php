@@ -1,4 +1,2 @@
 <?php
-class Bwork_Exception_ConfigException extends Exception {
-    
-}
+class Bwork_Exception_ConfigException extends Exception {}

@@ -6,6 +6,7 @@
  * @subpackage Bwork
  * @author Bas van Manen <basje1[at]gmail.com>
  * @version $id: Bwork Framework v 0.1
+ * @license http://creativecommons.org/licenses/by-nc-sa/3.0/
  */
 
 /**
@@ -15,7 +16,7 @@
  * attempts to require the class its file by resolving the namespace
  *
  * @package Bwork
- * @subpackage Bwork_Controller
+ * @subpackage Bwork
  * @version v 0.1
  */
 class Bwork_Autoload {

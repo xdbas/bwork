@@ -1,12 +1,13 @@
 <?php
 /**
- * Omega Framework
+ * Bwork Framework
  *
- * @package Omega
- * @subpackage Omega_Validation
- * @author Jorik Zweers <jorikzweers[at]gmail.com>
+ * @package Bwork
+ * @subpackage Bwork_Validation
  * @author Bas van Manen <basje1[at]gmail.com>
- * @version $id: Omega Framework v 0.3
+ * @author Jorik Zweers <jorikzweers[at]gmail.com>
+ * @version $id: Bwork Framework v 0.1
+ * @license http://creativecommons.org/licenses/by-nc-sa/3.0/
  */
 
 /**
@@ -14,10 +15,10 @@
  *
  * Example:
  * <code>
- * $validator = new Omega_Validation_FormValidation();
+ * $validator = new Bwork_Validation_FormValidation();
  * $validator->add("password", "User Password", array(
- *     new Omega_Validation_Validator_Required(),
- *     new Omega_Validation_Validator_MinLength(10)
+ *     new Bwork_Validation_Validator_Required(),
+ *     new Bwork_Validation_Validator_MinLength(10)
  * ));
  *
  * if($validator->validate()) {
@@ -25,12 +26,13 @@
  * }
  * </code>
  *
- * @package Omega
- * @subpackage Omega_Validation
+ * @package Bwork
+ * @subpackage Bwork_Validation
  * @version v 0.1
  */
-class Bwork_Validation_FormValidation implements Bwork_Validation_Interface
-{
+class Bwork_Validation_FormValidation 
+    implements Bwork_Validation_Interface {
+
     const POST  = 0;
     const GET   = 1;
 
@@ -85,10 +87,12 @@ class Bwork_Validation_FormValidation implements Bwork_Validation_Interface
             $data = isset($_GET[$key]) ? $_GET[$key] : null;
         }
 
-        $this->data[] = array("key"        => $key,
-                              "data"       => $data,
-                              "name"       => $label,
-                              "validators" => $validators);
+        $this->data[] = array
+            "key"        => $key,
+            "data"       => $data,
+            "name"       => $label,
+            "validators" => $validators
+        );
     }
     
     /**
@@ -99,10 +103,12 @@ class Bwork_Validation_FormValidation implements Bwork_Validation_Interface
      * @param array $validators
      */
     public function addString($data, $label, array $validators) {
-        $this->data[] = array("key"        => $label,
-                              "data"       => $data,
-                              "name"       => $label,
-                              "validators" => $validators);
+        $this->data[] = array(
+            "key"        => $label,
+            "data"       => $data,
+            "name"       => $label,
+            "validators" => $validators
+        );
     }
     /**
      * This method is used to validate all inputs

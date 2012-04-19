@@ -11,3 +11,9 @@ editnotes Bwork
 
 - NEED TO FIX TYPo IN VALIDATOR MIN/MAX LENGTH
 -Bwork_Validation_Validator_MaxLenght was set to lower than instead of <=
+
+- remove all exceptions from Bwork_Exception and move it to every subpackes
+
+- Think about helpers directory/namespace.
+
+- Standard for singlequotes throughout the project

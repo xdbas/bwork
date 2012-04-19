@@ -3,9 +3,10 @@
  * Bwork Framework
  *
  * @package Bwork
- * @subpackage Bwork_Controller
+ * @subpackage Bwork
  * @author Bas van Manen <basje1[at]gmail.com>
  * @version $id: Bwork Framework v 0.1
+ * @license http://creativecommons.org/licenses/by-nc-sa/3.0/
  */
 
 /**
@@ -15,7 +16,7 @@
  * the registry
  *
  * @package Bwork
- * @subpackage Bwork_Controller
+ * @subpackage Bwork
  * @version v 0.3
  */
 class Bwork_Application {

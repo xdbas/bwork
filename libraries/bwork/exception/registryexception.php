@@ -1,4 +1,2 @@
 <?php
-class Bwork_Exception_RegistryException extends exception{
-    
-}
+class Bwork_Exception_RegistryException extends exception {}

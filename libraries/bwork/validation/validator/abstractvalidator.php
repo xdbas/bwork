@@ -1,12 +1,13 @@
 <?php
 /**
- * Omega Framework
+ * Bwork Framework
  *
- * @package Omega
- * @subpackage Omega_Validation_Validator
- * @author Jorik Zweers <jorikzweers[at]gmail.com>
+ * @package Bwork
+ * @subpackage Bwork_Validation_Validator
  * @author Bas van Manen <basje1[at]gmail.com>
- * @version $id: Omega Framework v 0.3
+ * @author Jorik Zweers <jorikzweers[at]gmail.com>
+ * @version $id: Bwork Framework v 0.1
+ * @license http://creativecommons.org/licenses/by-nc-sa/3.0/
  */
 
 /**
@@ -14,11 +15,12 @@
  *
  * This is the main class for all validators
  *
- * @package Omega
- * @subpackage Omega_Validation_Validator
+ * @package Bwork
+ * @subpackage Bwork_Validation_Validator
  * @version v 0.1
  */
-abstract class Bwork_Validation_Validator_AbstractValidator implements Bwork_Validation_Validator_Interface {
+abstract class Bwork_Validation_Validator_AbstractValidator 
+    implements Bwork_Validation_Validator_Interface {
     
     /**
      * The input key
@@ -103,4 +105,5 @@ abstract class Bwork_Validation_Validator_AbstractValidator implements Bwork_Val
     public function setMessage($message) {
         $this->message = $message;
     }
+
 }

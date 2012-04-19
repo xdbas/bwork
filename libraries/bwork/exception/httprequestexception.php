@@ -1,6 +1,2 @@
 <?php
-
-class Bwork_Exception_HttpException extends Exception {
-    
-}
-?>
+class Bwork_Exception_HttpException extends Exception {}

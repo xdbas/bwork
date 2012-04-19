@@ -1,24 +1,26 @@
 <?php
 /**
- * Omega Framework
+ * Bwork Framework
  *
- * @package Omega
- * @subpackage Omega_Validation_Validator
- * @author Jorik Zweers <jorikzweers[at]gmail.com>
+ * @package Bwork
+ * @subpackage Bwork_Validation_Validator
  * @author Bas van Manen <basje1[at]gmail.com>
- * @version $id: Omega Framework v 0.3
+ * @author Jorik Zweers <jorikzweers[at]gmail.com>
+ * @version $id: Bwork Framework v 0.1
+ * @license http://creativecommons.org/licenses/by-nc-sa/3.0/
  */
 
 /**
- * MaxLength
+ * Required
  *
  * This validator checks the input is set
  *
- * @package Omega
- * @subpackage Omega_Validation_Validator
+ * @package Bwork
+ * @subpackage Bwork_Validation_Validator
  * @version v 0.1
  */
-final class Bwork_Validation_Validator_Required extends Bwork_Validation_Validator_AbstractValidator {
+final class Bwork_Validation_Validator_Required 
+    extends Bwork_Validation_Validator_AbstractValidator {
     
     /**
      * The default message
@@ -35,4 +37,5 @@ final class Bwork_Validation_Validator_Required extends Bwork_Validation_Validat
     public function execute() {
         return mb_strlen((string)$this->input) > 0;
     }
+
 }

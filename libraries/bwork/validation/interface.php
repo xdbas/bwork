@@ -1,19 +1,20 @@
 <?php
 /**
- * Omega Framework
+ * Bwork Framework
  *
- * @package Omega
- * @subpackage Omega_Validation
- * @author Jorik Zweers <jorikzweers[at]gmail.com>
+ * @package Bwork
+ * @subpackage Bwork_Validation
  * @author Bas van Manen <basje1[at]gmail.com>
- * @version $id: Omega Framework v 0.3
+ * @author Jorik Zweers <jorikzweers[at]gmail.com>
+ * @version $id: Bwork Framework v 0.1
+ * @license http://creativecommons.org/licenses/by-nc-sa/3.0/
  */
 
 /**
  * This is an interface for all form validation classes
  *
- * @package Omega
- * @subpackage Omega_Validation
+ * @package Bwork
+ * @subpackage Bwork_Validation
  * @version v 0.1
  */
 interface Bwork_Validation_Interface {
@@ -39,4 +40,5 @@ interface Bwork_Validation_Interface {
      * @param array $message_array
      */
     public function setMessages(array $message_array);
+
 }
