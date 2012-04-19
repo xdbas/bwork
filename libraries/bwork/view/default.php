@@ -60,7 +60,7 @@ class Bwork_View_Default implements Bwork_View_IView {
      * @access public
      * @return void
      */
-    public function assign($key, $value = null) {
+    public function assign($key, $value) {
         $this->variables[$key] = $value;
     }
     

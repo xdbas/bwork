@@ -1,11 +1,13 @@
 editnotes Bwork
 
 -Directory handeling(ACtion, Dispatcher, Layouts)
--HTTP REQUEST $default === NULL;
+
 -Security GlobalData added to security
 -User bootstrap _initsecure added for array map GlobalData
+
 -Bwork_View_Default $value =null -> $value value should never be null
 -interface Bwork_View_IView edited as $value = null -> $value
+
 -Bwork_Validation_Validator_MaxLenght was set to lower than instead of <=
 -strtolower changed in the Helper Handler
 -Space at start of Bwork_Controller_Action
