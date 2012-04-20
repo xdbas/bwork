@@ -27,7 +27,7 @@ final class Bwork_Validation_Validator_Required
      *
      * @var string
      */
-    protected $default_message = "[%s] is required.";
+    protected $default_message = '[%s] is required.';
 
     /**
      * This method is used to execute the validator

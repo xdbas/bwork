@@ -37,12 +37,12 @@ abstract class Bwork_Data_PDO implements Bwork_Data_Interface {
     public function  __construct() {
 
         $dbParams   = Bwork_Core_Registry::GetInstance()
-                        ->getResource("Bwork_Config_Confighandler")
-                        ->get("database");
-        $dsn        = sprintf("mysql:dbname=%s;host=%s;port=%s", $dbParams["dbname"], $dbParams["host"], $dbParams["port"]);
+                        ->getResource('Bwork_Config_Confighandler')
+                        ->get('database');
+        $dsn        = sprintf('mysql:dbname=%s;host=%s;port=%s', $dbParams['dbname'], $dbParams['host'], $dbParams['port']);
         
-        $username = $dbParams["username"];
-        $password = $dbParams["password"];
+        $username = $dbParams['username'];
+        $password = $dbParams['password'];
 
         try {
             $this->db = new PDO($dsn, $username, $password);
@@ -50,7 +50,7 @@ abstract class Bwork_Data_PDO implements Bwork_Data_Interface {
             $this->db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         }
         catch(PDOException $e) {
-            throw new Exception("PDO Error: Failed connecting to database.");
+            throw new Exception('PDO Error: Failed connecting to database.');
         }
     }
 

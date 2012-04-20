@@ -19,14 +19,15 @@
  * @subpackage Bwork_Config
  * @version v 0.1
  */
-final class Bwork_Config_Parser_PHPConfigParser implements Bwork_Config_Parser_IConfigParser {
+final class Bwork_Config_Parser_PHPConfigParser 
+    implements Bwork_Config_Parser_IConfigParser {
 	
     /**
      * @see Bwork_Config_Parsers_IConfigParser::parse()
      */
     public function parse($file) {
         $config = array();
-        require_once APP."config/".$file;
+        require_once APP.'config/'.$file;
 
         return $config;
     }

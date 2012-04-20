@@ -17,3 +17,5 @@ editnotes Bwork
 - Think about helpers directory/namespace.
 
 - Standard for singlequotes throughout the project
+
+- better names for interface/abstract

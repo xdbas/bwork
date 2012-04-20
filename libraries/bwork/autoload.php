@@ -67,10 +67,10 @@ class Bwork_Autoload {
      */
     private function autoload($class) {
         $class = strtolower($class);
-        $path = str_replace("_", DIRECTORY_SEPARATOR, $class.'.php');
+        $path = str_replace('_', DIRECTORY_SEPARATOR, $class.'.php');
 
-        if(substr($class, -5) == "model") {
-            $class = substr($class, 0 , strpos($class, "model")).".php";
+        if(substr($class, -5) == 'model') {
+            $class = substr($class, 0 , strpos($class, 'model')).'.php';
             if(file_exists(APP.'models'.DIRECTORY_SEPARATOR.$class)) {
                 require_once APP.'models'.DIRECTORY_SEPARATOR.$class;
             }
@@ -82,7 +82,7 @@ class Bwork_Autoload {
             require_once LIBS.$path;
         } 
         else {
-            throw new Exception($path." Was not found.");
+            throw new Exception($path.' Was not found.');
         }
     }
     

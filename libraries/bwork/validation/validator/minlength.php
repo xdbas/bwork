@@ -35,7 +35,7 @@ final class Bwork_Validation_Validator_MinLength
      * @param string $message
      */
     public function __construct($length, $message = NULL) {
-        $this->default_message  = "[%s] should have atleast " . $length . " characters";
+        $this->default_message  = '[%s] should have atleast ' . $length . ' characters';
         $this->min_length       = $length;
         $this->params[]         = $length;
 

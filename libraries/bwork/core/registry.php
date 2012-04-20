@@ -75,7 +75,7 @@ class Bwork_Core_Registry {
      */
     public function getResource($class_name) {
         if($this->exists(strtolower($class_name)) === false) {
-            throw new Bwork_Exception_RegistryException(sprintf("Class: %s was not found in Registry.", $class_name));
+            throw new Bwork_Exception_RegistryException(sprintf('Class: %s was not found in Registry.', $class_name));
         }
         
         return $this->objects[strtolower($class_name)];
@@ -91,13 +91,13 @@ class Bwork_Core_Registry {
      */
     public function setResource($object, $alias = null) {
         if(is_object($object) === false) {
-            throw new Bwork_Exception_RegistryException("Resource is not an object.");
+            throw new Bwork_Exception_RegistryException('Resource is not an object.');
         }
 
         $name = is_null($alias) || is_string($alias) == false? strtolower(get_class($object)) : strtolower($alias);
         
         if($this->exists($name)) {
-            throw new Bwork_Exception_RegistryException(sprintf("Class: %s already exists in Registry.", $name));
+            throw new Bwork_Exception_RegistryException(sprintf('Class: %s already exists in Registry.', $name));
         }
         
         $this->objects[$name] = $object;

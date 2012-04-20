@@ -52,9 +52,9 @@ class Bwork_Bootstrap_PreBootstrap extends Bwork_Bootstrap_Bootstrap {
     public function _initConfig() {
         $config = new Bwork_Config_Confighandler();
         
-        $config->setParser("php", new Bwork_Config_Parser_PHPConfigParser())
-               ->setParser("xml", new Bwork_Config_Parser_XMLConfigParser())
-               ->setParser("ini", new Bwork_Config_Parser_IniConfigParser());
+        $config->setParser('php', new Bwork_Config_Parser_PHPConfigParser())
+               ->setParser('xml', new Bwork_Config_Parser_XMLConfigParser())
+               ->setParser('ini', new Bwork_Config_Parser_IniConfigParser());
         
         return $config;
     }
@@ -66,8 +66,7 @@ class Bwork_Bootstrap_PreBootstrap extends Bwork_Bootstrap_Bootstrap {
      */
     public function _initRouter() {
         $router = new Bwork_Router_Router(
-                Bwork_Core_Registry::getInstance()
-                ->getResource("Bwork_Http_Request")
+                Bwork_Core_Registry::getInstance()->getResource('Bwork_Http_Request')
         );
         $router->setHandler(new Bwork_Router_Handler_Default());
         

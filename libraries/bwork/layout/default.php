@@ -91,8 +91,8 @@ class Bwork_Layout_Default implements Bwork_Layout_ILayout {
        ob_start();
        
        require_once Bwork_Core_Registry::GetInstance()
-                        ->getResource("Bwork_Config_Confighandler")
-                        ->get("layouts_path")
+                        ->getResource('Bwork_Config_Confighandler')
+                        ->get('layouts_path')
                         .$this->layout;
        $content = ob_get_contents();
        

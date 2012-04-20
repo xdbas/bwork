@@ -42,13 +42,13 @@ class Bwork_View_Default implements Bwork_View_IView {
      */
     public function __construct($template = null) {
         if($template == null) {
-            $router = Bwork_Core_Registry::GetInstance()->getResource("Bwork_Router_Router");
+            $router = Bwork_Core_Registry::GetInstance()->getResource('Bwork_Router_Router');
             
            $template_name = $router->controller.DIRECTORY_SEPARATOR.$router->action;
            
            $this->view = $template_name.Bwork_Core_Registry::GetInstance()
-                                            ->getResource("Bwork_Config_Confighandler")
-                                            ->get("default_view_extension");
+                                            ->getResource('Bwork_Config_Confighandler')
+                                            ->get('default_view_extension');
         } else {
             $this->view = $template;
         }
@@ -84,8 +84,8 @@ class Bwork_View_Default implements Bwork_View_IView {
         ob_start();
         
         require_once Bwork_Core_Registry::GetInstance()
-                        ->getResource("Bwork_Config_Confighandler")
-                        ->get("scripts_path")
+                        ->getResource('Bwork_Config_Confighandler')
+                        ->get('scripts_path')
                         .$this->view;
        
         $content = ob_get_contents();

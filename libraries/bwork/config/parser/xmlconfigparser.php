@@ -6,6 +6,7 @@
  * @subpackage Bwork_Config
  * @author Bas van Manen <basje1[at]gmail.com>
  * @version $id: Bwork Framework v 0.1
+ * @license http://creativecommons.org/licenses/by-nc-sa/3.0/
  */
 
 /**
@@ -18,7 +19,8 @@
  * @subpackage Bwork_Config
  * @version v 0.1
  */
-final class Bwork_Config_Parser_XMLConfigParser implements Bwork_Config_Parser_IConfigParser {
+final class Bwork_Config_Parser_XMLConfigParser 
+    implements Bwork_Config_Parser_IConfigParser {
 
     /**
      * @see Bwork_Config_Parsers_IConfigParser::parse()
@@ -27,7 +29,7 @@ final class Bwork_Config_Parser_XMLConfigParser implements Bwork_Config_Parser_I
         $config = array();
 
         $xml_reader = new XMLReader();
-        $xml_reader->open(APP."config/".$file);
+        $xml_reader->open(APP.'config/'.$file);
         
         while ($xml_reader->read()) {
             if ($xml_reader->nodeType == XMLREADER::ELEMENT && $xml_reader->localName != "config") {

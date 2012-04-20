@@ -52,7 +52,7 @@ final class Bwork_Config_Confighandler implements Bwork_config_IConfighandler {
                 $data = $this->parsers[$file_extension]->parse($file);
             } 
             else {
-                throw new Bwork_Exception_ConfigException(sprintf("File type %s is not supported.", $file_extension));
+                throw new Bwork_Exception_ConfigException(sprintf('File type %s is not supported.', $file_extension));
             }
         }
         
@@ -70,7 +70,7 @@ final class Bwork_Config_Confighandler implements Bwork_config_IConfighandler {
      */
     public function loadArray(array $data) {
         if(is_array($data) == false) {
-            throw new Bwork_Exception_ConfigException("Iinput data should be an array.");
+            throw new Bwork_Exception_ConfigException('Input data should be an array.');
         }
    
         $this->settings = array_merge($this->settings, $data);
@@ -85,11 +85,11 @@ final class Bwork_Config_Confighandler implements Bwork_config_IConfighandler {
      */
     public function setParser($ext, Bwork_Config_Parser_IConfigParser $parser) {
         if(is_object($parser) === false) {
-            throw new Bwork_Exception_ConfigException("Parser is not an object.");
+            throw new Bwork_Exception_ConfigException('Parser is not an object.');
         }
 
         if($parser instanceof Bwork_Config_Parser_IConfigParser === false) {
-            throw new Bwork_Exception_ConfigException("Parser is not an instance of IConfigParser.");
+            throw new Bwork_Exception_ConfigException('Parser is not an instance of IConfigParser.');
         }
 
         $this->parsers[$ext] = $parser;
@@ -118,7 +118,7 @@ final class Bwork_Config_Confighandler implements Bwork_config_IConfighandler {
      */
     public function set($key, $value) {
         if($this->exists($key) === true){
-            throw new Bwork_Exception_ConfigException("This setting is already set.");
+            throw new Bwork_Exception_ConfigException('This setting is already set.');
         }
 
         $this->settings[$key] = $value;
@@ -144,7 +144,7 @@ final class Bwork_Config_Confighandler implements Bwork_config_IConfighandler {
      */
     public function get($key) {
         if($this->exists($key) === false) {
-            throw new Bwork_Exception_ConfigException(sprintf("%s: Is not found in Bwork_Config_Confighandler::Settings", $key));
+            throw new Bwork_Exception_ConfigException(sprintf('%s: Is not found in Bwork_Config_Confighandler::Settings', $key));
         }
 
         return $this->settings[$key];

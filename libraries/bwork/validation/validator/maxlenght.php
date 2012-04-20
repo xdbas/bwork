@@ -31,7 +31,7 @@ final class Bwork_Validation_Validator_MaxLenght
      * @param string $message
      */
     public function __construct($length, $message = NULL) {
-        $this->default_message  = "[%s] exceeded the maximum length of " . $length . ".";
+        $this->default_message  = '[%s] exceeded the maximum length of ' . $length . '.';
         $this->max_length       = $length;
         $this->params[]         = $length;
 

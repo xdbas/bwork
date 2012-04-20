@@ -29,7 +29,7 @@ class Bwork_Application {
      * @return void
      */
     public static function _initAutoloader() {
-        require_once LIBS."bwork/autoload.php";
+        require_once LIBS.'bwork/autoload.php';
         
         bwork_autoload::init();
     }
@@ -63,7 +63,7 @@ class Bwork_Application {
      * @return void
      */
     public static function Run() {
-        $router = Bwork_Core_Registry::getInstance()->getResource("Bwork_Router_Router");
+        $router = Bwork_Core_Registry::getInstance()->getResource('Bwork_Router_Router');
         $router->route();
         
         self::Dispatch($router);

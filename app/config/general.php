@@ -1,11 +1,11 @@
 <?php
 $config['subdirectory_url'] = DIRECTORY_SEPARATOR.'bwork'.DIRECTORY_SEPARATOR;
 
-$config['default_controller'] = "test";
-$config['default_action'] = "index";
+$config['default_controller'] = 'test';
+$config['default_action'] = 'index';
 
-$config['default_view_extensions'] = array("php", "html", "xml");
-$config['default_view_extension'] = ".php";
+$config['default_view_extensions'] = array('php', 'html', 'xml');
+$config['default_view_extension'] = '.php';
 
 $config['controller_path'] = APP.'controllers'.DIRECTORY_SEPARATOR;
 $config['scripts_path'] = APP.'view'.DIRECTORY_SEPARATOR.'scripts'.DIRECTORY_SEPARATOR;

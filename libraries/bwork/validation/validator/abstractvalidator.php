@@ -90,7 +90,7 @@ abstract class Bwork_Validation_Validator_AbstractValidator
         }
 
         for($i = 0; $i < sizeof($this->params); $i++) {
-            $key = "{param" . ($i + 1) . "}";
+            $key = '{param' . ($i + 1) . '}';
             $this->message = str_replace($key, $this->params[$i], $this->message);
         }
 

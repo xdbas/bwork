@@ -81,7 +81,7 @@ class Bwork_Router_Router {
      */
     public function setHandler(Bwork_Router_Handler_Interface $handler) {
         if($handler instanceof Bwork_Router_Handler_Interface == false) {
-            throw new Bwork_Exception_RouterException(sprintf("%s should be and instance of Bwork_Router_Handler_Interface", get_class($handler)));
+            throw new Bwork_Exception_RouterException(sprintf('%s should be and instance of Bwork_Router_Handler_Interface', get_class($handler)));
         }
         
         $this->handlers[get_class($handler)] = $handler;
@@ -133,11 +133,11 @@ class Bwork_Router_Router {
            $this->action = $this->uriParams[1];
         }
         else {
-            $config = Bwork_Core_Registry::getInstance()->getResource("Bwork_Config_Confighandler");
-            if($config->exists("default_action") == false) {
-                throw new Bwork_Exception_RouterException("There was no default_action property set in Bwork_Config_Confighandler");
+            $config = Bwork_Core_Registry::getInstance()->getResource('Bwork_Config_Confighandler');
+            if($config->exists('default_action') == false) {
+                throw new Bwork_Exception_RouterException('There was no default_action property set in Bwork_Config_Confighandler');
             }
-            $this->action = $config->get("default_action");
+            $this->action = $config->get('default_action');
         }
         
         $this->mockParams = array();
@@ -149,17 +149,17 @@ class Bwork_Router_Router {
      * @return void
      */
     public function setDefault() {
-        $config = Bwork_Core_Registry::getInstance()->getResource("Bwork_Config_Confighandler");
+        $config = Bwork_Core_Registry::getInstance()->getResource('Bwork_Config_Confighandler');
         
-        if($config->exists("default_controller") == false) {
-            throw new Bwork_Exception_RouterException("There was no default_controller property set in Bwork_Config_Confighandler");
+        if($config->exists('default_controller') == false) {
+            throw new Bwork_Exception_RouterException('There was no default_controller property set in Bwork_Config_Confighandler');
         }
-        $this->controller = $config->get("default_controller");
+        $this->controller = $config->get('default_controller');
         
-        if($config->exists("default_action") == false) {
-            throw new Bwork_Exception_RouterException("There was no default_action property set in Bwork_Config_Confighandler");
+        if($config->exists('default_action') == false) {
+            throw new Bwork_Exception_RouterException('There was no default_action property set in Bwork_Config_Confighandler');
         }
-        $this->action = $config->get("default_action");
+        $this->action = $config->get('default_action');
         
         $this->mockParams = array();
     }

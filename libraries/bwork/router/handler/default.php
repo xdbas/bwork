@@ -31,11 +31,11 @@ final class Bwork_Router_Handler_Default implements Bwork_Router_Handler_Interfa
      * @see Bwork_Router_Handler_Interface::checkRoute()
      */
     public function checkRoute($url) {
-        $url = implode("/", $url);
-        $config = Bwork_Core_Registry::getInstance()->getResource("Bwork_Config_Confighandler");
+        $url = implode('/', $url);
+        $config = Bwork_Core_Registry::getInstance()->getResource('Bwork_Config_Confighandler');
         
-        if($config->exists("route")) {
-            $routes = $config->get("route");
+        if($config->exists('route')) {
+            $routes = $config->get('route');
             if(array_key_exists($url, $routes)) {
                 $this->params = $routes[$url];
                 return true;

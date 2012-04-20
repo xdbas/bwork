@@ -49,12 +49,12 @@ class Bwork_Helper_Handler {
      */
     public static function registerNamespace($namespace) {
         if(in_array($namespace, self::$namespaces)) {
-            throw new Bwork_Exception_Helper(sprintf("Namespace: %s was already registered.", $namespace));
+            throw new Bwork_Exception_Helper(sprintf('Namespace: %s was already registered.', $namespace));
         }
         
-        $path = LIBS.str_replace("_", DIRECTORY_SEPARATOR, $namespace).DIRECTORY_SEPARATOR;
+        $path = LIBS.str_replace('_', DIRECTORY_SEPARATOR, $namespace).DIRECTORY_SEPARATOR;
         if(self::checkPath($path) == false) {
-            throw new Bwork_Exception_Helper(sprintf("Path: %s could not be found."));
+            throw new Bwork_Exception_Helper(sprintf('Path: %s could not be found.'));
         }
         
         self::$namespaces[$namespace] = $path;
@@ -81,7 +81,7 @@ class Bwork_Helper_Handler {
     public static function retrieveHelper($helper) {
         if(self::isAssigned($helper) == false) {
             if(self::requireHelperFile($helper) == false) {
-                throw new Bwork_Exception_Helper(sprintf("There was no helper found under the name %s", $helper));
+                throw new Bwork_Exception_Helper(sprintf('There was no helper found under the name %s', $helper));
             }
         }
         
@@ -102,7 +102,7 @@ class Bwork_Helper_Handler {
                 require strtolower($path.$helper).'.php';
                 
                 if(class_exists($namespace.'_'.$helper)) {
-                    $class_name = $namespace."_".$helper;
+                    $class_name = $namespace.'_'.$helper;
                     self::$helpers[$helper] = new $class_name();
                     return true;
                 }                

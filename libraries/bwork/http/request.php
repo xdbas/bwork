@@ -43,12 +43,12 @@ class Bwork_Http_Request {
     public function __construct() {
         $url = isset($_GET['url']) ? trim($_GET['url']) : '';
 
-        $this->uri = substr($url, -1) == "/"? substr($url, 0 , -1) : $url;
-        if(strpos($this->uri, "/") !== false) {
-            $this->params = explode("/", $this->uri);
+        $this->uri = substr($url, -1) == '/'? substr($url, 0 , -1) : $url;
+        if(strpos($this->uri, '/') !== false) {
+            $this->params = explode('/', $this->uri);
         } 
         else {
-            if($this->uri != "") {
+            if($this->uri != '') {
                 $this->params[] = $this->uri;
                 return;
             }
@@ -78,13 +78,13 @@ class Bwork_Http_Request {
      * @param string $default
      * @return string
      */
-    public function getParam($param, $default = "") {
+    public function getParam($param, $default = '') {
         if(array_key_exists($param, $this->params) === false) {
             if(isset($default) 
                 || $default === null) {
                 return $default;
             }
-            throw new Bwork_Exception_HttpException(sprintf("Param: %s was undifined in URI Params.", $param));
+            throw new Bwork_Exception_HttpException(sprintf('Param: %s was undifined in URI Params.', $param));
         }
         
         return $this->params[$param];
@@ -101,7 +101,7 @@ class Bwork_Http_Request {
        if(isset($this->params) && is_array($this->params)) {
            for($i = 0; $i < count($this->params); $i += 2) {
                $key     = $this->params[$i];
-               $value   = isset($this->params[$i + 1]) ? $this->params[$i + 1] : "";
+               $value   = isset($this->params[$i + 1]) ? $this->params[$i + 1] : '';
 
                $args[$key] = $value;
            }
@@ -119,11 +119,11 @@ class Bwork_Http_Request {
     public function getArg($key) {
         $args = $this->getArgs();
         if(count($args) == 0) {
-            throw new Bwork_Exception_HttpException("No arguments found in Http URI.");
+            throw new Bwork_Exception_HttpException('No arguments found in Http URI.');
         }
         
         if(isset($args[$key]) === false) {
-            throw new Bwork_Exception_HttpException(sprintf("Arg: %s was undefined in URI Args.", $key));
+            throw new Bwork_Exception_HttpException(sprintf('Arg: %s was undefined in URI Args.', $key));
         }
 
         return $args[$key];
@@ -183,7 +183,7 @@ class Bwork_Http_Request {
      * @return mixed
      */
     public function rawPost() {
-        return file_get_contents("php://input");
+        return file_get_contents('php://input');
     }
     
     /**
@@ -191,7 +191,7 @@ class Bwork_Http_Request {
      * @return string Bwork_Http_Request::Params
      */
     public function __toString() {
-        return implode("/", $this->params);
+        return implode('/', $this->params);
     }
     
 }

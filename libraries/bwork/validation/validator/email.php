@@ -26,7 +26,7 @@ final class Bwork_Validation_Validator_Email
      *
      * @var string
      */
-    protected $default_message = "[%s] should be a valid emailaddress.";
+    protected $default_message = '[%s] should be a valid emailaddress.';
 
     /**
      * This method is used to execute the validator

@@ -5,12 +5,12 @@ class Bwork_Helper_TestFunction {
     public $var;
     
     public function testFunction() {
-        $this->var = "lalalala";
+        $this->var = 'lalalala';
         return $this;
     }
  
     public function rewrite() {
-        $this->var = "trololololo";
+        $this->var = 'trololololo';
         return $this;
     }
     

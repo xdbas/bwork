@@ -55,14 +55,12 @@ abstract class Bwork_Controller_Action {
      */
     public function __construct() {
         $this->setRequest(
-                Bwork_Core_Registry::getInstance()
-                ->getResource("Bwork_Http_Request")
+            Bwork_Core_Registry::getInstance()->getResource('Bwork_Http_Request')
         ); 
         
         $this->setResponse(
-                Bwork_Core_Registry::getInstance()
-                ->getResource("Bwork_Http_Response"
-        ));
+            Bwork_Core_Registry::getInstance()->getResource('Bwork_Http_Response')
+        );
     }
     
     /**
@@ -129,7 +127,7 @@ abstract class Bwork_Controller_Action {
         }
         
         if(is_callable(array($this, $action)) == false) {
-            throw new Bwork_Exception_ControllerException(sprintf("Unable to call action %s", $action));
+            throw new Bwork_Exception_ControllerException(sprintf('Unable to call action %s', $action));
         }
         
         $methodReflection = new ReflectionMethod($this, $action);
@@ -143,7 +141,7 @@ abstract class Bwork_Controller_Action {
            $this->handleView($returnData); 
         }
         else {
-            throw new Bwork_Exception_ControllerException("Return type from controllerAction should either be a string or an object");
+            throw new Bwork_Exception_ControllerException('Return type from controllerAction should either be a string or an object');
         }
     }
     
@@ -166,13 +164,13 @@ abstract class Bwork_Controller_Action {
     public function handleView(Bwork_View_IView $view) {
 
         if($view instanceof Bwork_View_IView == false) {
-            throw new Bwork_Exception_ControllerException("ControllerAction return value should be an instance of Bwork_View_IView");
+            throw new Bwork_Exception_ControllerException('ControllerAction return value should be an instance of Bwork_View_IView');
         }
         
         $content = $view->fetch();
 
         if($this->layoutEnabled == true) {
-            $layout = Bwork_Core_Registry::getInstance()->getResource("Bwork_Layout_ILayout");
+            $layout = Bwork_Core_Registry::getInstance()->getResource('Bwork_Layout_ILayout');
             
             $layout->mergeVariables($view->getVariables());
             $layout->setContent($content);
@@ -190,11 +188,11 @@ abstract class Bwork_Controller_Action {
      * @return void
      */
     public function __call($name, $arguments) {
-        if(substr($name, -6) == "Action") {
-            throw new Bwork_Exception_ControllerException(sprintf("Action %s does not exists and has been cought by __call", $name));
+        if(substr($name, -6) == 'Action') {
+            throw new Bwork_Exception_ControllerException(sprintf('Action %s does not exists and has been cought by __call', $name));
         }
                 
-        throw new Bwork_Exception_ControllerException(sprintf("Method %s does not exists and has been cought by __call", $name));
+        throw new Bwork_Exception_ControllerException(sprintf('Method %s does not exists and has been cought by __call', $name));
     }
     
 }

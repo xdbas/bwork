@@ -12,8 +12,7 @@
 /**
  * Response
  *
- * This class will handle the response of the framework and should be the only
- * class allowed to actually echo something
+ * This class will handle the response of the framework.
  *
  * @package Bwork
  * @subpackage Bwork_Http
@@ -36,14 +35,14 @@ class Bwork_Http_Response {
      * @var int $statusCode
      * @access public
      */
-    public $statusCode      = 200;
+    public $statusCode = 200;
     
     /**
      * This will hold the status message possible set in a controller its 
-     * default value is "OK"
+     * default value is 'OK'
      * @var string $statusMessage
      */
-    public $statusMessage   = "OK";
+    public $statusMessage = 'OK';
     
     /**
      * This is een array with possible header statusses that will be used in the
@@ -52,11 +51,11 @@ class Bwork_Http_Response {
      * @access protected 
      */
     protected $response = array(
-        200 => "OK",
-        301 => "Moved Permanently",
-        302 => "Moved Temporarily",
-        304 => "Not Modified",
-        404 => "File Not Found"
+        200 => 'OK',
+        301 => 'Moved Permanently',
+        302 => 'Moved Temporarily',
+        304 => 'Not Modified',
+        404 => 'File Not Found'
     );
     
     /**
@@ -81,7 +80,7 @@ class Bwork_Http_Response {
             $description = $this->response[$code];
         }
         else if($description === null) {
-            throw new Bwork_Exception_HttpException(sprintf("Code not found, please define a description for [%s]", $code));
+            throw new Bwork_Exception_HttpException(sprintf('Code not found, please define a description for [%s]', $code));
         }
         
         $this->statusCode       = $code;
@@ -96,7 +95,7 @@ class Bwork_Http_Response {
      * @return void
      */
     public function outputStatus() {
-        header(sprintf("HTTP/1.1 %d %s", $this->statusCode, $this->statusMessage));
+        header(sprintf('HTTP/1.1 %d %s', $this->statusCode, $this->statusMessage));
     
         echo $this->body;
     }

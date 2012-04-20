@@ -33,14 +33,14 @@ abstract class Bwork_Bootstrap_Bootstrap {
         $methods = get_class_methods($this);
 
         foreach($methods as $key => $value) {
-            if(substr(strtolower($value), 0, 5) == "_init") {
+            if(substr(strtolower($value), 0, 5) == '_init') {
 
                 $methodReflection = new ReflectionMethod($this, $value);
                 $returnData = $methodReflection->invoke($this);
 
                 if($returnData != null) {
                     if(is_object($returnData) == false) {
-                        throw new Bwork_Exception_Bootstrap(sprintf("The return data of %s should be either null or an object.", $value));
+                        throw new Bwork_Exception_Bootstrap(sprintf('The return data of %s should be either null or an object.', $value));
                     }
 
                     if($returnData instanceof Bwork_Bootstrap_Alias) {

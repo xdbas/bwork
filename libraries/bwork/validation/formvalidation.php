@@ -16,7 +16,7 @@
  * Example:
  * <code>
  * $validator = new Bwork_Validation_FormValidation();
- * $validator->add("password", "User Password", array(
+ * $validator->add('password', 'User Password', array(
  *     new Bwork_Validation_Validator_Required(),
  *     new Bwork_Validation_Validator_MinLength(10)
  * ));
@@ -88,10 +88,10 @@ class Bwork_Validation_FormValidation
         }
 
         $this->data[] = array
-            "key"        => $key,
-            "data"       => $data,
-            "name"       => $label,
-            "validators" => $validators
+            'key'        => $key,
+            'data'       => $data,
+            'name'       => $label,
+            'validators' => $validators
         );
     }
     
@@ -104,10 +104,10 @@ class Bwork_Validation_FormValidation
      */
     public function addString($data, $label, array $validators) {
         $this->data[] = array(
-            "key"        => $label,
-            "data"       => $data,
-            "name"       => $label,
-            "validators" => $validators
+            'key'        => $label,
+            'data'       => $data,
+            'name'       => $label,
+            'validators' => $validators
         );
     }
     /**
@@ -118,18 +118,18 @@ class Bwork_Validation_FormValidation
     public function validate() {
         foreach($this->data as $input) {
             
-            foreach($input["validators"] as $validator) {
+            foreach($input['validators'] as $validator) {
                 $class_name = get_class($validator);
-                $key        = substr($class_name, strrpos($class_name, "_") + 1);
+                $key        = substr($class_name, strrpos($class_name, '_') + 1);
                 
                 if(array_key_exists($key, $this->messages)) {
                     $validator->setMessage($this->messages[$key]);
                 }
 
-                $validator->setInput($input["data"], $input["name"]);
+                $validator->setInput($input['data'], $input['name']);
                 
                 if($validator->execute() == false) {
-                    $this->errors[$input["key"]] = $validator->getMessage();
+                    $this->errors[$input['key']] = $validator->getMessage();
                     break;
                 }
             }
@@ -164,7 +164,7 @@ class Bwork_Validation_FormValidation
     public function setMessages(array $message_array) {
         
         if(is_array($message_array) == false) {
-            throw new Bwork_Exception_Validation(sprintf("%s should be in array format.", $message_array));
+            throw new Bwork_Exception_Validation(sprintf('%s should be in array format.', $message_array));
         }
         
         $this->messages = $message_array;

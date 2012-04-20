@@ -13,7 +13,7 @@ class HomeController extends Bwork_Controller_action {
     
     public function indexAction() {
         $layout = new Bwork_View_Default();
-        $layout->assign("testvar", "testvalue");
+        $layout->assign('testvar', 'testvalue');
         
         $testModel = new TestModel();
         
@@ -26,13 +26,13 @@ class HomeController extends Bwork_Controller_action {
     public function testAction() {
         
         $testVars = array(
-            "hello",
-            "1",
-            "0",
-            "",
+            'hello',
+            '1',
+            '0',
+            '',
             null,
-            "a",
-            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            'a',
+            'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
         );
         
         $validator = new Bwork_Validation_FormValidation();
@@ -48,7 +48,7 @@ class HomeController extends Bwork_Controller_action {
         }
         
         if($validator->validate()) {
-            echo "Ja";
+            echo 'Ja';
         }
         else {
             print_r($validator->getErrors());
