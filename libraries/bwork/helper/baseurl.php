@@ -40,9 +40,9 @@ class Bwork_Helper_BaseUrl {
 	 * @return void
 	 */
 	public function __construct() {
-		$config = Bwork_Core_Registry::getInstance()->getResource('Bwork_Config_Confighandler');
-
-		$this->defaultBaseUrl = $config->get('sub_url');
+		$this->defaultBaseUrl = Bwork_Core_Registry::getInstance()
+								->getResource('Bwork_Config_Confighandler')
+								->get('sub_url');
 	}
 
 	/**
