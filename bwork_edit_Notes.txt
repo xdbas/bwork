@@ -19,3 +19,6 @@ editnotes Bwork
 - Standard for singlequotes throughout the project
 
 - better names for interface/abstract
+
+- Css links added as helper
+- Directory check in config for base links
