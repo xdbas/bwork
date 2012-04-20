@@ -87,7 +87,7 @@ class Bwork_Validation_FormValidation
             $data = isset($_GET[$key]) ? $_GET[$key] : null;
         }
 
-        $this->data[] = array
+        $this->data[] = array(
             'key'        => $key,
             'data'       => $data,
             'name'       => $label,
