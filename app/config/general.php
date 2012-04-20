@@ -13,9 +13,11 @@ $config['layouts_path'] = APP.'view'.DIRECTORY_SEPARATOR.'layouts'.DIRECTORY_SEP
 
 $config['default_helper_path'] = LIBS.'bwork'.DIRECTORY_SEPARATOR.'helper'.DIRECTORY_SEPARATOR;
 
+$config['sub_url'] = '/';
+$config['base_url'] = 'http://' . $_SERVER['SERVER_NAME'] . $config['sub_url'];
+
 $config['database']['host'] = '127.0.0.1';
 $config['database']['dbname'] = 'bwork';
 $config['database']['username'] = 'root';
 $config['database']['password'] = 'root';
 $config['database']['port'] = '3306';
-?>

@@ -41,17 +41,19 @@ class Bwork_View_Default implements Bwork_View_IView {
      * @return void
      */
     public function __construct($template = null) {
+        $config = Bwork_Core_Registry::GetInstance()->getResource('Bwork_Config_Confighandler');
+
         if($template == null) {
             $router = Bwork_Core_Registry::GetInstance()->getResource('Bwork_Router_Router');
             
            $template_name = $router->controller.DIRECTORY_SEPARATOR.$router->action;
            
-           $this->view = $template_name.Bwork_Core_Registry::GetInstance()
-                                            ->getResource('Bwork_Config_Confighandler')
-                                            ->get('default_view_extension');
+           $this->view = $template_name.$config->get('default_view_extension');
         } else {
             $this->view = $template;
         }
+
+        $this->variables['base_url'] = $config->get('base_url');
     }
     
     /**
