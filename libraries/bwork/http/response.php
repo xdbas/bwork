@@ -83,8 +83,8 @@ class Bwork_Http_Response {
             throw new Bwork_Exception_HttpException(sprintf('Code not found, please define a description for [%s]', $code));
         }
         
-        $this->statusCode       = $code;
-        $this->statusMessage    = $description;
+        $this->statusCode    = $code;
+        $this->statusMessage = $description;
     }
     
     /**
