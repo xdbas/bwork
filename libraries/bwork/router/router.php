@@ -50,6 +50,13 @@ class Bwork_Router_Router {
     public $mockParams;
     
     /**
+     * Will hold the sub path to the controller file
+     * @access public
+     * @var String
+     */
+    public $subPath = null;
+
+    /**
      * Will hold the URI Params gained from Bwork_Http_Request object
      * @access protected
      * @var array 

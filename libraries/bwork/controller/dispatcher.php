@@ -16,7 +16,7 @@
  *
  * @package Bwork
  * @subpackage Bwork_Controller
- * @version v 0.2
+ * @version v 0.3
  */
 class Bwork_Controller_Dispatcher {
     
@@ -28,8 +28,13 @@ class Bwork_Controller_Dispatcher {
      * @return void
      */
     public function dispatch(Bwork_Router_Router $router) {
-                
+        
+        $config = Bwork_Core_Registry::getInstance()->getResource('Bwork_Config_Confighandler');    
+
         $controller = $router->controller;
+        $action     = $router->action;
+        $subPath    = $router->subPath;
+
         if(empty($controller)) {
             throw new Bwork_Exception_ControllerException('Controller was not set by the router.');
         }
@@ -39,8 +44,8 @@ class Bwork_Controller_Dispatcher {
         }
         
         $controllerName = $controller.'Controller';
-        $filename = $controller.'.php';
-        $controllerPath = Bwork_Core_Registry::getInstance()->getResource('Bwork_Config_Confighandler')->get('controller_path');
+        $filename       = $controller.'.php';
+        $controllerPath = $config->get('controller_path').$subPath;
         
         if(file_exists($controllerPath.$filename) == false) {
             throw new Exception(sprintf('%s does not exists', $controllerPath.$filename));
