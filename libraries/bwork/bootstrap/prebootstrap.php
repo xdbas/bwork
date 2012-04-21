@@ -68,7 +68,8 @@ class Bwork_Bootstrap_PreBootstrap extends Bwork_Bootstrap_Bootstrap {
         $router = new Bwork_Router_Router(
                 Bwork_Core_Registry::getInstance()->getResource('Bwork_Http_Request')
         );
-        $router->setHandler(new Bwork_Router_Handler_Default());
+        $router->setHandler(new Bwork_Router_Handler_Default())
+               ->setHandler(new Bwork_Router_Handler_SubPath());
         
         return $router;
     }
