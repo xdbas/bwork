@@ -1,18 +1,25 @@
 editnotes Bwork
 
--Directory handeling(ACtion, Dispatcher, Layouts)
+[
+- Rework Autoloaders. Make one for libs and one for application also remove singleton func.
+- Rename App CONSTS.. APPLICATION_PATH..
+- Also don't rely on autoloader when throwing exceptions before autoloader is loaded or at loader.
+- Checkout and use get_include_path().
+]
 
+[
 -Security GlobalData added to security
 -User bootstrap _initsecure added for array map GlobalData
-
-- paginator added to helper
+]
 
 - remove all exceptions from Bwork_Exception and move it to every subpackes
 
 - Think about helpers directory/namespace.
 
-- Standard for singlequotes throughout the project
-
 - better names for interface/abstract
 
+
+
 - Css links added as helper
+- paginator class added to libs
+- paginator added as helper
