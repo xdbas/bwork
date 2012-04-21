@@ -36,6 +36,7 @@ interface Bwork_Router_Handler_Interface {
      * return array(
      *  'controller'    => 'Controllername',
      *  'action'        => 'ActionName',
+     *  'subPath'       => 'subfoldername/'
      *  'mockParams'    => array('1', '2')
      * );
      * </code>
