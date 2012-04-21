@@ -112,6 +112,7 @@ class Bwork_Router_Router {
                     $this->controller   = $params['controller'];
                     $this->action       = $params['action'];
                     $this->mockParams   = $params['mockParams'];
+                    $this->subPath      = $params['subPath'];
                     $routed = true;
                     break;
                 }
