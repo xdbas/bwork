@@ -29,6 +29,7 @@ interface Bwork_Router_Handler_Interface {
     
     /**
      * Will return the controller/action/mockparams parameters in array format
+     * this method will only get called when checkRoute returns true
      * 
      * Example:
      * <code>

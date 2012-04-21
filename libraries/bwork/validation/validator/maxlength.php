@@ -19,7 +19,7 @@
  * @subpackage Bwork_Validation_Validator
  * @version v 0.1
  */
-final class Bwork_Validation_Validator_MaxLenght 
+final class Bwork_Validation_Validator_MaxLength 
     extends Bwork_Validation_Validator_AbstractValidator {
     
     private $max_length;
@@ -44,7 +44,7 @@ final class Bwork_Validation_Validator_MaxLenght
      * @return boolean
      */
     public function execute() {
-        return (empty($this->input) || mb_strlen($this->input) < $this->max_length);
+        return (empty($this->input) || mb_strlen($this->input) <= $this->max_length);
     }
     
 }
