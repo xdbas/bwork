@@ -5,12 +5,7 @@ editnotes Bwork
 -Security GlobalData added to security
 -User bootstrap _initsecure added for array map GlobalData
 
-- assign array in http request
-
 - paginator added to helper
-
-- NEED TO FIX TYPo IN VALIDATOR MIN/MAX LENGTH
--Bwork_Validation_Validator_MaxLenght was set to lower than instead of <=
 
 - remove all exceptions from Bwork_Exception and move it to every subpackes
 
@@ -21,4 +16,3 @@ editnotes Bwork
 - better names for interface/abstract
 
 - Css links added as helper
-- Directory check in config for base links
