@@ -17,7 +17,7 @@
  *
  * @package Bwork
  * @subpackage Bwork
- * @version v 0.3
+ * @version v 0.4
  */
 class Bwork_Application {
     
@@ -29,9 +29,15 @@ class Bwork_Application {
      * @return void
      */
     public static function _initAutoloader() {
-        require_once 'bwork/autoload.php';
-        
-        bwork_autoload::init();
+        require_once 'bwork/loader/libraryautoloader.php';
+        spl_autoload_register(array(
+            'Bwork_Loader_LibraryAutoloader', 'autoload'
+        ));
+
+        require_once 'bwork/loader/applicationautoloader.php';
+        spl_autoload_register(array(
+            'Bwork_Loader_ApplicationAutoloader', 'autoload'
+        ));
     }
     
     /**
@@ -45,7 +51,10 @@ class Bwork_Application {
     public static function _initBootstrap() {
         self::_initPreBootstrap();
         
-        $bootstrap = new Bootstrap();
+        if(file_exists(APPLICATION_PATH.'bootstrap.php')) {
+            require_once APPLICATION_PATH.'bootstrap.php';
+            $bootstrap = new Bootstrap();
+        }
     }
     
     /**

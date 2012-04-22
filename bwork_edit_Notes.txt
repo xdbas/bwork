@@ -1,13 +1,6 @@
 editnotes Bwork
 
 [
-- Rework Autoloaders. Make one for libs and one for application also remove singleton func.
-- Rename App CONSTS.. APPLICATION_PATH..
-- Also don't rely on autoloader when throwing exceptions before autoloader is loaded or at loader.
-- Checkout and use get_include_path().
-]
-
-[
 -Security GlobalData added to security
 -User bootstrap _initsecure added for array map GlobalData
 ]
@@ -15,9 +8,10 @@ editnotes Bwork
 - Coding style change =[
 
 - Check for modules instead of subpath
-
+[
+- exception handler
 - remove all exceptions from Bwork_Exception and move it to every subpackes
-
+]
 - Think about helpers directory/namespace.
 
 - better names for interface/abstract
