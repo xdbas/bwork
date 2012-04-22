@@ -27,7 +27,7 @@ final class Bwork_Config_Parser_IniConfigParser
      */
     public function parse($file) {
         $config = array();
-        $config = parse_ini_file(APP.'config/'.$file);
+        $config = parse_ini_file(APPLICATION_PATH.'config/'.$file);
 
         return $config;
     }

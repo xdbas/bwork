@@ -20,7 +20,8 @@
  * @version v 0.1
  * @static
  */
-class Bwork_Helper_Handler {
+class Bwork_Helper_Handler 
+{
     
     /**
      * This will hold all the registered namespaces where the key will be used
@@ -47,14 +48,15 @@ class Bwork_Helper_Handler {
      * @static
      * @access public 
      */
-    public static function registerNamespace($namespace) {
+    public static function registerNamespace($namespace) 
+    {
         if(in_array($namespace, self::$namespaces)) {
             throw new Bwork_Exception_Helper(sprintf('Namespace: %s was already registered.', $namespace));
         }
         
-        $path = LIBS.str_replace('_', DIRECTORY_SEPARATOR, $namespace).DIRECTORY_SEPARATOR;
+        $path = LIBRARY_PATH.str_replace('_', DIRECTORY_SEPARATOR, $namespace).DIRECTORY_SEPARATOR;
         if(self::checkPath($path) == false) {
-            throw new Bwork_Exception_Helper(sprintf('Path: %s could not be found.'));
+            throw new Bwork_Exception_Helper(sprintf('Path: %s could not be found.', $path));
         }
         
         self::$namespaces[$namespace] = $path;
@@ -67,7 +69,8 @@ class Bwork_Helper_Handler {
      * @access public
      * @static
      */
-    public static function checkPath($path) {
+    public static function checkPath($path) 
+    {
         return is_dir(strtolower($path));
     }
     
@@ -78,7 +81,8 @@ class Bwork_Helper_Handler {
      * @static
      * @return object 
      */
-    public static function retrieveHelper($helper) {
+    public static function retrieveHelper($helper) 
+    {
         if(self::isAssigned($helper) == false) {
             if(self::requireHelperFile($helper) == false) {
                 throw new Bwork_Exception_Helper(sprintf('There was no helper found under the name %s', $helper));
@@ -96,7 +100,8 @@ class Bwork_Helper_Handler {
      * @static
      * @return boolean 
      */
-    protected static function requireHelperFile($helper) {
+    protected static function requireHelperFile($helper) 
+    {
         foreach(self::$namespaces as $namespace => $path) {
             if(file_exists(strtolower($path.$helper).'.php')) {
                 require strtolower($path.$helper).'.php';
@@ -120,7 +125,8 @@ class Bwork_Helper_Handler {
      * @static
      * @return boolean 
      */
-    protected static function isAssigned($helper) {
+    protected static function isAssigned($helper) 
+    {
         return array_key_exists($helper, self::$helpers);
     }
     

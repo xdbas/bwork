@@ -29,7 +29,7 @@ final class Bwork_Config_Parser_XMLConfigParser
         $config = array();
 
         $xml_reader = new XMLReader();
-        $xml_reader->open(APP.'config/'.$file);
+        $xml_reader->open(APPLICATION_PATH.'config/'.$file);
         
         while ($xml_reader->read()) {
             if ($xml_reader->nodeType == XMLREADER::ELEMENT && $xml_reader->localName != "config") {

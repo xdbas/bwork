@@ -29,7 +29,7 @@ class Bwork_Application {
      * @return void
      */
     public static function _initAutoloader() {
-        require_once LIBS.'bwork/autoload.php';
+        require_once 'bwork/autoload.php';
         
         bwork_autoload::init();
     }

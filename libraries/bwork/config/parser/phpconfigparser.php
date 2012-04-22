@@ -27,7 +27,7 @@ final class Bwork_Config_Parser_PHPConfigParser
      */
     public function parse($file) {
         $config = array();
-        require_once APP.'config/'.$file;
+        require_once APPLICATION_PATH.'config/'.$file;
 
         return $config;
     }

@@ -71,18 +71,18 @@ class Bwork_Autoload {
 
         if(substr($class, -5) == 'model') {
             $class = substr($class, 0 , strpos($class, 'model')).'.php';
-            if(file_exists(APP.'models'.DIRECTORY_SEPARATOR.$class)) {
-                require_once APP.'models'.DIRECTORY_SEPARATOR.$class;
+            if(file_exists(APPLICATION_PATH.'models'.DIRECTORY_SEPARATOR.$class)) {
+                require_once APPLICATION_PATH.'models'.DIRECTORY_SEPARATOR.$class;
             }
         }
-        else if(file_exists(APP.$path)) {
-            require_once APP.$path;
+        else if(file_exists(APPLICATION_PATH.$path)) {
+            require_once APPLICATION_PATH.$path;
         } 
-        else if(file_exists(LIBS.$path)) {
-            require_once LIBS.$path;
+        else if(file_exists(LIBRARY_PATH.$path)) {
+            require_once LIBRARY_PATH.$path;
         } 
         else {
-            throw new Exception($path.' Was not found.');
+            throw new Exception(sprintf('[%s] Was not found.', $path));
         }
     }
     

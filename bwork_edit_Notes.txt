@@ -12,6 +12,10 @@ editnotes Bwork
 -User bootstrap _initsecure added for array map GlobalData
 ]
 
+- Coding style change =[
+
+- Check for modules instead of subpath
+
 - remove all exceptions from Bwork_Exception and move it to every subpackes
 
 - Think about helpers directory/namespace.
