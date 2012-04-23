@@ -20,7 +20,7 @@
  * @version v 0.1
  */
 final class Bwork_Config_Parser_XMLConfigParser 
-    implements Bwork_Config_Parser_IConfigParser {
+    implements Bwork_config_Handler {
 
     /**
      * @see Bwork_Config_Parsers_IConfigParser::parse()

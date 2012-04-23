@@ -19,7 +19,8 @@
  * @version v 0.2
  * @final
  */
-final class Bwork_Config_Confighandler implements Bwork_config_IConfighandler {
+final class Bwork_Config_Confighandler implements Bwork_config_Handler
+{
     
     /**
      * This will hold all the config settings set throughout the project
@@ -36,15 +37,10 @@ final class Bwork_Config_Confighandler implements Bwork_config_IConfighandler {
     private $parsers = array();
 
     /**
-     * This will check the file for it's filetype and will check if there is an
-     * handler set for this filetype, and will on success parse this file and
-     * merge its config data with the settings array
-     * 
-     * @param string $file 
-     * @access public
-     * @return Bwork_Config_Confighandler
+     * @see Bwork_Config_Handler::loadFile()
      */
-    public function loadFile($file) {
+    public function loadFile($file)
+    {
         if(is_string($file) === true) {
             $file_extension = substr($file, strrpos($file, '.') + 1);
 
@@ -62,13 +58,10 @@ final class Bwork_Config_Confighandler implements Bwork_config_IConfighandler {
     }
     
     /**
-     * This will attempt to merge the input data with the settings array
-     * 
-     * @access public
-     * @param array $data
-     * @return void
+     * @see Bwork_Config_Handler::loadArray()
      */
-    public function loadArray(array $data) {
+    public function loadArray(array $data)
+    {
         if(is_array($data) == false) {
             throw new Bwork_Exception_ConfigException('Input data should be an array.');
         }
@@ -79,16 +72,17 @@ final class Bwork_Config_Confighandler implements Bwork_config_IConfighandler {
     /**
      * Will attempt to add the parser to the $parsers
      * @param string $ext
-     * @param Bwork_Config_Parser_IConfigParser $parser
+     * @param Bwork_config_Handler $parser
      * @access public
      * @return Bwork_Config_Confighandler 
      */
-    public function setParser($ext, Bwork_Config_Parser_IConfigParser $parser) {
+    public function setParser($ext, Bwork_config_Handler $parser)
+    {
         if(is_object($parser) === false) {
             throw new Bwork_Exception_ConfigException('Parser is not an object.');
         }
 
-        if($parser instanceof Bwork_Config_Parser_IConfigParser === false) {
+        if($parser instanceof Bwork_config_Handler === false) {
             throw new Bwork_Exception_ConfigException('Parser is not an instance of IConfigParser.');
         }
 
@@ -105,7 +99,8 @@ final class Bwork_Config_Confighandler implements Bwork_config_IConfighandler {
      * @access public
      * @return Bwork_Config_Confighandler
      */
-    public function __set($key, $value) {
+    public function __set($key, $value)
+    {
         return $this->set($key, $value);
     }
 
@@ -116,7 +111,8 @@ final class Bwork_Config_Confighandler implements Bwork_config_IConfighandler {
      * @access public
      * @return Bwork_Config_Confighandler
      */
-    public function set($key, $value) {
+    public function set($key, $value)
+    {
         if($this->exists($key) === true){
             throw new Bwork_Exception_ConfigException('This setting is already set.');
         }
@@ -132,17 +128,16 @@ final class Bwork_Config_Confighandler implements Bwork_config_IConfighandler {
      * @param string $key
      * @return void 
      */
-    public function __get($key) {
+    public function __get($key)
+    {
         $this->get($key);
     }
 
     /**
-     * Will retrieve a setting from $settings
-     * @param string $key
-     * @access public
-     * @return void
+     * @see Bwork_Config_Handler::get()
      */
-    public function get($key) {
+    public function get($key)
+    {
         if($this->exists($key) === false) {
             throw new Bwork_Exception_ConfigException(sprintf('%s: Is not found in Bwork_Config_Confighandler::Settings', $key));
         }
@@ -156,7 +151,8 @@ final class Bwork_Config_Confighandler implements Bwork_config_IConfighandler {
      * @param string $key
      * @return string 
      */
-    public function __isset($key) {
+    public function __isset($key)
+    {
         return isset($this->settings[$key]);
     }
 
@@ -166,7 +162,8 @@ final class Bwork_Config_Confighandler implements Bwork_config_IConfighandler {
      * @access public
      * @return void 
      */
-    public function exists($key) {
+    public function exists($key)
+    {
         return array_key_exists($key, $this->settings);
     }
     
