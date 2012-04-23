@@ -22,8 +22,9 @@ interface Bwork_Config_Handler
      * handler set for this filetype, and will on success parse this file and
      * merge its config data with the settings array
      * 
-     * @param string $file 
      * @access public
+     * @param string $file 
+     * @throws Bwork_Config_Exception
      * @return Bwork_Config_Confighandler
      */
     public function loadFile($file);
@@ -33,14 +34,17 @@ interface Bwork_Config_Handler
      * 
      * @access public
      * @param array $data
+     * @throws Bwork_Config_Exception
      * @return void
      */
     public function loadArray(array $data);
     
     /**
      * Will retrieve a setting from Bwork_Config::$settings
-     * @param string $key
+     * 
      * @access public
+     * @param string $key
+     * @throws Bwork_Config_Exception
      * @return void
      */
     public function get($key);
