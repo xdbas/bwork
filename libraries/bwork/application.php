@@ -19,7 +19,8 @@
  * @subpackage Bwork
  * @version v 0.4
  */
-class Bwork_Application {
+class Bwork_Application 
+{
     
     /**
      * This function will require the autoloader class and initialize the object
@@ -28,7 +29,8 @@ class Bwork_Application {
      * @access public
      * @return void
      */
-    public static function _initAutoloader() {
+    public static function _initAutoloader() 
+    {
         require_once 'bwork/loader/libraryautoloader.php';
         spl_autoload_register(array(
             'Bwork_Loader_LibraryAutoloader', 'autoload'
@@ -48,7 +50,8 @@ class Bwork_Application {
      * @static
      * @return void
      */
-    public static function _initBootstrap() {
+    public static function _initBootstrap() 
+    {
         self::_initPreBootstrap();
         
         if(file_exists(APPLICATION_PATH.'bootstrap.php')) {
@@ -60,7 +63,8 @@ class Bwork_Application {
     /**
      * @see Bwork_Application::_initBootstrap
      */
-    public static function _initPreBootstrap() {
+    public static function _initPreBootstrap() 
+    {
         $prebootstrap = new Bwork_Bootstrap_PreBootstrap();
     }
     
@@ -71,7 +75,11 @@ class Bwork_Application {
      * @access public
      * @return void
      */
-    public static function Run() {
+    public static function Run() 
+    {
+        self::_initAutoloader();
+        self::_initBootstrap();
+        
         $router = Bwork_Core_Registry::getInstance()->getResource('Bwork_Router_Router');
         $router->route();
         
@@ -82,7 +90,8 @@ class Bwork_Application {
      * @see Bwork_Application::Run
      * @param Bwork_Router_Router $router
      */
-    public static function Dispatch(Bwork_Router_Router $router) {
+    public static function Dispatch(Bwork_Router_Router $router) 
+    {
         $dispatcher = new Bwork_Controller_Dispatcher();
         $dispatcher->dispatch($router);
     }
