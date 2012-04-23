@@ -21,7 +21,8 @@
  * @version v 0.1
  * @abstract
  */
-class Bwork_Bootstrap_Alias {
+class Bwork_Bootstrap_Alias
+{
     
     /**
      * This will hold the Alias name of the object
@@ -46,7 +47,8 @@ class Bwork_Bootstrap_Alias {
      * @param type $name
      * @param type $object 
      */
-    public function __construct($name, $object) {
+    public function __construct($name, $object)
+    {
         $this->name = $name;
         $this->object = $object;
     }

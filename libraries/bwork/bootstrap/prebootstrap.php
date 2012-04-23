@@ -20,14 +20,16 @@
  * @uses Bwork_Bootstrap_Bootstrap
  * @version v 0.1
  */
-class Bwork_Bootstrap_PreBootstrap extends Bwork_Bootstrap_AbstractBootstrap {
+class Bwork_Bootstrap_PreBootstrap extends Bwork_Bootstrap_AbstractBootstrap
+{
     
     /**
      * This will create the Http Request object
      * @access public
      * @return Bwork_Http_Request
      */
-    public function _initHttpRequest() {
+    public function _initHttpRequest()
+    {
         $httpRequest = new Bwork_Http_Request();
         
         return $httpRequest;
@@ -38,7 +40,8 @@ class Bwork_Bootstrap_PreBootstrap extends Bwork_Bootstrap_AbstractBootstrap {
      * @access public
      * @return Bwork_Http_Response 
      */
-    public function _initHttpResponse() {
+    public function _initHttpResponse()
+    {
         $httpResponse = new Bwork_Http_Response();
         
         return $httpResponse;
@@ -54,7 +57,8 @@ class Bwork_Bootstrap_PreBootstrap extends Bwork_Bootstrap_AbstractBootstrap {
         
         $config->setParser('php', new Bwork_Config_Parser_PHPConfigParser())
                ->setParser('xml', new Bwork_Config_Parser_XMLConfigParser())
-               ->setParser('ini', new Bwork_Config_Parser_IniConfigParser());
+               ->setParser('ini', new Bwork_Config_Parser_IniConfigParser())
+               ->loadFile('general.php');
         
         return $config;
     }
@@ -64,7 +68,8 @@ class Bwork_Bootstrap_PreBootstrap extends Bwork_Bootstrap_AbstractBootstrap {
      * @access public
      * @return Bwork_Router_Router 
      */
-    public function _initRouter() {
+    public function _initRouter()
+    {
         $router = new Bwork_Router_Router(
                 Bwork_Core_Registry::getInstance()->getResource('Bwork_Http_Request')
         );

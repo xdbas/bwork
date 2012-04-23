@@ -21,26 +21,29 @@
  * @version v 0.1
  * @abstract
  */
-abstract class Bwork_Bootstrap_AbstractBootstrap {    
+abstract class Bwork_Bootstrap_AbstractBootstrap
+{
 
     /**
      * The construction method that handles the class function
      * 
      * @access public
+     * @throws Bwork_Bootstrap_Exception
      * @return void
      */
-    public function __construct() {
+    public function __construct() 
+    {
         $methods = get_class_methods($this);
 
         foreach($methods as $key => $value) {
             if(substr(strtolower($value), 0, 5) == '_init') {
 
                 $methodReflection = new ReflectionMethod($this, $value);
-                $returnData = $methodReflection->invoke($this);
+                $returnData       = $methodReflection->invoke($this);
 
-                if($returnData != null) {
-                    if(is_object($returnData) == false) {
-                        throw new Bwork_Exception_Bootstrap(sprintf('The return data of %s should be either null or an object.', $value));
+                if($returnData !== null) {
+                    if(is_object($returnData) === false) {
+                        throw new Bwork_Bootstrap_Exception(sprintf('The return data of %s should be either null or an object.', $value));
                     }
 
                     if($returnData instanceof Bwork_Bootstrap_Alias) {

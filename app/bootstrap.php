@@ -5,7 +5,6 @@ class Bootstrap extends Bwork_Bootstrap_AbstractBootstrap {
     public function _initConfig() {
         $config = Bwork_Core_Registry::getInstance()
                 ->getResource('Bwork_Config_Confighandler')
-                ->loadFile('general.php')
                 ->loadFile('route.php');
     }
     
