@@ -26,7 +26,7 @@ interface Bwork_Config_Handler
      * @access public
      * @return Bwork_Config_Confighandler
      */
-	public function loadFile($file);
+    public function loadFile($file);
 
     /**
      * This will attempt to merge the input data with the settings array
@@ -43,6 +43,6 @@ interface Bwork_Config_Handler
      * @access public
      * @return void
      */
-	public function get($key);
+    public function get($key);
         
 }
