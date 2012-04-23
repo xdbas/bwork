@@ -20,12 +20,14 @@
  * @version v 0.1
  */
 final class Bwork_Config_Parser_XMLConfigParser 
-    implements Bwork_config_Handler {
+    implements Bwork_Config_Parser
+{
 
     /**
      * @see Bwork_Config_Parsers_IConfigParser::parse()
      */
-    public function parse($file) {
+    public function parse($file)
+    {
         $config = array();
 
         $xml_reader = new XMLReader();

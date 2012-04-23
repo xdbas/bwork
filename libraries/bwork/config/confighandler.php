@@ -77,14 +77,14 @@ final class Bwork_Config_Confighandler implements Bwork_config_Handler
      * @throws Bwork_Config_Exception
      * @return Bwork_Config_Confighandler 
      */
-    public function setParser($ext, Bwork_config_Handler $parser)
+    public function setParser($ext, Bwork_Config_Parser $parser)
     {
         if(is_object($parser) === false) {
-            throw new Bwork_Config_Exception('Parser is not an object.');
+            throw new Bwork_Config_Exception(sprintf('Parser %s is not an object.', get_class($parser));
         }
 
-        if($parser instanceof Bwork_config_Handler === false) {
-            throw new Bwork_Config_Exception('Parser is not an instance of IConfigParser.');
+        if($parser instanceof Bwork_Config_Parser === false) {
+            throw new Bwork_Config_Exception(sprintf('Parser %s is not an instance of Bwork_Config_Parser.', get_class($parser));
         }
 
         $this->parsers[$ext] = $parser;
