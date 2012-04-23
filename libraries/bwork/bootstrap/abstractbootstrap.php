@@ -10,7 +10,7 @@
  */
 
 /**
- * Bootstrap
+ * AbstractBootstrap
  *
  * This class will execute all class methods starting with _init from its 
  * children and will when its return type equals an object add it to the 
@@ -21,7 +21,7 @@
  * @version v 0.1
  * @abstract
  */
-abstract class Bwork_Bootstrap_Bootstrap {    
+abstract class Bwork_Bootstrap_AbstractBootstrap {    
 
     /**
      * The construction method that handles the class function

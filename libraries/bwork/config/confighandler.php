@@ -80,11 +80,11 @@ final class Bwork_Config_Confighandler implements Bwork_config_Handler
     public function setParser($ext, Bwork_Config_Parser $parser)
     {
         if(is_object($parser) === false) {
-            throw new Bwork_Config_Exception(sprintf('Parser %s is not an object.', get_class($parser));
+            throw new Bwork_Config_Exception(sprintf('Parser %s is not an object.', get_class($parser)));
         }
 
         if($parser instanceof Bwork_Config_Parser === false) {
-            throw new Bwork_Config_Exception(sprintf('Parser %s is not an instance of Bwork_Config_Parser.', get_class($parser));
+            throw new Bwork_Config_Exception(sprintf('Parser %s is not an instance of Bwork_Config_Parser.', get_class($parser)));
         }
 
         $this->parsers[$ext] = $parser;
@@ -116,7 +116,7 @@ final class Bwork_Config_Confighandler implements Bwork_config_Handler
     public function set($key, $value)
     {
         if($this->exists($key) === true){
-            throw new Bwork_Config_Exception('This setting is already set.');
+            throw new Bwork_Config_Exception(sprintf('Setting %s is already set.', $key));
         }
 
         $this->settings[$key] = $value;

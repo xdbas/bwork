@@ -20,7 +20,7 @@
  * @uses Bwork_Bootstrap_Bootstrap
  * @version v 0.1
  */
-class Bwork_Bootstrap_PreBootstrap extends Bwork_Bootstrap_Bootstrap {
+class Bwork_Bootstrap_PreBootstrap extends Bwork_Bootstrap_AbstractBootstrap {
     
     /**
      * This will create the Http Request object

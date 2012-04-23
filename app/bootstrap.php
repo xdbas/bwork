@@ -1,6 +1,6 @@
 <?php
 
-class Bootstrap extends Bwork_Bootstrap_Bootstrap {
+class Bootstrap extends Bwork_Bootstrap_AbstractBootstrap {
        
     public function _initConfig() {
         $config = Bwork_Core_Registry::getInstance()
