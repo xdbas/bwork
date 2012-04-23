@@ -19,9 +19,9 @@
  * @subpackage Bwork_Loader
  * @version v 0.1
  */
-require_once 'bwork/loader/interface.php';
+require_once 'bwork/loader/autoloader.php';
 require_once 'bwork/loader/exception.php';
-class Bwork_Loader_ApplicationAutoloader implements Bwork_Loader_Interface
+class Bwork_Loader_ApplicationAutoloader implements Bwork_Loader_Autoloader
 {
 
 	/**

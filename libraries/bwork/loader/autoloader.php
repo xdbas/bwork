@@ -18,7 +18,7 @@
  * @subpackage Bwork_Loader
  * @version v 0.1
  */
-interface Bwork_Loader_Interface
+interface Bwork_Loader_Autoloader
 {
 	/**
 	 * This is the main method which attempts to reslove the correct path and file name 
