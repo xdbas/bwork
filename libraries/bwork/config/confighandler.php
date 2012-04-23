@@ -16,18 +16,13 @@
  *
  * @package Bwork
  * @subpackage Bwork_Config
- * @version v 0.2
+ * @version v 0.3
  * @final
  */
-final class Bwork_Config_Confighandler implements Bwork_config_Handler
+final class Bwork_Config_Confighandler 
+    extends ArrayObject 
+    implements Bwork_config_Handler
 {
-    
-    /**
-     * This will hold all the config settings set throughout the project
-     * @var array $settings
-     * @access private
-     */
-    private $settings = array();
     
     /**
      * This will hold all config parsers objects
@@ -62,11 +57,14 @@ final class Bwork_Config_Confighandler implements Bwork_config_Handler
      */
     public function loadArray(array $data)
     {
-        if(is_array($data) == false) {
+        if(is_array($data) == false
+            && $data instanceof Travsersable == false) {
             throw new Bwork_Config_Exception('Input data should be an array.');
         }
-   
-        $this->settings = array_merge($this->settings, $data);
+        
+        foreach($data as $item => $value) {
+            $this->offsetSet($item, $value);
+        }
     }
 
     /**
@@ -95,10 +93,6 @@ final class Bwork_Config_Confighandler implements Bwork_config_Handler
     /**
      * Magic method __set
      * @see Bwork_Config_Confighandler::set()
-     * @param string $key
-     * @param string $value
-     * @access public
-     * @return Bwork_Config_Confighandler
      */
     public function __set($key, $value)
     {
@@ -115,20 +109,18 @@ final class Bwork_Config_Confighandler implements Bwork_config_Handler
      */
     public function set($key, $value)
     {
-        if($this->exists($key) === true){
+        if($this->offsetExists($key) === true){
             throw new Bwork_Config_Exception(sprintf('Setting %s is already set.', $key));
         }
 
-        $this->settings[$key] = $value;
+        $this->offsetSet($key, $value);
         
         return $this;
     }
     
     /**
      * Magic methods __get
-     * @see Bwork_Config_Confighandler::get()
-     * @param string $key
-     * @return void 
+     * @see Bwork_Config_Handler::get()
      */
     public function __get($key)
     {
@@ -140,24 +132,13 @@ final class Bwork_Config_Confighandler implements Bwork_config_Handler
      */
     public function get($key)
     {
-        if($this->exists($key) === false) {
+        if($this->offsetExists($key) === false) {
             throw new Bwork_Config_Exception(sprintf('%s: Is not found in Bwork_Config_Confighandler::Settings', $key));
         }
 
-        return $this->settings[$key];
+        return $this->offsetGet($key);
     }
     
-    /**
-     * Called when isset(Bwork_Config_Confighandler) and will return boolean if
-     * isset
-     * @param string $key
-     * @return string 
-     */
-    public function __isset($key)
-    {
-        return isset($this->settings[$key]);
-    }
-
     /**
      * This will check if a key is set in the settings array
      * @param string $key
@@ -166,7 +147,7 @@ final class Bwork_Config_Confighandler implements Bwork_config_Handler
      */
     public function exists($key)
     {
-        return array_key_exists($key, $this->settings);
+        return $this->offsetExists($key);
     }
     
 }
