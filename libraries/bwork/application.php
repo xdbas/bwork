@@ -46,6 +46,7 @@ class Bwork_Application
      * This will initialize the bootstrappers where the prebootstrapper is used 
      * for system processes and the normal bootstrapper is called from the 
      * application
+     * 
      * @access public
      * @static
      * @return void
@@ -67,6 +68,22 @@ class Bwork_Application
     {
         $prebootstrap = new Bwork_Bootstrap_PreBootstrap();
     }
+
+    /**
+     * Attempts to perform some checks for a stable run of the framework
+     * 
+     * @access public
+     * @static
+     * @return void
+     * @throws
+     */
+    public static function runTimeChecks()
+    {
+        if(defined('APPLICATION_PATH') === false 
+            || defined('LIBRARY_PATH') === false) {
+            throw new RuntimeException ('APPLICATION_PATH And LIBRARY_PATH has to be defined for a stable run.');
+        }
+    }
     
     /**
      * The main application function used to dispatch the project
@@ -77,6 +94,8 @@ class Bwork_Application
      */
     public static function Run() 
     {
+        self::runTimeChecks();
+
         self::_initAutoloader();
         self::_initBootstrap();
         
