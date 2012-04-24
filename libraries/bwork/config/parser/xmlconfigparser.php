@@ -29,12 +29,19 @@ final class Bwork_Config_Parser_XMLConfigParser
     public function parse($file)
     {
         $config = array();
+        $file   = APPLICATION_PATH.'config'.DIRECTORY_SEPARATOR.$file;
+
+        if(is_file($file) === false
+            || is_readable($file) === false) {
+            throw new Bwork_Config_Exception(sprintf('%s is not a file or readable.', $file));
+        }
 
         $xml_reader = new XMLReader();
-        $xml_reader->open(APPLICATION_PATH.'config/'.$file);
+        $xml_reader->open($file);
         
         while ($xml_reader->read()) {
-            if ($xml_reader->nodeType == XMLREADER::ELEMENT && $xml_reader->localName != "config") {
+            if ($xml_reader->nodeType == XMLREADER::ELEMENT 
+                && $xml_reader->localName != "config") {
                 $config[$xml_reader->localName] = $xml_reader->readString();
             }
         }

@@ -29,7 +29,14 @@ final class Bwork_Config_Parser_PHPConfigParser
     public function parse($file)
     {
         $config = array();
-        require_once APPLICATION_PATH.'config/'.$file;
+        $file   = APPLICATION_PATH.'config'.DIRECTORY_SEPARATOR.$file;
+
+        if(is_file($file) === false
+            || is_readable($file) === false) {
+            throw new Bwork_Config_Exception(sprintf('%s is not a file or readable.', $file));
+        }
+
+        require_once $file;
 
         return $config;
     }
