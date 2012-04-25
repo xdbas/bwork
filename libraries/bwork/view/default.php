@@ -47,12 +47,23 @@ class Bwork_View_Default implements Bwork_View_IView {
             
            $template_name = $router->controller.DIRECTORY_SEPARATOR.$router->action;
            
-           $this->view = $template_name.$config->get('default_view_extension');
+           $this->setView($template_name.$config->get('default_view_extension'));
         } else {
-            $this->view = $template;
+            $this->setView($template);
         }
     }
     
+    /**
+     * This method can be used to set the view file
+     * 
+     * @access public
+     * @param string $view
+     * @return void
+     */
+    public function setView($view) {
+        $this->view = $view;
+    }
+
     /**
      * This will add a key-value pair to the $variables variable
      * @param string $key
