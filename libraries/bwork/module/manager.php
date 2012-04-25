@@ -24,8 +24,41 @@ class Bwork_Module_Manager
                Traversable
 {
     
+    /**
+     * Will hold all the loaded modules
+     * 
+     * @access public
+     * @var Array $modules
+     */
     public $modules = array();
 
+    /**
+     * This method can be used to add a series of modules
+     * 
+     * @access public
+     * @param Array|Traversable $modules
+     * @throws Bwork_Module_Exception
+     * @return void
+     */
+    public function addModules($modules) {
+        if(is_array($modules) === false 
+            && $modules instanceof Traversable === false) {
+            throw new Bwork_Module_Exception('Added modules are not in the correct format');
+        }
+
+        foreach ($modules as $module) {
+            $this->addModule($module);
+        }
+    }
+
+    /**
+     * This method can be used to add a single module
+     * 
+     * @access public
+     * @param String $moduleName
+     * @throws Bwork_Module_Exception
+     * @return void
+     */
     public function addModule($moduleName)
     {
         if($this->offsetExists($moduleName)) {
