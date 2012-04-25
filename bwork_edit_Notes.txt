@@ -1,22 +1,43 @@
 editnotes Bwork
 
-[
--Security GlobalData added to security
--User bootstrap _initsecure added for array map GlobalData
+- Coding style change(example) [
+
+class XxxxXxxx
+{
+    
+
+    public function xxxXxx()
+    {
+
+        if(true
+            || false !== true) {
+            return new array(
+                'str' => null
+            );
+        }
+        else {
+
+        }
+
+    }
+}
+
 ]
 
-- Coding style change =[
-
+[
 - Check for modules instead of subpath
+- Registry overriding for new layouts? from module bootstrapper
+- New routing system which can work with modules + How to add new routes???
+- 
+]
 [
 - exception handler
 - remove all exceptions from Bwork_Exception and move it to every subpackes
 ]
+
 - Think about helpers directory/namespace.
 
 - better names for interface/abstract
-
-
 
 - Css links added as helper
 - paginator class added to libs
