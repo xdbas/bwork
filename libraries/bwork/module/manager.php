@@ -75,6 +75,10 @@ class Bwork_Module_Manager
 
     }
 
+    public function initializeModules() {
+        
+    }
+
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
