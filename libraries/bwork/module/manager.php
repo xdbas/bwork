@@ -20,8 +20,7 @@
  */
 class Bwork_Module_Manager 
     implements Bwork_Module_Module, 
-               ArrayAccess, 
-               Traversable
+               ArrayAccess
 {
     
     /**
@@ -36,13 +35,12 @@ class Bwork_Module_Manager
      * This method can be used to add a series of modules
      * 
      * @access public
-     * @param Array|Traversable $modules
+     * @param Array $modules
      * @throws Bwork_Module_Exception
      * @return void
      */
-    public function addModules($modules) {
-        if(is_array($modules) === false 
-            && $modules instanceof Traversable === false) {
+    public function addModules(array $modules) {
+        if(is_array($modules) === false) {
             throw new Bwork_Module_Exception('Added modules are not in the correct format');
         }
 
@@ -65,20 +63,48 @@ class Bwork_Module_Manager
             throw new Bwork_Module_Exception(sprintf('Module %s is already loaded.', $moduleName));
         }
 
-        $this->checkModulePath($moduleName);
+        $this->initialize($moduleName);
 
         return $this;   
     }
 
-    protected function checkModulePath()
+    /**
+     * This will check the module files are ready and attempts to run the bootstrapper
+     * @access protected
+     * @param String $moduleName
+     * @throws Bwork_Module_Exception
+     * @return void
+     */
+    protected function initialize($moduleName)
     {
+        $modulePath = Bwork_Core_Registry::GetInstance()
+                        ->getResource('Bwork_Config_ConfigHandler')
+                        ->get('module_path');
 
+        if(is_dir($modulePath.strtolower($moduleName)) === false) {
+            throw new Bwork_Module_Exception(sprintf('The directory for module [%s] cannot be found.', $moduleName));
+        }
+
+        $bootstrapFileName  = strtolower($moduleName).'bootstrap.php';
+        $bootstrapClassName = ucfirst($moduleName).'Bootstrap';
+        $bootstrapFile      = $modulePath.$moduleName.DIRECTORY_SEPARATOR.$bootstrapFileName;
+
+        if(file_exists($bootstrapFile) === false) {
+            throw new Bwork_Module_Exception(sprintf('Bootstrap [%s] was not found in module [%s]', $bootstrapFile, $moduleName));
+        }
+
+        require_once $bootstrapFile;
+        $bootstrap = new $bootstrapClassName();
     }
 
-    public function initializeModules() {
-        
-    }
-
+    /**
+     * offsetSet(): defined by ArrayAccess interface.
+     *
+     * @see ArrayAccess::offsetSet()
+     * @param mixed $offset
+     * @param mixed $value
+     * @return void
+     */
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -88,16 +114,37 @@ class Bwork_Module_Manager
         }
     }
 
+    /**
+     * offsetExists(): defined by ArrayAccess interface.
+     *
+     * @see ArrayAccess::offsetExists()
+     * @param mixed $offset
+     * @return boolean
+     */
     public function offsetExists($offset)
     {
         return isset($this->modules[$offset]);
     }
 
+    /**
+     * offsetUnset(): defined by ArrayAccess interface.
+     *
+     * @see ArrayAccess::offsetUnset()
+     * @param mixed $offset
+     * @return void
+     */
     public function offsetUnset($offset)
     {
         unset($this->modules[$offset]);
     }
 
+    /**
+     * offsetGet(): defined by ArrayAccess interface.
+     *
+     * @see ArrayAccess::offsetGet()
+     * @param mixed $offset
+     * @return mixed
+     */
     public function offsetGet($offset)
     {
         return isset($this->modules[$offset]) ? $this->modules[$offset] : null;

@@ -16,7 +16,8 @@ class XxxxXxxx
             );
         }
         else {
-
+            $class->setValue(1)
+                  ->setValue(2);
         }
 
     }
