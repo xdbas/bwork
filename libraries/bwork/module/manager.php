@@ -18,9 +18,7 @@
  * @subpackage Bwork_Module
  * @version v 0.1
  */
-class Bwork_Module_Manager 
-    implements Bwork_Module_Module, 
-               ArrayAccess
+class Bwork_Module_Manager implements Bwork_Module_Module
 {
     
     /**
@@ -59,10 +57,11 @@ class Bwork_Module_Manager
      */
     public function addModule($moduleName)
     {
-        if($this->offsetExists($moduleName)) {
+        if(in_array($moduleName, $this->modules) === true) {
             throw new Bwork_Module_Exception(sprintf('Module %s is already loaded.', $moduleName));
         }
 
+        $this->modules[] = $moduleName;
         $this->initialize($moduleName);
 
         return $this;   
@@ -70,6 +69,7 @@ class Bwork_Module_Manager
 
     /**
      * This will check the module files are ready and attempts to run the bootstrapper
+     * 
      * @access protected
      * @param String $moduleName
      * @throws Bwork_Module_Exception
@@ -77,9 +77,8 @@ class Bwork_Module_Manager
      */
     protected function initialize($moduleName)
     {
-        $modulePath = Bwork_Core_Registry::GetInstance()
-                        ->getResource('Bwork_Config_ConfigHandler')
-                        ->get('module_path');
+        $config     = Bwork_Core_Registry::GetInstance()->getResource('Bwork_Config_ConfigHandler');
+        $modulePath = $config->get('module_path');
 
         if(is_dir($modulePath.strtolower($moduleName)) === false) {
             throw new Bwork_Module_Exception(sprintf('The directory for module [%s] cannot be found.', $moduleName));
@@ -93,61 +92,18 @@ class Bwork_Module_Manager
             throw new Bwork_Module_Exception(sprintf('Bootstrap [%s] was not found in module [%s]', $bootstrapFile, $moduleName));
         }
 
+        $configPath     = $modulePath.$moduleName.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR;
+        $configFilename = 'config.php';
+        $configFile     = $configPath.$configFilename;
+
+        if(file_exists($configFile) === false) {
+            throw new Bwork_Module_Exception(sprintf('Config file [%s] was not found for module [%s]', $configFilename, $moduleName));
+        }
+
+        $config->loadFile($configFile);
+
         require_once $bootstrapFile;
         $bootstrap = new $bootstrapClassName();
-    }
-
-    /**
-     * offsetSet(): defined by ArrayAccess interface.
-     *
-     * @see ArrayAccess::offsetSet()
-     * @param mixed $offset
-     * @param mixed $value
-     * @return void
-     */
-    public function offsetSet($offset, $value)
-    {
-        if (is_null($offset)) {
-            $this->modules[] = $value;
-        } else {
-            $this->modules[$offset] = $value;
-        }
-    }
-
-    /**
-     * offsetExists(): defined by ArrayAccess interface.
-     *
-     * @see ArrayAccess::offsetExists()
-     * @param mixed $offset
-     * @return boolean
-     */
-    public function offsetExists($offset)
-    {
-        return isset($this->modules[$offset]);
-    }
-
-    /**
-     * offsetUnset(): defined by ArrayAccess interface.
-     *
-     * @see ArrayAccess::offsetUnset()
-     * @param mixed $offset
-     * @return void
-     */
-    public function offsetUnset($offset)
-    {
-        unset($this->modules[$offset]);
-    }
-
-    /**
-     * offsetGet(): defined by ArrayAccess interface.
-     *
-     * @see ArrayAccess::offsetGet()
-     * @param mixed $offset
-     * @return mixed
-     */
-    public function offsetGet($offset)
-    {
-        return isset($this->modules[$offset]) ? $this->modules[$offset] : null;
     }
 
 }
