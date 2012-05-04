@@ -47,9 +47,9 @@ final class Bwork_Router_Handler_Module implements Bwork_Router_Handler_Interfac
                 $configModule = $config->get($module);
 
                 $this->params['controller'] = isset($url[1])? $url[1] : $configModule['default_controller'];
-                $this->params['action'] = isset($url[2])? $url[2] : $configModule['default_action'];
+                $this->params['action']     = isset($url[2])? $url[2] : $configModule['default_action'];
                 $this->params['mockParams'] = array();
-                $this->params['module']  = $module;
+                $this->params['module']     = $module;
 
                 return true;
             }
@@ -59,7 +59,8 @@ final class Bwork_Router_Handler_Module implements Bwork_Router_Handler_Interfac
     /** 
      * @see Bwork_Router_Handler_Interface::getParams()
      */
-    public function getParams() {
+    public function getParams()
+    {
         return $this->params;
     }
 

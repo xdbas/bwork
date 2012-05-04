@@ -19,8 +19,10 @@
  * @package Bwork
  * @subpackage Bwork_Router_Handler
  * @version v 0.1
+ * @deprecated
  */
-final class Bwork_Router_Handler_SubPath implements Bwork_Router_Handler_Interface {
+final class Bwork_Router_Handler_SubPath implements Bwork_Router_Handler_Interface
+{
     
     /**
      * Will store the parameter gained when resolving a route
@@ -31,7 +33,8 @@ final class Bwork_Router_Handler_SubPath implements Bwork_Router_Handler_Interfa
     /** 
      * @see Bwork_Router_Handler_Interface::checkRoute()
      */
-    public function checkRoute(array $url) {
+    public function checkRoute(array $url)
+    {
         $config = Bwork_Core_Registry::getInstance()->getResource('Bwork_Config_Confighandler');
 
         if(count($url) <= 0) {
@@ -72,7 +75,8 @@ final class Bwork_Router_Handler_SubPath implements Bwork_Router_Handler_Interfa
      * @param array $url
      * @param int $from From which item the subPaths stops
      */
-    public function resolveParams(array $url, $from) {
+    public function resolveParams(array $url, $from)
+    {
         $config = Bwork_Core_Registry::getInstance()->getResource('Bwork_Config_Confighandler');
 
         $this->params['controller'] = isset($url[$from])? $url[$from] : $config->get('default_controller');
@@ -82,7 +86,8 @@ final class Bwork_Router_Handler_SubPath implements Bwork_Router_Handler_Interfa
     /** 
      * @see Bwork_Router_Handler_Interface::getParams()
      */
-    public function getParams() {
+    public function getParams()
+    {
         return $this->params;
     }
 }

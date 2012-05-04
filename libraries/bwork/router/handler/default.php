@@ -19,7 +19,8 @@
  * @subpackage Bwork_Router_Handler
  * @version v 0.1
  */
-final class Bwork_Router_Handler_Default implements Bwork_Router_Handler_Interface {
+final class Bwork_Router_Handler_Default implements Bwork_Router_Handler_Interface
+{
     
     /**
      * Will store the parameter gained when resolving a route
@@ -30,8 +31,9 @@ final class Bwork_Router_Handler_Default implements Bwork_Router_Handler_Interfa
     /** 
      * @see Bwork_Router_Handler_Interface::checkRoute()
      */
-    public function checkRoute(array $url) {
-        $url = implode('/', $url);
+    public function checkRoute(array $url)
+    {
+        $url    = implode('/', $url);
         $config = Bwork_Core_Registry::getInstance()->getResource('Bwork_Config_Confighandler');
         
         if($config->exists('route')) {
@@ -48,8 +50,8 @@ final class Bwork_Router_Handler_Default implements Bwork_Router_Handler_Interfa
     /** 
      * @see Bwork_Router_Handler_Interface::getParams()
      */
-    public function getParams() {
+    public function getParams()
+    {
         return $this->params;
-        
     }
 }
