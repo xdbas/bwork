@@ -47,7 +47,7 @@ class Bwork_Controller_Dispatcher {
         $filename       = $controller.'.php';
         if(isset($module)) {
             $configModule   = $config->get($module);
-            $controllerPath = $config->get('module_path').$module.DIRECTORY_SEPARATOR.$configModule['controller_path'];
+            $controllerPath = $config->get('module_path').strtolower($module).DIRECTORY_SEPARATOR.$configModule['controller_path'];
         }
         else {
             $controllerPath = $config->get('controller_path');
