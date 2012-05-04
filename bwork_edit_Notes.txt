@@ -26,15 +26,14 @@ class XxxxXxxx
 ]
 
 [
-- Check for modules instead of subpath
+- Models within modules
 - Registry overriding for new layouts? from module bootstrapper
-- New routing system which can work with modules + How to add new routes???
-- 
 ]
 [
 - exception handler
 - remove all exceptions from Bwork_Exception and move it to every subpackes
 ]
+- New Data MySQLi
 
 - Think about helpers directory/namespace.
 
