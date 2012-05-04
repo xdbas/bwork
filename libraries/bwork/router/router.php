@@ -50,11 +50,11 @@ class Bwork_Router_Router {
     public $mockParams;
     
     /**
-     * Will hold the sub path to the controller file
+     * Will hold the module name which is resolved
      * @access public
      * @var String
      */
-    public $subPath = null;
+    public $module = null;
 
     /**
      * Will hold the URI Params gained from Bwork_Http_Request object
@@ -112,7 +112,7 @@ class Bwork_Router_Router {
                     $this->controller   = $params['controller'];
                     $this->action       = $params['action'];
                     $this->mockParams   = $params['mockParams'];
-                    $this->subPath      = $params['subPath'];
+                    $this->module       = $params['module'];
                     $routed = true;
                     break;
                 }

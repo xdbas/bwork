@@ -34,7 +34,7 @@ final class Bwork_Router_Handler_SubPath implements Bwork_Router_Handler_Interfa
     public function checkRoute(array $url) {
         $config = Bwork_Core_Registry::getInstance()->getResource('Bwork_Config_Confighandler');
 
-        if(count($url) < 0) {
+        if(count($url) <= 0) {
             return false;
         }
 

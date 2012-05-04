@@ -33,7 +33,7 @@ class Bwork_Controller_Dispatcher {
 
         $controller = $router->controller;
         $action     = $router->action;
-        $subPath    = $router->subPath;
+        $module     = $router->module;
 
         if(empty($controller)) {
             throw new Bwork_Exception_ControllerException('Controller was not set by the router.');
@@ -45,7 +45,13 @@ class Bwork_Controller_Dispatcher {
         
         $controllerName = $controller.'Controller';
         $filename       = $controller.'.php';
-        $controllerPath = $config->get('controller_path').$subPath;
+        if(isset($module)) {
+            $configModule   = $config->get($module);
+            $controllerPath = $config->get('module_path').$module.DIRECTORY_SEPARATOR.$configModule['controller_path'];
+        }
+        else {
+            $controllerPath = $config->get('controller_path');
+        }
         
         if(file_exists($controllerPath.$filename) == false) {
             throw new Exception(sprintf('%s does not exists', $controllerPath.$filename));

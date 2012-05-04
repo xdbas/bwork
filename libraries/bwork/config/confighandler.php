@@ -33,6 +33,7 @@ final class Bwork_Config_Confighandler
 
     /**
      * @see Bwork_Config_Handler::loadFile()
+     * @todo: Add Fileinfo for extension
      */
     public function loadFile($file)
     {

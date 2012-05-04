@@ -58,7 +58,7 @@ class Bwork_Bootstrap_PreBootstrap extends Bwork_Bootstrap_AbstractBootstrap
         $config->setParser('php', new Bwork_Config_Parser_PHPConfigParser())
                ->setParser('xml', new Bwork_Config_Parser_XMLConfigParser())
                ->setParser('ini', new Bwork_Config_Parser_IniConfigParser())
-               ->loadFile('general.php');
+               ->loadFile(APPLICATION_PATH.'config'.DIRECTORY_SEPARATOR.'general.php');
         
         return $config;
     }
@@ -74,7 +74,8 @@ class Bwork_Bootstrap_PreBootstrap extends Bwork_Bootstrap_AbstractBootstrap
                 Bwork_Core_Registry::getInstance()->getResource('Bwork_Http_Request')
         );
         $router->setHandler(new Bwork_Router_Handler_Default())
-               ->setHandler(new Bwork_Router_Handler_SubPath());
+               ->setHandler(new Bwork_Router_Handler_Module());
+               //->setHandler(new Bwork_Router_Handler_SubPath());
         
         return $router;
     }

@@ -68,6 +68,16 @@ class Bwork_Module_Manager implements Bwork_Module_Module
     }
 
     /**
+     * This method is used to retrieved initialized modules
+     * 
+     * @access public
+     * @return array $modules
+     */
+    public function getModules() {
+        return $this->modules;
+    }
+
+    /**
      * This will check the module files are ready and attempts to run the bootstrapper
      * 
      * @access protected

@@ -29,9 +29,9 @@ final class Bwork_Config_Parser_XMLConfigParser
     public function parse($file)
     {
         $config = array();
-        $file   = APPLICATION_PATH.'config'.DIRECTORY_SEPARATOR.$file;
 
-        if(is_file($file) === false
+        if(file_exists($file) === false 
+            || is_file($file) === false
             || is_readable($file) === false) {
             throw new Bwork_Config_Exception(sprintf('%s is not a file or readable.', $file));
         }
