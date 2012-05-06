@@ -30,7 +30,7 @@ class Bwork_Loader_ApplicationAutoloader implements Bwork_Loader_Autoloader
 	public static function autoload($className)
 	{
 		$className = strtolower($className);
-		
+
 		if(substr($className, -5) == 'model') {
 			$fileName  = substr($className, 0, strpos($className, 'model')) . '.php';
 
@@ -38,7 +38,7 @@ class Bwork_Loader_ApplicationAutoloader implements Bwork_Loader_Autoloader
 		}
 		elseif(substr($className, -2) == 'vo') {
 			$fileName  = substr($className, 0, strpos($className, 'vo')) . '.php';
-			
+
 			self::load($fileName, 'vo');
 		}
 		else {
@@ -75,7 +75,7 @@ class Bwork_Loader_ApplicationAutoloader implements Bwork_Loader_Autoloader
 				}
 			}
 		}
-			
+
 		$path = $config->get($type . '_path');
 		if(self::fileExists($path.$filename)) {
 			require_once $path.$filename;
