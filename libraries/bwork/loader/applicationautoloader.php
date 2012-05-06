@@ -17,7 +17,7 @@
  *
  * @package Bwork
  * @subpackage Bwork_Loader
- * @version v 0.1
+ * @version v 0.2
  */
 require_once 'bwork/loader/autoloader.php';
 require_once 'bwork/loader/exception.php';
@@ -29,31 +29,74 @@ class Bwork_Loader_ApplicationAutoloader implements Bwork_Loader_Autoloader
 	 */
 	public static function autoload($className)
 	{
-		$config    = Bwork_Core_Registry::getInstance()->getResource('Bwork_Config_Confighandler');
 		$className = strtolower($className);
-        
-		$modelPath = $config->get('model_path');
-		$voPath    = $config->get('vo_path');
 		
 		if(substr($className, -5) == 'model') {
 			$fileName  = substr($className, 0, strpos($className, 'model')) . '.php';
 
-			if(file_exists($modelPath.$fileName)) {
-				require_once $modelPath.$fileName;
-				return;
-			}
+			self::load($fileName, 'model');
 		}
 		elseif(substr($className, -2) == 'vo') {
 			$fileName  = substr($className, 0, strpos($className, 'vo')) . '.php';
 			
-			if(file_exists($voPath.$fileName)) {
-				require_once $voPath.$fileName;
-				return;
-			}
+			self::load($fileName, 'vo');
 		}
 		else {
 			throw new Bwork_Loader_Exception(sprintf('Class %s could not be loaded by the autoloader.', $className));
 		}
+	}
+
+	/**
+	 * This method attempts to locate and load a file based on its type 
+	 * and will give higher priority modules.
+	 * 
+	 * @access public
+	 * @static
+	 * @param string $filename
+	 * @param string $type model|vo
+	 * @throws Bwork_Loader_Exception
+	 * @return void
+	 */
+	public static function load($filename, $type)
+	{
+		$config = Bwork_Core_Registry::getInstance()->getResource('Bwork_Config_Confighandler');
+
+		if(Bwork_Core_Registry::getInstance()->exists("Bwork_Module_Manager") === true) {
+			$manager = Bwork_Core_Registry::getInstance()->getResource("Bwork_Module_Manager");
+
+			foreach($manager->getModules() as $module) {
+				$pathToModule = $config->get('module_path').$module . DIRECTORY_SEPARATOR;
+				$moduleConfig = $config->get($module);
+				$pathToFile   = $pathToModule.$moduleConfig[$type . '_path'];
+
+				if(self::fileExists($pathToFile.$filename)) {
+					require_once $pathToFile.$filename;
+					return;
+				}
+			}
+		}
+			
+		$path = $config->get($type . '_path');
+		if(self::fileExists($path.$filename)) {
+			require_once $path.$filename;
+			return;
+		}
+		else {
+			throw new Bwork_Loader_Exception(sprintf('File(%s) [%s] could not be found in any of the checked locations.', $type, $filename));
+		}
+	}
+
+	/**
+	 * This methods will perform checks if the given file exists and is readable
+	 * 
+	 * @access public
+	 * @static
+	 * @param string $file
+	 * @return void
+	 */
+	public static function fileExists($file)
+	{
+		return file_exists($file) && is_file($file) && is_readable($file);
 	}
 
 }
