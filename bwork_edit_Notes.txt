@@ -26,6 +26,7 @@ class XxxxXxxx
 ]
 
 [
+- setting current module? rest of classes know which is used at that very moment
 - View handling for modules
 - Registry overriding for new layouts? from module bootstrapper
 ]
@@ -33,6 +34,7 @@ class XxxxXxxx
 - exception handler
 - remove all exceptions from Bwork_Exception and move it to every subpackes
 ]
+- 1 registry getinstance when used multiply times
 - New Data MySQLi
 
 - Think about helpers directory/namespace.
