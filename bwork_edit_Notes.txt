@@ -26,7 +26,7 @@ class XxxxXxxx
 ]
 
 [
-- Models within modules
+- View handling for modules
 - Registry overriding for new layouts? from module bootstrapper
 ]
 [
