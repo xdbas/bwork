@@ -112,7 +112,7 @@ class Bwork_Core_Registry {
      * @return boolean 
      */
     public function exists($class_name) {
-        return array_key_exists($class_name, $this->objects);
+        return array_key_exists(strtolower($class_name), $this->objects);
     }
     
 }
