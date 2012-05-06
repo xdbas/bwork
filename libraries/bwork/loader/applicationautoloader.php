@@ -17,7 +17,7 @@
  *
  * @package Bwork
  * @subpackage Bwork_Loader
- * @version v 0.2
+ * @version v 0.3
  */
 require_once 'bwork/loader/autoloader.php';
 require_once 'bwork/loader/exception.php';
@@ -30,7 +30,7 @@ class Bwork_Loader_ApplicationAutoloader implements Bwork_Loader_Autoloader
 	public static function autoload($className)
 	{
 		$className = strtolower($className);
-
+        
 		if(substr($className, -5) == 'model') {
 			$fileName  = substr($className, 0, strpos($className, 'model')) . '.php';
 
@@ -38,7 +38,7 @@ class Bwork_Loader_ApplicationAutoloader implements Bwork_Loader_Autoloader
 		}
 		elseif(substr($className, -2) == 'vo') {
 			$fileName  = substr($className, 0, strpos($className, 'vo')) . '.php';
-
+			
 			self::load($fileName, 'vo');
 		}
 		else {
@@ -48,7 +48,8 @@ class Bwork_Loader_ApplicationAutoloader implements Bwork_Loader_Autoloader
 
 	/**
 	 * This method attempts to locate and load a file based on its type 
-	 * and will give higher priority modules.
+	 * and will give higher priority to modules and fallback on normal 
+	 * Models or Value objects
 	 * 
 	 * @access public
 	 * @static
@@ -59,23 +60,21 @@ class Bwork_Loader_ApplicationAutoloader implements Bwork_Loader_Autoloader
 	 */
 	public static function load($filename, $type)
 	{
-		$config = Bwork_Core_Registry::getInstance()->getResource('Bwork_Config_Confighandler');
+		$registry = Bwork_Core_Registry::getInstance();
+		$config   = $registry->getResource('Bwork_Config_Confighandler');
+		$router   = $registry->getResource('Bwork_Router_Router');
 
-		if(Bwork_Core_Registry::getInstance()->exists("Bwork_Module_Manager") === true) {
-			$manager = Bwork_Core_Registry::getInstance()->getResource("Bwork_Module_Manager");
+		if(($module = $router->module) !== null) {	
+			$pathToModule = $config->get('module_path').$module . DIRECTORY_SEPARATOR;
+			$moduleConfig = $config->get($module);
+			$pathToFile   = $pathToModule.$moduleConfig[$type . '_path'];
 
-			foreach($manager->getModules() as $module) {
-				$pathToModule = $config->get('module_path').$module . DIRECTORY_SEPARATOR;
-				$moduleConfig = $config->get($module);
-				$pathToFile   = $pathToModule.$moduleConfig[$type . '_path'];
-
-				if(self::fileExists($pathToFile.$filename)) {
-					require_once $pathToFile.$filename;
-					return;
-				}
+			if(self::fileExists($pathToFile.$filename)) {
+				require_once $pathToFile.$filename;
+				return;
 			}
 		}
-
+			
 		$path = $config->get($type . '_path');
 		if(self::fileExists($path.$filename)) {
 			require_once $path.$filename;
