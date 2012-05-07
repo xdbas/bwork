@@ -18,6 +18,7 @@
  * @package Bwork
  * @subpackage Bwork
  * @version v 0.1
+ * @deprecated
  */
 class Bwork_Autoload {
     
