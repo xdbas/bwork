@@ -18,7 +18,7 @@
  *
  * @package Bwork
  * @subpackage Bwork_Bootstrap
- * @version v 0.1
+ * @version v 0.2
  * @abstract
  */
 class Bwork_Bootstrap_Alias
@@ -41,16 +41,26 @@ class Bwork_Bootstrap_Alias
     public $object;
     
     /**
+     * Holds information wether it should override or not
+     * 
+     * @var int Bwork_Core_Registry::NO_OVERRIDING||Bwork_Core_Registry::OVERRIDE
+     * @access public
+     */
+    public $override;
+    
+    /**
      * This is the constructor function used to assign the alias name for its 
      * object
      * 
-     * @param type $name
-     * @param type $object 
+     * @param string $name
+     * @param object $object 
+     * @param int $override
      */
-    public function __construct($name, $object)
+    public function __construct($name, $object, $override = Bwork_Core_Registry::NO_OVERRIDING)
     {
-        $this->name = $name;
-        $this->object = $object;
+        $this->name     = $name;
+        $this->object   = $object;
+        $this->override = $override;
     }
     
 }

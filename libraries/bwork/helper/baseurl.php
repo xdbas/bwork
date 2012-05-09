@@ -17,42 +17,46 @@
  *
  * Example:
  * <code>
- * <?php echo $this->baseUrl(string $url, boolean $ssl); ?>
+ *  <?php echo $this->baseUrl(string $url, boolean $ssl); ?>
  * </code>
  *
  * @package Bwork
  * @subpackage Bwork_Helper
- * @version v 0.1
+ * @version v 0.2
  */
-class Bwork_Helper_BaseUrl {
+class Bwork_Helper_BaseUrl
+{
 
-	/**
-	 * Holds the default base URI
-	 * @var String $defaultBaseUrl
-	 */
-	private $defaultBaseUrl;
+    /**
+     * Holds the default base URI
+     * 
+     * @var String $defaultBaseUrl
+     */
+    private $defaultBaseUrl;
 
-	/**
-	 * The construction method is used to get the sub url from the config
-	 * and assign it to the defaultBaseUrl var
-	 *
-	 * @access public
-	 * @return void
-	 */
-	public function __construct() {
-		$this->defaultBaseUrl = Bwork_Core_Registry::getInstance()->getResource('Bwork_Config_Confighandler')->get('sub_url');
-	}
+    /**
+     * The construction method is used to get the sub url from the config
+     * and assign it to the defaultBaseUrl var
+     *
+     * @access public
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->defaultBaseUrl = Bwork_Core_Registry::getInstance()->getResource('Bwork_Config_Confighandler')->get('sub_url');
+    }
 
-	/**
-	 * Called by __call() at either a view or layout and is the main function of this helper
-	 *
-	 * @access public
-	 * @param String $url
-	 * @param Boolean $ssl
-	 * @return String Generated base url
-	 */
-	public function baseUrl($url = null, $ssl = false) {
-		return ($ssl === true? 'https://' . $_SERVER['SERVER_NAME']:'').$this->defaultBaseUrl.($url !== null? $url:'');
-	}
-
+    /**
+     * Called by __call() at either a view or layout and is the main function of this helper
+     *
+     * @access public
+     * @param String $url
+     * @param Boolean $ssl
+     * @return String Generated base url
+     */
+    public function baseUrl($url = null, $ssl = false)
+    {
+        return ($ssl === true? 'https://' . $_SERVER['SERVER_NAME']:'').$this->defaultBaseUrl.($url !== null? $url:'');
+    }
+    
 }

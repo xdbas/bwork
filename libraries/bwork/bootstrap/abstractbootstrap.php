@@ -18,7 +18,7 @@
  *
  * @package Bwork
  * @subpackage Bwork_Bootstrap
- * @version v 0.1
+ * @version v 0.2
  * @abstract
  */
 abstract class Bwork_Bootstrap_AbstractBootstrap
@@ -47,7 +47,7 @@ abstract class Bwork_Bootstrap_AbstractBootstrap
                     }
 
                     if($returnData instanceof Bwork_Bootstrap_Alias) {
-                        Bwork_Core_Registry::getInstance()->setResource($returnData->object, $returnData->name);
+                        Bwork_Core_Registry::getInstance()->setResource($returnData->object, $returnData->name, $returnData->override);
                     }
                     else {
                         Bwork_Core_Registry::getInstance()->setResource($returnData);

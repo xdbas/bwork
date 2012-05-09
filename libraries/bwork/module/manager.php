@@ -16,7 +16,7 @@
  *
  * @package Bwork
  * @subpackage Bwork_Module
- * @version v 0.1
+ * @version v 0.2
  */
 class Bwork_Module_Manager implements Bwork_Module_Module
 {
@@ -24,10 +24,10 @@ class Bwork_Module_Manager implements Bwork_Module_Module
     /**
      * Will hold all the loaded modules
      * 
-     * @access public
+     * @access protected
      * @var Array $modules
      */
-    public $modules = array();
+    protected $modules = array();
 
     /**
      * This method can be used to add a series of modules
@@ -37,7 +37,8 @@ class Bwork_Module_Manager implements Bwork_Module_Module
      * @throws Bwork_Module_Exception
      * @return void
      */
-    public function addModules(array $modules) {
+    public function addModules(array $modules)
+    {
         if(is_array($modules) === false) {
             throw new Bwork_Module_Exception('Added modules are not in the correct format');
         }
@@ -62,9 +63,20 @@ class Bwork_Module_Manager implements Bwork_Module_Module
         }
 
         $this->modules[] = $moduleName;
-        $this->initialize($moduleName);
 
         return $this;   
+    }
+    
+    /**
+     * This method can be used to check if a module had yet been initialized
+     * 
+     * @access public
+     * @param type $moduleName
+     * @return type boolean
+     */
+    public function moduleExists($moduleName)
+    {
+        return in_array($moduleName, $this->modules);
     }
 
     /**
@@ -80,12 +92,12 @@ class Bwork_Module_Manager implements Bwork_Module_Module
     /**
      * This will check the module files are ready and attempts to run the bootstrapper
      * 
-     * @access protected
+     * @access public
      * @param String $moduleName
      * @throws Bwork_Module_Exception
      * @return void
      */
-    protected function initialize($moduleName)
+    public function initialize($moduleName)
     {
         $config     = Bwork_Core_Registry::GetInstance()->getResource('Bwork_Config_ConfigHandler');
         $modulePath = $config->get('module_path');

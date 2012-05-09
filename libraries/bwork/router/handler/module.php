@@ -16,13 +16,15 @@
  *
  * @package Bwork
  * @subpackage Bwork_Router_Handler
- * @version v 0.1
+ * @version v 0.2
  */
-final class Bwork_Router_Handler_Module implements Bwork_Router_Handler_Interface
+final class Bwork_Router_Handler_Module 
+    implements Bwork_Router_Handler_Interface 
 {
     
     /**
      * Will store the parameter gained when resolving a route
+     * 
      * @var array
      */
     public $params;
@@ -38,22 +40,22 @@ final class Bwork_Router_Handler_Module implements Bwork_Router_Handler_Interfac
         $modules = $moduleManager->getModules();
 
         if(count($modules) < 1
-            || count($url) < 1) {
-            return false;
+                || count($url) < 1) {
+                return false;
         }
 
         foreach($modules as $module) {
             if($module == $url[0]) {
+                $moduleManager->initialize($module);
                 $configModule = $config->get($module);
 
                 $this->params['controller'] = isset($url[1])? $url[1] : $configModule['default_controller'];
-                $this->params['action']     = isset($url[2])? $url[2] : $configModule['default_action'];
+                $this->params['action'] = isset($url[2])? $url[2] : $configModule['default_action'];
                 $this->params['mockParams'] = array();
-                $this->params['module']     = $module;
-
+                $this->params['module']  = $module;
                 return true;
             }
-        }
+        }   	
     }
 
     /** 

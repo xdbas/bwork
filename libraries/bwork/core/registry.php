@@ -16,69 +16,70 @@
  *
  * @package Bwork
  * @subpackage Bwork_Core
- * @version v 0.3
+ * @version v 0.4
  */
-class Bwork_Core_Registry {
-        
-    /**
-     * Holder for stored objects
-     * @var array objects
-     */
-    private $objects = array();
+class Bwork_Core_Registry extends ArrayObject
+{
+    const NO_OVERRIDING = 1;
+    const OVERRIDING    = 2;
     
     /**
      * Holds an instance of Bwork_Core_Registry
+     * 
+     * @staticvar
      * @var object $instance
      */
     private static $instance;
     
     /**
      * Used to return an instance of the class
+     * 
      * @access public
+     * @static
      * @return object
      */
-    public static function getInstance() {
+    public static function getInstance()
+    {
         if(self::$instance === null) {
             self::$instance = new self();
         }
         
         return self::$instance;
     }
-    
+
     /**
      * Magic method to retrieve a resource
-     * @see Bwork_Core_Registry::GetResource()
-     * @param string $class_name
-     * @access public
-     * @return object
+     *
+     * @see Bwork_Core_Registry::getResource()
      */
-    public function __get($class_name) {
+    public function __get($class_name)
+    {
         return $this->getResource($class_name);
     }
-    
+
     /**
-     *
-     * @param string $name
-     * @param object $object
-     * @see Registry_Core_Registry::setResource 
+     * @see Registry_Core_Registry::setResource ()
      */
-    public function __set($name, $object) {
-        $this->set($object);
+    public function __set($name, $object)
+    {
+        $this->setResource($object);
     }
-     
+
     /**
-     * Used to retrieve an object from the $objects array
+     * Used to retrieve an object from the array object Storage
      *
      * @param string $key
      * @access public
+     * @throws RunetimeException
      * @return object
      */
-    public function getResource($class_name) {
-        if($this->exists(strtolower($class_name)) === false) {
-            throw new Bwork_Exception_RegistryException(sprintf('Class: %s was not found in Registry.', $class_name));
+    public function getResource($class_name)
+    {
+        if($this->resourceExists(strtolower($class_name)) === false) {
+            throw new RuntimeException(sprintf('Class [%s] was not found in Registry.', $class_name));
         }
         
-        return $this->objects[strtolower($class_name)];
+        return $this->offsetGet(strtolower($class_name));
     }
     
     /**
@@ -87,32 +88,37 @@ class Bwork_Core_Registry {
      * @param object $object
      * @param string $alias
      * @access public
+     * @throws RunetimeException
      * @return Bwork_Core_Registry
      */
-    public function setResource($object, $alias = null) {
+    public function setResource($object, $alias = null, $override = Bwork_Core_Registry::NO_OVERRIDING)
+    {
         if(is_object($object) === false) {
-            throw new Bwork_Exception_RegistryException('Resource is not an object.');
+            throw new RuntimeException('Resource is not an object.');
         }
 
         $name = is_null($alias) || is_string($alias) == false? strtolower(get_class($object)) : strtolower($alias);
         
-        if($this->exists($name)) {
-            throw new Bwork_Exception_RegistryException(sprintf('Class: %s already exists in Registry.', $name));
+        if($override == Bwork_Core_Registry::NO_OVERRIDING
+            && $this->resourceExists($name)) {
+            throw new RuntimeException(sprintf('Class: [%s] already exists in Registry.', $name));
         }
         
-        $this->objects[$name] = $object;
+        $this->offsetSet($name, $object);
         
         return $this;
     }
     
     /**
      * Checks if class name exists in Bwork_Core_Registry::$objects
+     * 
      * @param string $class_name
      * @access public
      * @return boolean 
      */
-    public function exists($class_name) {
-        return array_key_exists(strtolower($class_name), $this->objects);
+    public function resourceExists($class_name)
+    {
+        return $this->offsetExists(strtolower($class_name));
     }
     
 }
