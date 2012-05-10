@@ -38,3 +38,13 @@ class XxxxXxxx
 - Css links added as helper
 - paginator class added to libs
 - paginator added as helper
+
+
+bugs[
+- change set include path
+- remove testmodel
+- add new config
+- lowercase in url modules
+- lowercase loading in modules
+- fix for last char is \ in link
+]
