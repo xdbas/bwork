@@ -25,8 +25,7 @@ class Bwork_Core_Registry extends ArrayObject
     
     /**
      * Holds an instance of Bwork_Core_Registry
-     * 
-     * @staticvar
+     *
      * @var object $instance
      */
     private static $instance;
@@ -51,6 +50,8 @@ class Bwork_Core_Registry extends ArrayObject
      * Magic method to retrieve a resource
      *
      * @see Bwork_Core_Registry::getResource()
+     * @param string $class_name
+     * @return object
      */
     public function __get($class_name)
     {
@@ -58,7 +59,11 @@ class Bwork_Core_Registry extends ArrayObject
     }
 
     /**
+     * Magic method set, to set a resource
+     *
      * @see Registry_Core_Registry::setResource ()
+     * @param string $name
+     * @param mixed $object
      */
     public function __set($name, $object)
     {
@@ -68,9 +73,10 @@ class Bwork_Core_Registry extends ArrayObject
     /**
      * Used to retrieve an object from the array object Storage
      *
-     * @param string $key
+     * @param $class_name
+     * @throws RuntimeException
+     * @internal param string $key
      * @access public
-     * @throws RunetimeException
      * @return object
      */
     public function getResource($class_name)
@@ -81,17 +87,18 @@ class Bwork_Core_Registry extends ArrayObject
         
         return $this->offsetGet(strtolower($class_name));
     }
-    
+
     /**
      * Used to add an object to the object array
-     * 
+     *
      * @param object $object
      * @param string $alias
+     * @param int $override
+     * @throws RuntimeException
      * @access public
-     * @throws RunetimeException
      * @return Bwork_Core_Registry
      */
-    public function setResource($object, $alias = null, $override = Bwork_Core_Registry::NO_OVERRIDING)
+    public function setResource($object, $alias = null, $override = self::NO_OVERRIDING)
     {
         if(is_object($object) === false) {
             throw new RuntimeException('Resource is not an object.');
@@ -99,7 +106,7 @@ class Bwork_Core_Registry extends ArrayObject
 
         $name = is_null($alias) || is_string($alias) == false? strtolower(get_class($object)) : strtolower($alias);
         
-        if($override == Bwork_Core_Registry::NO_OVERRIDING
+        if(self::NO_OVERRIDING == $override
             && $this->resourceExists($name)) {
             throw new RuntimeException(sprintf('Class: [%s] already exists in Registry.', $name));
         }
