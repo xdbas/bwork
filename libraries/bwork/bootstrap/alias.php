@@ -14,7 +14,7 @@
  *
  * This class will is used when an object should be placed in the registry 
  * under a different name than its standard, instead of returning an object 
- * from a boostrapper return a Bootstrap_Alias.
+ * from a bootstrap return a Bootstrap_Alias.
  *
  * @package Bwork
  * @subpackage Bwork_Bootstrap
@@ -55,6 +55,7 @@ class Bwork_Bootstrap_Alias
      * @param string $name
      * @param object $object 
      * @param int $override
+     * @return Bwork_Bootstrap_Alias
      */
     public function __construct($name, $object, $override = Bwork_Core_Registry::NO_OVERRIDING)
     {

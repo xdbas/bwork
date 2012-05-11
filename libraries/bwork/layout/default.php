@@ -60,13 +60,15 @@ class Bwork_Layout_Default implements Bwork_Layout_ILayout
      */
     protected $content;
 
-
     /**
-     * This method will attempt to set the layout variable and perform some 
+     * This method will attempt to set the layout variable and perform some
      * checks before doing so
-     * 
-     * @param string $layout 
+     *
+     * @param string $layout
+     * @param null $module
      * @access public
+     * @throws Bwork_Layout_Exception
+     * @return Bwork_Layout_Default
      */
     public function setLayout($layout, $module = null)
     {
@@ -89,13 +91,13 @@ class Bwork_Layout_Default implements Bwork_Layout_ILayout
             
             if(file_exists($path.$layout)) {
                 $this->layout = $path.$layout;
-                return;
+                return $this;
             }
         }
         
         if(file_exists(($path = $config->get('layouts_path')).$layout)) {
             $this->layout = $path.$layout;
-            return;
+            return $this;
         }
         else {
             throw new Bwork_Layout_Exception(sprintf('Layout [%s] could not be found', $layout));
@@ -118,17 +120,19 @@ class Bwork_Layout_Default implements Bwork_Layout_ILayout
      * 
      * @param string $content 
      * @access public
-     * @return void
+     * @return Bwork_Layout_Default
      */
     public function setContent($content)
     {
         $this->content = $content;
+
+        return $this;
     }
     
     /**
      * This will return the current content
      * 
-     * @acccess public
+     * @access public
      * @return string
      */
     public function getContent()
@@ -137,11 +141,11 @@ class Bwork_Layout_Default implements Bwork_Layout_ILayout
     }
     
     /**
-     * This will include the layout file which therfore should have added
+     * This will include the layout file which therefore should have added
      * possible view layout content
      * 
      * @access public
-     * @return string
+     * @return mixed
      */
     public function fetch()
     {
@@ -156,7 +160,8 @@ class Bwork_Layout_Default implements Bwork_Layout_ILayout
     }
     
     /**
-     * This will imidiatly attempt to display the layout template file
+     * This will immediately attempt to display the layout template file
+     *
      * @access public
      * @return void
      */
@@ -189,14 +194,14 @@ class Bwork_Layout_Default implements Bwork_Layout_ILayout
     {
         return isset($this->variables[$key])? $this->variables[$key] : null;
     }
-    
+
     /**
-     * This is the magic mathod used when a undifined method is called
+     * This is the magic method used when a undefined method is called
      * this will try to retrieve a helper for this function and execute the
      * helper
-     * 
+     *
      * @param string $name
-     * @param array $argument
+     * @param array $arguments
      * @access public
      * @return object
      */

@@ -26,14 +26,20 @@ final class Bwork_Config_Confighandler
     
     /**
      * This will hold all config parsers objects
+     *
      * @var array $parsers
      * @access private
      */
     private $parsers = array();
 
     /**
+     * Load file method
+     *
      * @see Bwork_Config_Handler::loadFile()
      * @todo: Add Fileinfo for extension
+     * @param string $file
+     * @throws Bwork_Config_Exception
+     * @return Bwork_Config_Confighandler
      */
     public function loadFile($file)
     {
@@ -52,9 +58,14 @@ final class Bwork_Config_Confighandler
         
         return $this;
     }
-    
+
     /**
+     * Load array method
+     *
      * @see Bwork_Config_Handler::loadArray()
+     * @param array $data
+     * @throws Bwork_Config_Exception
+     * @return void
      */
     public function loadArray(array $data)
     {
@@ -70,11 +81,12 @@ final class Bwork_Config_Confighandler
 
     /**
      * Will attempt to add the parser to the $parsers
+     *
      * @access public
      * @param string $ext
-     * @param Bwork_config_Handler $parser
+     * @param Bwork_config_Parser $parser
      * @throws Bwork_Config_Exception
-     * @return Bwork_Config_Confighandler 
+     * @return Bwork_Config_Confighandler
      */
     public function setParser($ext, Bwork_Config_Parser $parser)
     {
@@ -93,7 +105,11 @@ final class Bwork_Config_Confighandler
 
     /**
      * Magic method __set
+     *
      * @see Bwork_Config_Confighandler::set()
+     * @param string $key
+     * @param mixed $value
+     * @return Bwork_Config_Confighandler
      */
     public function __set($key, $value)
     {
@@ -102,6 +118,7 @@ final class Bwork_Config_Confighandler
 
     /**
      * Will add the key-value arguments to $settings
+     *
      * @param string $key
      * @param string $value
      * @access public
@@ -118,10 +135,13 @@ final class Bwork_Config_Confighandler
         
         return $this;
     }
-    
+
     /**
      * Magic methods __get
+     *
      * @see Bwork_Config_Handler::get()
+     * @param string $key
+     * @return mixed
      */
     public function __get($key)
     {
@@ -129,7 +149,12 @@ final class Bwork_Config_Confighandler
     }
 
     /**
+     * This method will return a specific setting
+     *
      * @see Bwork_Config_Handler::get()
+     * @param string $key
+     * @throws Bwork_Config_Exception
+     * @return mixed
      */
     public function get($key)
     {
@@ -141,10 +166,11 @@ final class Bwork_Config_Confighandler
     }
     
     /**
-     * This will check if a key is set in the settings array
+     * This will check if a key is set in the storage
+     *
      * @param string $key
      * @access public
-     * @return void 
+     * @return boolean
      */
     public function exists($key)
     {

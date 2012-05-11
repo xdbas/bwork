@@ -24,7 +24,12 @@ final class Bwork_Config_Parser_XMLConfigParser
 {
 
     /**
+     * XML parse method
+     *
      * @see Bwork_Config_Parsers_IConfigParser::parse()
+     * @param string $file
+     * @throws Bwork_Config_Exception
+     * @return array
      */
     public function parse($file)
     {

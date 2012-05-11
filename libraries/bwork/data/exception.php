@@ -10,19 +10,14 @@
  */
 
 /**
- * @interface
+ * Exception
+ *
+ * Exception extender for Data exceptions
+ *
  * @package Bwork
  * @subpackage Bwork_Data
  * @version v 0.1
  */
-interface Bwork_Data_Interface
+class Bwork_Data_Exception extends Exception
 {
-
-    /**
-     * This is the main method and should always return an instance of self
-     *
-     * @return self
-     */
-    public function db();
-    
 }

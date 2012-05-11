@@ -39,7 +39,7 @@ class Bwork_Helper_BaseUrl
      * and assign it to the defaultBaseUrl var
      *
      * @access public
-     * @return void
+     * @return Bwork_Helper_BaseUrl
      */
     public function __construct()
     {

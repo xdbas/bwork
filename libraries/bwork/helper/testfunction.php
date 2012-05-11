@@ -1,20 +1,26 @@
 <?php
-
-class Bwork_Helper_TestFunction {
+/**
+ * dummy file
+ */
+class Bwork_Helper_TestFunction
+{
     
     public $var;
     
-    public function testFunction() {
-        $this->var = 'lalalala';
+    public function testFunction()
+    {
+        $this->var = 'string';
         return $this;
     }
  
-    public function rewrite() {
-        $this->var = 'trololololo';
+    public function rewrite()
+    {
+        $this->var = 'rewrote it';
         return $this;
     }
     
-    public function __toString() {
+    public function __toString()
+    {
         return $this->var;
     }
     

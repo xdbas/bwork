@@ -18,10 +18,12 @@
  * @subpackage Bwork_Http
  * @version v 0.1
  */
-class Bwork_Http_Request {
+class Bwork_Http_Request
+{
     
     /**
      * Will hold the current URI in string format
+     *
      * @var string $uri
      * @access protected
      */
@@ -29,18 +31,21 @@ class Bwork_Http_Request {
     
     /**
      * This wil hold the current URI params in array format
+     *
      * @var array $params
      */
     protected $params;
-    
+
     /**
-     * The construction method will handle the current URI and add the string 
-     * format to self::$uri and explode on a '/' and will add the params to 
+     * The construction method will handle the current URI and add the string
+     * format to self::$uri and explode on a '/' and will add the params to
      * self::$params
+     *
      * @access public
-     * @return void
+     * @return Bwork_Http_Request
      */
-    public function __construct() {
+    public function __construct()
+    {
         $url = isset($_GET['url']) ? trim($_GET['url']) : '';
 
         $this->uri = substr($url, -1) == '/'? substr($url, 0 , -1) : $url;
@@ -59,43 +64,47 @@ class Bwork_Http_Request {
     /**
      * This method is used to retrieve all params
      * 
-     * @param string $param
+     * @param null|string $param
      * @return array Bwork_Http_Request::Params
      */
-    public function getParams($param = null) {
+    public function getParams($param = null)
+    {
         if($param !== null) {
             return $this->getParam($param);
         }
         
         return $this->params;
     }
-    
+
     /**
      * This method is used to retrieve a param
      *
      * @access public
      * @param string $param
      * @param string $default
+     * @throws Bwork_Http_Exception
      * @return string
      */
-    public function getParam($param, $default = '') {
+    public function getParam($param, $default = '')
+    {
         if(array_key_exists($param, $this->params) === false) {
             if(isset($default) 
                 || $default === null) {
                 return $default;
             }
-            throw new Bwork_Exception_HttpException(sprintf('Param: %s was undifined in URI Params.', $param));
+            throw new Bwork_Http_Exception(sprintf('Param: %s was undefined in URI Params.', $param));
         }
         
         return $this->params[$param];
     }
     
     /**
-     * This method is used to retreive all args in associative format
+     * This method is used to retrieve all args in associative format
      *
      * @return array
      */
-    public function getArgs() {
+    public function getArgs()
+    {
        $args = array();
 
        if(isset($this->params) && is_array($this->params)) {
@@ -109,33 +118,26 @@ class Bwork_Http_Request {
 
        return $args;
     }
-    
+
     /**
      * This method is used to retrieve an argument
      *
      * @param string $key
+     * @throws Bwork_Http_Exception
      * @return string
      */
-    public function getArg($key) {
+    public function getArg($key)
+    {
         $args = $this->getArgs();
         if(count($args) == 0) {
-            throw new Bwork_Exception_HttpException('No arguments found in Http URI.');
+            throw new Bwork_Http_Exception('No arguments found in Http URI.');
         }
         
         if(isset($args[$key]) === false) {
-            throw new Bwork_Exception_HttpException(sprintf('Arg: %s was undefined in URI Args.', $key));
+            throw new Bwork_Http_Exception(sprintf('Arg: %s was undefined in URI Args.', $key));
         }
 
         return $args[$key];
-    }
-
-    /**
-     * 
-     *
-     *
-     */
-    public function create($url) {
-
     }
     
     /**
@@ -143,7 +145,8 @@ class Bwork_Http_Request {
      * 
      * @return int
      */
-    public function countParams() {
+    public function countParams()
+    {
         return count($this->params);
     }
     
@@ -154,7 +157,8 @@ class Bwork_Http_Request {
      * @param string $key
      * @return mixed
      */
-    public function post($key = null) {
+    public function post($key = null)
+    {
         if($key === null) {
             return $_POST;
         }
@@ -167,9 +171,10 @@ class Bwork_Http_Request {
      *
      * @access public
      * @param string $key
-     * @return midex
+     * @return mixed
      */
-    public function get($key = null) {
+    public function get($key = null)
+    {
         if($key === null) {
             return $_GET;
         }
@@ -182,15 +187,18 @@ class Bwork_Http_Request {
      *
      * @return mixed
      */
-    public function rawPost() {
+    public function rawPost()
+    {
         return file_get_contents('php://input');
     }
     
     /**
      * Used to retrieve the url
+     *
      * @return string Bwork_Http_Request::Params
      */
-    public function __toString() {
+    public function __toString()
+    {
         return implode('/', $this->params);
     }
     

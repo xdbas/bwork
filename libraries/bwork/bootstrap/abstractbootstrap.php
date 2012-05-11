@@ -26,10 +26,10 @@ abstract class Bwork_Bootstrap_AbstractBootstrap
 
     /**
      * The construction method that handles the class function
-     * 
+     *
      * @access public
      * @throws Bwork_Bootstrap_Exception
-     * @return void
+     * @return Bwork_Bootstrap_AbstractBootstrap
      */
     public function __construct() 
     {

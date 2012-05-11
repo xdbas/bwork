@@ -19,22 +19,27 @@
  * @subpackage Bwork_Data
  * @version v 0.1
  */
-abstract class Bwork_Data_PDO implements Bwork_Data_Interface {
+abstract class Bwork_Data_PDO implements Bwork_Data_Interface
+{
     
     /**
      * This will hold the PDO object
+     *
      * @var PDO $db
      * @access protected
      */
     protected $db;
-    
+
     /**
-     * The construction method will attempt to establish a connection with the 
+     * The construction method will attempt to establish a connection with the
      * MySQL database and stores itself in $db.
+     *
      * @access public
-     * @return void
+     * @throws Bwork_Data_Exception
+     * @return Bwork_Data_PDO
      */
-    public function  __construct() {
+    public function  __construct()
+    {
 
         $dbParams   = Bwork_Core_Registry::GetInstance()
                         ->getResource('Bwork_Config_Confighandler')
@@ -50,26 +55,30 @@ abstract class Bwork_Data_PDO implements Bwork_Data_Interface {
             $this->db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         }
         catch(PDOException $e) {
-            throw new Exception('PDO Error: Failed connecting to database.');
+            throw new Bwork_Data_Exception('PDO Error: Failed connecting to database.');
         }
     }
 
     /**
-     * Magic mathod automaticly called just before destroying the object and 
+     * Magic method automatically called just before destroying the object and
      * will unset PDO
+     *
      * @access public
      * @return void
      */
-    public function  __destruct() {
+    public function  __destruct()
+    {
         unset($this->db);
     }
 
     /**
      * The main function that will return the PDO class
+     *
      * @access public
      * @return PDO
      */
-    public function db() {
+    public function db()
+    {
         return $this->db;
     }
     

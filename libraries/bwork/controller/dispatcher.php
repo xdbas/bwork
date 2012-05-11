@@ -18,16 +18,20 @@
  * @subpackage Bwork_Controller
  * @version v 0.3
  */
-class Bwork_Controller_Dispatcher {
-    
+class Bwork_Controller_Dispatcher
+{
+
     /**
-     * This will dispatch a controller and will perform some checks to prevent 
+     * This will dispatch a controller and will perform some checks to prevent
      * failing
-     * @param Bwork_Router_Router $router 
+     *
+     * @param Bwork_Router_Router $router
+     * @throws Bwork_Controller_Exception
      * @access public
      * @return void
      */
-    public function dispatch(Bwork_Router_Router $router) {
+    public function dispatch(Bwork_Router_Router $router)
+    {
         
         $config = Bwork_Core_Registry::getInstance()->getResource('Bwork_Config_Confighandler');    
 
@@ -36,11 +40,11 @@ class Bwork_Controller_Dispatcher {
         $module     = $router->module;
 
         if(empty($controller)) {
-            throw new Bwork_Exception_ControllerException('Controller was not set by the router.');
+            throw new Bwork_Controller_Exception('Controller was not set by the router.');
         }
         
-        if(empty($router->action)) {
-            throw new Bwork_Exception_ControllerException('Action was not set by the router.');
+        if(empty($action)) {
+            throw new Bwork_Controller_Exception('Action was not set by the router.');
         }
         
         $controllerName = $controller.'Controller';
@@ -52,15 +56,18 @@ class Bwork_Controller_Dispatcher {
         else {
             $controllerPath = $config->get('controller_path');
         }
-        
-        if(file_exists($controllerPath.$filename) == false) {
-            throw new Exception(sprintf('%s does not exists', $controllerPath.$filename));
+
+        $filePath = $controllerPath.$filename;
+        if(file_exists($filePath) === false
+            || is_file($filePath) === false
+            || is_readable($filePath) === false) {
+            throw new Bwork_Controller_Exception(sprintf('[%s] does not exists', $filePath));
         }
-        require_once $controllerPath.$filename;
+        require_once $filePath;
         
         $controllerClass = new $controllerName();
-        if($controllerClass instanceof Bwork_Controller_Action == false) {
-            throw new Bwork_Exception_ControllerException(sprintf('%s have to be an instance of Bwork_Controller_Action', $controllerName));
+        if($controllerClass instanceof Bwork_Controller_Action === false) {
+            throw new Bwork_Controller_Exception(sprintf('[%s] have to be an instance of Bwork_Controller_Action', $controllerName));
         }
 
         $controllerClass->invoke($router);
