@@ -16,9 +16,9 @@ class HomeController extends Bwork_Controller_action {
         $layout->assign('testvar', 'testvalue');
         
         $testModel = new TestModel();
-        
-        
-        
+
+
+
         return $layout;
 
     }

@@ -1,4 +1,4 @@
-editnotes Bwork
+edit notes Bwork
 
 - Coding style change(example) [
 
@@ -26,25 +26,19 @@ class XxxxXxxx
 ]
 [
 - exception handler
-- remove all exceptions from Bwork_Exception and move it to every subpackes
 ]
-- 1 registry getinstance when used multiply times
+- 1 registry getInstance when used multiply times
 - New Data MySQLi
 
-- Think about helpers directory/namespace.
-
-- better names for interface/abstract
+- edit interface name View/Layout
 
 - Css links added as helper
-- paginator class added to libs
-- paginator added as helper
+- pagination class added to libs
+- pagination added as helper
 
-
-bugs[
-- change set include path
-- remove testmodel
+[
 - add new config
 - lowercase in url modules
 - lowercase loading in modules
-- fix for last char is \ in link
+- Models for modules ModuleName_ModelName?
 ]
