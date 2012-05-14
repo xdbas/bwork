@@ -17,13 +17,15 @@
  * @subpackage Bwork_Validation
  * @version v 0.1
  */
-interface Bwork_Validation_Interface {
+interface Bwork_Validation_Validation
+{
     /**
      * This method is used to add an input to be checked
      *
      * @param string $key
      * @param string $label
      * @param array $validators
+     * @return self
      */
     public function add($key, $label, array $validators);
 

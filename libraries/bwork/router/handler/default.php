@@ -19,27 +19,34 @@
  * @subpackage Bwork_Router_Handler
  * @version v 0.1
  */
-final class Bwork_Router_Handler_Default implements Bwork_Router_Handler_Interface
+final class Bwork_Router_Handler_Default
+    implements Bwork_Router_Handler
 {
     
     /**
      * Will store the parameter gained when resolving a route
+     *
      * @var array
+     * @access protected
      */
-    public $params;
-    
-    /** 
+    protected $params;
+
+    /**
+     * Will check if a route is set for this uri\
+     *
      * @see Bwork_Router_Handler_Interface::checkRoute()
+     * @param array $uri
+     * @return bool
      */
-    public function checkRoute(array $url)
+    public function checkRoute(array $uri)
     {
-        $url    = implode('/', $url);
+        $uri    = implode('/', $uri);
         $config = Bwork_Core_Registry::getInstance()->getResource('Bwork_Config_Confighandler');
         
         if($config->exists('route')) {
             $routes = $config->get('route');
-            if(array_key_exists($url, $routes)) {
-                $this->params = $routes[$url];
+            if(array_key_exists($uri, $routes)) {
+                $this->params = $routes[$uri];
                 return true;
             }
         }
@@ -47,8 +54,11 @@ final class Bwork_Router_Handler_Default implements Bwork_Router_Handler_Interfa
         return false;
     }
     
-    /** 
+    /**
+     * Will return the resolved Params used for dispatching
+     *
      * @see Bwork_Router_Handler_Interface::getParams()
+     * @return array
      */
     public function getParams()
     {

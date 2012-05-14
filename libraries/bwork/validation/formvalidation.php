@@ -31,7 +31,8 @@
  * @version v 0.1
  */
 class Bwork_Validation_FormValidation 
-    implements Bwork_Validation_Interface {
+    implements Bwork_Validation_Validation
+{
 
     const POST  = 0;
     const GET   = 1;
@@ -40,13 +41,15 @@ class Bwork_Validation_FormValidation
      * Type: POST | GET
      *
      * @var int
+     * @access private
      */
     private $form_method = self::POST;
 
     /**
      * Added inputs to validate
      *
-     * @var aray
+     * @var array
+     * @access private
      */
     private $data = array();
 
@@ -54,6 +57,7 @@ class Bwork_Validation_FormValidation
      * Stores all errors
      *
      * @var array
+     * @access private
      */
     private $errors = array();
 
@@ -61,15 +65,17 @@ class Bwork_Validation_FormValidation
      * Stores all messages
      *
      * @var array
+     * @access private
      */
     private $messages = array();
 
     /**
      * This method is used to set the current form method
      *
-     * @param int $type
+     * @param int $form_method
      */
-    public function setFormMethod($form_method) {
+    public function setFormMethod($form_method)
+    {
         $this->form_method = $form_method;
     }
 
@@ -79,8 +85,10 @@ class Bwork_Validation_FormValidation
      * @param string $key
      * @param string $label
      * @param array $validators
+     * @return Bwork_Validation_FormValidation
      */
-    public function add($key, $label, array $validators) {
+    public function add($key, $label, array $validators)
+    {
         if($this->form_method == self::POST) {
             $data = isset($_POST[$key]) ? $_POST[$key] : null;
         } else {
@@ -93,29 +101,36 @@ class Bwork_Validation_FormValidation
             'name'       => $label,
             'validators' => $validators
         );
+
+        return $this;
     }
-    
+
     /**
      * This method is used to check an raw string
      *
-     * @param string $key
+     * @param string $data
      * @param string $label
      * @param array $validators
+     * @return Bwork_Validation_FormValidation
      */
-    public function addString($data, $label, array $validators) {
+    public function addString($data, $label, array $validators)
+    {
         $this->data[] = array(
             'key'        => $label,
             'data'       => $data,
             'name'       => $label,
             'validators' => $validators
         );
+
+        return $this;
     }
     /**
      * This method is used to validate all inputs
      *
-     * @return boolean
+     * @return bool
      */
-    public function validate() {
+    public function validate()
+    {
         foreach($this->data as $input) {
             
             foreach($input['validators'] as $validator) {
@@ -143,7 +158,8 @@ class Bwork_Validation_FormValidation
      *
      * @return int
      */
-    public function getErrorCount() {
+    public function getErrorCount()
+    {
         return count($this->errors);
     }
 
@@ -152,7 +168,8 @@ class Bwork_Validation_FormValidation
      *
      * @return array
      */
-    public function getErrors() {
+    public function getErrors()
+    {
         return $this->errors;
     }
 
@@ -160,11 +177,13 @@ class Bwork_Validation_FormValidation
      * This method is used to set global custom messages
      *
      * @param array $message_array
+     * @throws Bwork_Validation_Exception
      */
-    public function setMessages(array $message_array) {
+    public function setMessages(array $message_array)
+    {
         
         if(is_array($message_array) == false) {
-            throw new Bwork_Exception_Validation(sprintf('%s should be in array format.', $message_array));
+            throw new Bwork_Validation_Exception(sprintf('%s should be in array format.', $message_array));
         }
         
         $this->messages = $message_array;

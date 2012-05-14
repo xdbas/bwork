@@ -20,11 +20,14 @@
  * @version v 0.1
  */
 final class Bwork_Validation_Validator_MinLength 
-    extends Bwork_Validation_Validator_AbstractValidator {
+    extends Bwork_Validation_AbstractValidator
+{
+
     /**
-     * The minimum length
+     * This holds the min length set by the constructor
      *
      * @var int
+     * @access private
      */
     private $min_length;
 
@@ -33,9 +36,11 @@ final class Bwork_Validation_Validator_MinLength
      *
      * @param int $length
      * @param string $message
+     * @return Bwork_Validation_Validator_MinLength
      */
-    public function __construct($length, $message = NULL) {
-        $this->default_message  = '[%s] should have atleast ' . $length . ' characters';
+    public function __construct($length, $message = null)
+    {
+        $this->default_message  = '[%s] should have at least ' . $length . ' characters';
         $this->min_length       = $length;
         $this->params[]         = $length;
 
@@ -45,9 +50,11 @@ final class Bwork_Validation_Validator_MinLength
     /**
      * This method is used to execute the validator
      *
+     * @access public
      * @return boolean
      */
-    public function execute() {
+    public function execute()
+    {
         return (empty($this->input) || mb_strlen($this->input) >= $this->min_length);
     }
     

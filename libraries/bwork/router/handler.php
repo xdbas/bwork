@@ -18,14 +18,16 @@
  * @subpackage Bwork_Router
  * @version v 0.1
  */
-interface Bwork_Router_Handler_Interface {
+interface Bwork_Router_Handler
+{
     
     /**
      * Will attempt to resolve if there is a specified route set for parameter $url
-     * @param Array $url
+     *
+     * @param Array $uri
      * @return boolean
      */
-    public function checkRoute(array $url);
+    public function checkRoute(array $uri);
     
     /**
      * Will return the controller/action/mockparams parameters in array format
@@ -36,7 +38,7 @@ interface Bwork_Router_Handler_Interface {
      * return array(
      *  'controller'    => 'Controllername',
      *  'action'        => 'ActionName',
-     *  'subPath'       => 'subfoldername/'
+     *  'module'        => 'admin'
      *  'mockParams'    => array('1', '2')
      * );
      * </code>

@@ -12,7 +12,7 @@
 /**
  * LibraryAutoloader
  *
- * This autoloader attempts to load the given class, but is only capeable of loading
+ * This autoloader attempts to load the given class, but is only capable of loading
  * files within a library.
  *
  * @package Bwork
@@ -23,9 +23,15 @@ require_once 'bwork/loader/autoloader.php';
 class Bwork_Loader_LibraryAutoloader implements Bwork_Loader_Autoloader
 {
 
-	/**
-	 * @see Bwork_Loader_Interface::autoload()
-	 */
+    /**
+     * Main method for loading library files
+     *
+     * @see Bwork_Loader_Interface::autoload()
+     * @access public
+     * @static
+     * @param string $className
+     * @return void
+     */
 	public static function autoload($className)
 	{
 		$filePath     = str_replace('_', DIRECTORY_SEPARATOR, strtolower($className)) . '.php';
@@ -46,13 +52,13 @@ class Bwork_Loader_LibraryAutoloader implements Bwork_Loader_Autoloader
 
 	/**
 	 * This method is used to check if a file exist within the library folder and
-	 * is used before relying on the include paths. Alot of servers dont allow 
+	 * is used before relying on the include paths. Allot of servers don't allow
 	 * you to attempt a file_exists command on pre initialized include paths.
 	 * 
 	 * @access public
 	 * @static
-	 * @param String $filename
-	 * @return mixed
+	 * @param string $filename
+	 * @return string
 	 */
 	public static function fileExists($filename)
     {

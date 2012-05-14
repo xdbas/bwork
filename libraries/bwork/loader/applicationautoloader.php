@@ -25,7 +25,14 @@ class Bwork_Loader_ApplicationAutoloader implements Bwork_Loader_Autoloader
 {
 
     /**
+     * Main method for loading Models and ValueObject
+     *
      * @see Bwork_Loader_Interface::autoload()
+     * @access public
+     * @static
+     * @param string $className
+     * @throws Bwork_Loader_Exception
+     * @return void
      */
     public static function autoload($className)
     {

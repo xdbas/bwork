@@ -20,13 +20,29 @@
  * @version v 0.1
  */
 final class Bwork_Validation_Validator_Email 
-    extends Bwork_Validation_Validator_AbstractValidator {
+    extends Bwork_Validation_AbstractValidator
+{
+
     /**
      * The default message
      *
      * @var string
+     * @access protected
+     * @override
      */
-    protected $default_message = '[%s] should be a valid emailaddress.';
+    protected $default_message = '[%s] should be a valid email address.';
+
+
+    /**
+     * Constructor
+     *
+     * @param string $message
+     * @return Bwork_Validation_Validator_Email
+     */
+    public function __construct($message = null)
+    {
+        parent::__construct($message);
+    }
 
     /**
      * This method is used to execute the validator

@@ -16,16 +16,18 @@
  * This is the main class for all validators
  *
  * @package Bwork
- * @subpackage Bwork_Validation_Validator
+ * @subpackage Bwork_Validation
  * @version v 0.1
  */
-abstract class Bwork_Validation_Validator_AbstractValidator 
-    implements Bwork_Validation_Validator_Interface {
+abstract class Bwork_Validation_AbstractValidator
+    implements Bwork_Validation_Validator
+{
     
     /**
      * The input key
      *
      * @var string
+     * @access protected
      */
     protected $input;
 
@@ -33,6 +35,7 @@ abstract class Bwork_Validation_Validator_AbstractValidator
      * The input name
      *
      * @var string
+     * @access protected
      */
     protected $input_name;
 
@@ -47,6 +50,7 @@ abstract class Bwork_Validation_Validator_AbstractValidator
      * The default message
      *
      * @var string
+     * @access protected
      */
     protected $default_message;
 
@@ -54,6 +58,7 @@ abstract class Bwork_Validation_Validator_AbstractValidator
      * The extra params
      *
      * @var array
+     * @access protected
      */
     protected $params = array();
 
@@ -62,8 +67,9 @@ abstract class Bwork_Validation_Validator_AbstractValidator
      *
      * @param string $message
      */
-    public function __construct($message = NULL) {
-        if($message !== NULL) {
+    public function __construct($message = null)
+    {
+        if($message !== null) {
             $this->setMessage($message);
         }
     }
@@ -73,8 +79,10 @@ abstract class Bwork_Validation_Validator_AbstractValidator
      *
      * @param string $input
      * @param string $name
+     * @access public
      */
-    public function setInput($input, $name) {
+    public function setInput($input, $name)
+    {
         $this->input        = $input;
         $this->input_name   = $name;
     }
@@ -82,9 +90,11 @@ abstract class Bwork_Validation_Validator_AbstractValidator
     /**
      * Used to retrieve the message
      *
+     * @access public
      * @return string
      */
-    public function getMessage() {
+    public function getMessage()
+    {
         if(empty($this->message)) {
             return sprintf($this->default_message, $this->input_name);
         }
@@ -100,9 +110,11 @@ abstract class Bwork_Validation_Validator_AbstractValidator
     /**
      * Used to set the message
      *
+     * @access public
      * @param string $message
      */
-    public function setMessage($message) {
+    public function setMessage($message)
+    {
         $this->message = $message;
     }
 

@@ -20,10 +20,12 @@
  * @subpackage Bwork_Router
  * @version v 0.1
  */
-class Bwork_Router_Router {
+class Bwork_Router_Router
+{
     
     /**
      * Holds all the routing handler
+     *
      * @access protected
      * @var array
      */
@@ -31,12 +33,14 @@ class Bwork_Router_Router {
     
     /**
      * Will hold the controller value
+     *
      * @access public
      * @var string 
      */
     public $controller;
     /**
      * Will hold the action value
+     *
      * @access public
      * @var string 
      */
@@ -44,6 +48,7 @@ class Bwork_Router_Router {
     
     /**
      * Will hold specific mock parameters gained from a route
+     *
      * @access public
      * @var array
      */
@@ -51,6 +56,7 @@ class Bwork_Router_Router {
     
     /**
      * Will hold the module name which is resolved
+     *
      * @access public
      * @var String
      */
@@ -58,37 +64,44 @@ class Bwork_Router_Router {
 
     /**
      * Will hold the URI Params gained from Bwork_Http_Request object
+     *
      * @access protected
      * @var array 
      */
     protected $uriParams;
     /**
      * Will hold the current URI gained from Bwork_Http_Request object
+     *
      * @access protected
      * @var string 
      */
     protected $requestUri;
-    
+
     /**
      * This function will initialize the routing object and resolve the current URI values
-     * @param Bwork_Http_Request $requestObject 
-     * @access public
-     * @return void
-     */
-    public function __construct(Bwork_Http_Request $requestObject) {
-        $this->uriParams = $requestObject->countParams() > 0? $requestObject->getParams() : array();
-        $this->requestUri = $requestObject->__toString();
-    }
-    
-    /**
-     * Will attempt to add an inputted handler to the handlers property
-     * @param Bwork_Router_Handler_Interface $handler 
+     *
+     * @param Bwork_Http_Request $requestObject
      * @access public
      * @return Bwork_Router_Router
      */
-    public function setHandler(Bwork_Router_Handler_Interface $handler) {
-        if($handler instanceof Bwork_Router_Handler_Interface == false) {
-            throw new Bwork_Exception_RouterException(sprintf('%s should be and instance of Bwork_Router_Handler_Interface', get_class($handler)));
+    public function __construct(Bwork_Http_Request $requestObject)
+    {
+        $this->uriParams = $requestObject->countParams() > 0? $requestObject->getParams() : array();
+        $this->requestUri = $requestObject->__toString();
+    }
+
+    /**
+     * Will attempt to add an inputted handler to the handlers property
+     *
+     * @param Bwork_Router_Handler $handler
+     * @access public
+     * @throws Bwork_Router_Exception
+     * @return Bwork_Router_Router
+     */
+    public function setHandler(Bwork_Router_Handler $handler)
+    {
+        if($handler instanceof Bwork_Router_Handler == false) {
+            throw new Bwork_Router_Exception(sprintf('%s should be and instance of Bwork_Router_Handler_Interface', get_class($handler)));
         }
         
         $this->handlers[get_class($handler)] = $handler;
@@ -98,10 +111,12 @@ class Bwork_Router_Router {
     
     /**
      * This is the main function which will handle the full routing process
+     *
      * @access public
      * @return void
      */
-    public function route() {   
+    public function route()
+    {
         $routed = false;
 
         if(count($this->handlers) > 0) {
@@ -123,13 +138,16 @@ class Bwork_Router_Router {
             $this->checkDefaultSegments();
         }
     }
-    
+
     /**
      * If there is no specific Route found for the current URI this will attempt to resolve the controller and action in the default way
+     *
      * @access private
+     * @throws Bwork_Router_Exception
      * @return void
      */
-    private function checkDefaultSegments() {
+    private function checkDefaultSegments()
+    {
         if(count($this->uriParams) == 0) {
             $this->setDefault();
             return;
@@ -143,29 +161,33 @@ class Bwork_Router_Router {
         else {
             $config = Bwork_Core_Registry::getInstance()->getResource('Bwork_Config_Confighandler');
             if($config->exists('default_action') == false) {
-                throw new Bwork_Exception_RouterException('There was no default_action property set in Bwork_Config_Confighandler');
+                throw new Bwork_Router_Exception('There was no default_action property set in Bwork_Config_Confighandler');
             }
             $this->action = $config->get('default_action');
         }
         
         $this->mockParams = array();
     }
-    
+
     /**
      * This will attempt to set the default controller an action values as set in a Config file
+     *
      * @access public
+     * @access public
+     * @throws Bwork_Router_Exception
      * @return void
      */
-    public function setDefault() {
+    public function setDefault()
+    {
         $config = Bwork_Core_Registry::getInstance()->getResource('Bwork_Config_Confighandler');
         
         if($config->exists('default_controller') == false) {
-            throw new Bwork_Exception_RouterException('There was no default_controller property set in Bwork_Config_Confighandler');
+            throw new Bwork_Router_Exception('There was no default_controller property set in Bwork_Config_Confighandler');
         }
         $this->controller = $config->get('default_controller');
         
         if($config->exists('default_action') == false) {
-            throw new Bwork_Exception_RouterException('There was no default_action property set in Bwork_Config_Confighandler');
+            throw new Bwork_Router_Exception('There was no default_action property set in Bwork_Config_Confighandler');
         }
         $this->action = $config->get('default_action');
         

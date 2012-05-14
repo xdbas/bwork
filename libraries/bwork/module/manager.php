@@ -12,7 +12,7 @@
 /**
  * Manager
  *
- * This class is used to controll module loading and getting
+ * This class is used to control module loading and getting
  *
  * @package Bwork
  * @subpackage Bwork_Module
@@ -54,7 +54,7 @@ class Bwork_Module_Manager implements Bwork_Module_Module
      * @access public
      * @param String $moduleName
      * @throws Bwork_Module_Exception
-     * @return void
+     * @return Bwork_Module_Manager
      */
     public function addModule($moduleName)
     {
@@ -71,8 +71,8 @@ class Bwork_Module_Manager implements Bwork_Module_Module
      * This method can be used to check if a module had yet been initialized
      * 
      * @access public
-     * @param type $moduleName
-     * @return type boolean
+     * @param string $moduleName
+     * @return boolean
      */
     public function moduleExists($moduleName)
     {
@@ -90,7 +90,7 @@ class Bwork_Module_Manager implements Bwork_Module_Module
     }
 
     /**
-     * This will check the module files are ready and attempts to run the bootstrapper
+     * This will check the module files are ready and attempts to run the bootstrap
      * 
      * @access public
      * @param String $moduleName

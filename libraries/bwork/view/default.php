@@ -37,15 +37,15 @@ class Bwork_View_Default implements Bwork_View_IView
      * @access protected
      */
     protected $variables = array();
-    
+
     /**
-     * The constructor method that is used to set a specific view file, will 
+     * The constructor method that is used to set a specific view file, will
      * when template param is null use the default values
-     * 
+     *
      * TODO: Multiple Template Extensions
-     * @param type $template 
+     * @param string $template
      * @access public
-     * @return void
+     * @return Bwork_View_Default
      */
     public function __construct($template = null)
     {

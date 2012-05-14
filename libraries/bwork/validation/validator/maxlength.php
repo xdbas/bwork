@@ -20,8 +20,15 @@
  * @version v 0.1
  */
 final class Bwork_Validation_Validator_MaxLength 
-    extends Bwork_Validation_Validator_AbstractValidator {
-    
+    extends Bwork_Validation_AbstractValidator
+{
+
+    /**
+     * This holds the max length set by the constructor
+     *
+     * @var int
+     * @access private
+     */
     private $max_length;
 
     /**
@@ -29,8 +36,10 @@ final class Bwork_Validation_Validator_MaxLength
      *
      * @param int $length
      * @param string $message
+     * @return Bwork_Validation_Validator_MaxLength
      */
-    public function __construct($length, $message = NULL) {
+    public function __construct($length, $message = null)
+    {
         $this->default_message  = '[%s] exceeded the maximum length of ' . $length . '.';
         $this->max_length       = $length;
         $this->params[]         = $length;
@@ -41,9 +50,11 @@ final class Bwork_Validation_Validator_MaxLength
     /**
      * This method is used to execute the validator
      *
+     * @access public
      * @return boolean
      */
-    public function execute() {
+    public function execute()
+    {
         return (empty($this->input) || mb_strlen($this->input) <= $this->max_length);
     }
     

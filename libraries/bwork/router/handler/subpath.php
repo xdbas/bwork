@@ -21,23 +21,29 @@
  * @version v 0.1
  * @deprecated
  */
-final class Bwork_Router_Handler_SubPath implements Bwork_Router_Handler_Interface
+final class Bwork_Router_Handler_SubPath
+    implements Bwork_Router_Handler
 {
     
     /**
      * Will store the parameter gained when resolving a route
+     *
      * @var array
      */
     public $params;
-    
-    /** 
+
+    /**
+     * Will check if a route is set for this uri\
+     *
      * @see Bwork_Router_Handler_Interface::checkRoute()
+     * @param array $uri
+     * @return bool
      */
-    public function checkRoute(array $url)
+    public function checkRoute(array $uri)
     {
         $config = Bwork_Core_Registry::getInstance()->getResource('Bwork_Config_Confighandler');
 
-        if(count($url) <= 0) {
+        if(count($uri) <= 0) {
             return false;
         }
 
@@ -45,12 +51,12 @@ final class Bwork_Router_Handler_SubPath implements Bwork_Router_Handler_Interfa
         $subPath        = null;
 
         $i = 0;
-        foreach($url as $param) {
+        foreach($uri as $param) {
             if(is_dir($controllerPath.$subPath.$param) === true) {
                 $subPath .= $param . DIRECTORY_SEPARATOR;
             }
             else {
-                $this->resolveParams($url, $i);
+                $this->resolveParams($uri, $i);
                 break;
             }
 
@@ -62,7 +68,7 @@ final class Bwork_Router_Handler_SubPath implements Bwork_Router_Handler_Interfa
 
         if(array_key_exists('controller', $this->params) == false 
             || array_key_exists('action', $this->params) == false) {
-            $this->resolveParams($url, $i);
+            $this->resolveParams($uri, $i);
         }
 
         return true;
@@ -74,6 +80,7 @@ final class Bwork_Router_Handler_SubPath implements Bwork_Router_Handler_Interfa
      * 
      * @param array $url
      * @param int $from From which item the subPaths stops
+     * @return void
      */
     public function resolveParams(array $url, $from)
     {
@@ -82,9 +89,12 @@ final class Bwork_Router_Handler_SubPath implements Bwork_Router_Handler_Interfa
         $this->params['controller'] = isset($url[$from])? $url[$from] : $config->get('default_controller');
         $this->params['action']     = isset($url[($from+1)])? $url[($from+1)] : $config->get('default_action');
     }
-    
-    /** 
+
+    /**
+     * Will return the resolved Params used for dispatching
+     *
      * @see Bwork_Router_Handler_Interface::getParams()
+     * @return array
      */
     public function getParams()
     {

@@ -20,18 +20,33 @@
  * @version v 0.1
  */
 final class Bwork_Validation_Validator_Required 
-    extends Bwork_Validation_Validator_AbstractValidator {
+    extends Bwork_Validation_AbstractValidator
+{
     
     /**
      * The default message
      *
      * @var string
+     * @access protected
+     * @override
      */
     protected $default_message = '[%s] is required.';
 
     /**
+     * Constructor
+     *
+     * @param string $message
+     * @return Bwork_Validation_Validator_Required
+     */
+    public function __construct($message = null)
+    {
+        parent::__construct($message);
+    }
+
+    /**
      * This method is used to execute the validator
      *
+     * @access public
      * @return boolean
      */
     public function execute() {

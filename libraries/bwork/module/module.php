@@ -20,7 +20,23 @@
  */
 interface Bwork_Module_Module
 {
-    
+
+    /**
+     * Method used to load a single module
+     *
+     * @abstract
+     * @param string $moduleName
+     * @return self
+     */
     public function addModule($moduleName);
+
+    /**
+     * Method used to initialize a loaded module
+     *
+     * @abstract
+     * @param string $moduleName
+     * @return void
+     */
+    public function initialize($moduleName);
 
 }

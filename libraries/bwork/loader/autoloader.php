@@ -21,13 +21,13 @@
 interface Bwork_Loader_Autoloader
 {
 	/**
-	 * This is the main method which attempts to reslove the correct path and file name 
+	 * This is the main method which attempts to resolve the correct path and file name
 	 * and attempts to require this file.
 	 * 
 	 * @access public
+     * @static
 	 * @var string $className
 	 * @return void
-	 * @static
 	 */
 	public static function autoload($className);
 }
