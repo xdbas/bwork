@@ -26,13 +26,24 @@ class Bwork_Exception_Handler
      * This method is called when an exception has been thrown
      *
      * @static
+     * @access public
      * @param Exception $exception
      */
     public static function onException(Exception $exception)
     {
+        $exceptionMessage = $exception->getMessage();
+        $exceptionFile    = str_replace(BASE, '', $exception->getFile());
+        $exceptionLine    = $exception->getLine();
 
-        echo '<pre>';
-        print_r($exception);
-        echo '</pre>';
+        $message = sprintf(
+            '<strong>%s</strong>: %s <br />File: <strong>%s</strong> (Line: <strong>%s</strong>)',
+            get_class($exception),
+            $exceptionMessage,
+            $exceptionFile,
+            $exceptionLine
+        );
+
+        echo '<pre>'.$message.'</pre>';
     }
+
 }

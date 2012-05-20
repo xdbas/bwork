@@ -85,8 +85,16 @@ class Bwork_Application
         }
     }
 
+    /**
+     * Attempts to set a handler for uncaught exceptions
+     *
+     * @static
+     * @access public
+     * @return void
+     */
     public static function initExceptionHandler()
     {
+        require_once 'bwork/exception/handler.php';
         set_exception_handler(array("Bwork_Exception_Handler", "onException"));
     }
 
