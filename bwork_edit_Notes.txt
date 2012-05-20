@@ -24,9 +24,8 @@ class XxxxXxxx
 }
 
 ]
-[
-- exception handler
-]
+
+
 - 1 registry getInstance when used multiply times
 - New Data MySQLi
 
