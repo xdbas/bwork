@@ -43,8 +43,8 @@ class Bwork_Application
     }
     
     /**
-     * This will initialize the bootstrappers where the prebootstrapper is used 
-     * for system processes and the normal bootstrapper is called from the 
+     * This will initialize the bootstrap files where the system bootstrap is used
+     * for system processes and the normal bootstrap is called from the
      * application
      * 
      * @access public
@@ -66,16 +66,16 @@ class Bwork_Application
      */
     public static function _initPreBootstrap() 
     {
-        $prebootstrap = new Bwork_Bootstrap_PreBootstrap();
+        $bootstrap = new Bwork_Bootstrap_Bootstrap();
     }
 
     /**
      * Attempts to perform some checks for a stable run of the framework
-     * 
+     *
      * @access public
      * @static
+     * @throws RuntimeException
      * @return void
-     * @throws
      */
     public static function runTimeChecks()
     {
@@ -84,6 +84,12 @@ class Bwork_Application
             throw new RuntimeException ('APPLICATION_PATH And LIBRARY_PATH has to be defined for a stable run.');
         }
     }
+
+    public static function initExceptionHandler()
+    {
+        set_exception_handler(array("Bwork_Exception_Handler", "onException"));
+    }
+
     
     /**
      * The main application function used to dispatch the project
@@ -95,6 +101,7 @@ class Bwork_Application
     public static function Run() 
     {
         self::runTimeChecks();
+        self::initExceptionHandler();
 
         self::_initAutoloader();
         self::_initBootstrap();
@@ -104,10 +111,11 @@ class Bwork_Application
         
         self::Dispatch($router);
     }
-    
+
     /**
      * @see Bwork_Application::Run
      * @param Bwork_Router_Router $router
+     * @return void
      */
     public static function Dispatch(Bwork_Router_Router $router) 
     {

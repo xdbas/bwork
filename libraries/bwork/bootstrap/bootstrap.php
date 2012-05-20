@@ -10,17 +10,17 @@
  */
 
 /**
- * PreBootstrap
+ * Bootstrap
  *
  * This class will initialize a few system processes that need saving in the
  * registry object and should therefore not be executed by the user.
  *
  * @package Bwork
  * @subpackage Bwork_Bootstrap
- * @uses Bwork_Bootstrap_Bootstrap
+ * @uses Bwork_Bootstrap_AbstractBootstrap
  * @version v 0.1
  */
-class Bwork_Bootstrap_PreBootstrap extends Bwork_Bootstrap_AbstractBootstrap
+class Bwork_Bootstrap_Bootstrap extends Bwork_Bootstrap_AbstractBootstrap
 {
     
     /**
