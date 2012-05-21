@@ -62,7 +62,7 @@ class Bwork_Module_Manager implements Bwork_Module_Module
             throw new Bwork_Module_Exception(sprintf('Module %s is already loaded.', $moduleName));
         }
 
-        $this->modules[] = $moduleName;
+        $this->modules[] = strtolower($moduleName);
 
         return $this;   
     }
@@ -76,7 +76,7 @@ class Bwork_Module_Manager implements Bwork_Module_Module
      */
     public function moduleExists($moduleName)
     {
-        return in_array($moduleName, $this->modules);
+        return in_array(strtolower($moduleName), $this->modules);
     }
 
     /**

@@ -50,7 +50,7 @@ final class Bwork_Router_Handler_Module
         }
 
         foreach($modules as $module) {
-            if($module == $uri[0]) {
+            if($module == strtolower($uri[0])) {
                 $moduleManager->initialize($module);
                 $configModule = $config->get($module);
 

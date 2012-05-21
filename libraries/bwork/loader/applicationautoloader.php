@@ -71,7 +71,8 @@ class Bwork_Loader_ApplicationAutoloader implements Bwork_Loader_Autoloader
         $config   = $registry->getResource('Bwork_Config_Confighandler');
         $router   = $registry->getResource('Bwork_Router_Router');
 
-        if(($module = $router->module) !== null) {	
+        if(($module = $router->module) !== null) {
+            $filename     = str_replace($module.'_', '', $filename);
             $pathToModule = $config->get('module_path').$module . DIRECTORY_SEPARATOR;
             $moduleConfig = $config->get($module);
             $pathToFile   = $pathToModule.$moduleConfig[$type . '_path'];

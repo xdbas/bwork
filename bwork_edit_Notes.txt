@@ -37,7 +37,5 @@ class XxxxXxxx
 
 [
 - add new config
-- lowercase in url modules
-- lowercase loading in modules
 - Models for modules ModuleName_ModelName?
 ]
