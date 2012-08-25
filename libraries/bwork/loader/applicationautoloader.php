@@ -12,7 +12,7 @@
 /**
  * ApplicationAutoloader
  *
- * This autoloader attempts to load the given class, but is only capeable of loading
+ * This autoloader attempts to load the given class, but is only capable of loading
  * either models or value objects.
  *
  * @package Bwork
@@ -64,6 +64,7 @@ class Bwork_Loader_ApplicationAutoloader implements Bwork_Loader_Autoloader
      * @param string $type model|vo
      * @throws Bwork_Loader_Exception
      * @return void
+     * TODO: Rewrite module function ( Now it checks if a module is initialized and when it is it attempts to load from Module paths, Though modules could have same names, Module models/vo's should have their 'module-name_' as prefix: 'admin_testModel()'
      */
     public static function load($filename, $type)
     {

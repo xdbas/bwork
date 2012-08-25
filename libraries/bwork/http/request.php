@@ -134,7 +134,6 @@ class Bwork_Http_Request
                 || $default === null) {
                 return $default;
             }
-            
             throw new Bwork_Http_Exception('No arguments found in Http URI.');
         }
         
@@ -143,7 +142,6 @@ class Bwork_Http_Request
                 || $default === null) {
                 return $default;
             }
-
             throw new Bwork_Http_Exception(sprintf('Arg: %s was undefined in URI Args.', $key));
         }
 
