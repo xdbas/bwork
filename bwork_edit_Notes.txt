@@ -25,7 +25,7 @@ class XxxxXxxx
 
 ]
 
-
+- http request return null getarg instead of error throwing or have option to set it off.
 - 1 registry getInstance when used multiply times
 - New Data MySQLi
 

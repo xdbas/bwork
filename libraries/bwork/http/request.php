@@ -88,7 +88,7 @@ class Bwork_Http_Request
     public function getParam($param, $default = '')
     {
         if(array_key_exists($param, $this->params) === false) {
-            if(isset($default) 
+            if(isset($default)
                 || $default === null) {
                 return $default;
             }
@@ -126,14 +126,24 @@ class Bwork_Http_Request
      * @throws Bwork_Http_Exception
      * @return string
      */
-    public function getArg($key)
+    public function getArg($key, $default = '')
     {
         $args = $this->getArgs();
         if(count($args) == 0) {
+            if(isset($default)
+                || $default === null) {
+                return $default;
+            }
+            
             throw new Bwork_Http_Exception('No arguments found in Http URI.');
         }
         
         if(isset($args[$key]) === false) {
+            if(isset($default)
+                || $default === null) {
+                return $default;
+            }
+
             throw new Bwork_Http_Exception(sprintf('Arg: %s was undefined in URI Args.', $key));
         }
 
