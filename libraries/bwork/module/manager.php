@@ -96,6 +96,7 @@ class Bwork_Module_Manager implements Bwork_Module_Module
      * @param String $moduleName
      * @throws Bwork_Module_Exception
      * @return void
+     * @TODO: Check if bootstrap file exists, you don't need one
      */
     public function initialize($moduleName)
     {
