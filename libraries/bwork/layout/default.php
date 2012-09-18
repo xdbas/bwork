@@ -28,7 +28,6 @@
  * </html>
  * </code>
  *
- * @todo Change name of Interface
  * @package Bwork
  * @subpackage Bwork_Layout
  * @version v 0.2
@@ -171,7 +170,7 @@ class Bwork_Layout_Default implements Bwork_Layout_Layout
     }
     
     /**
-     * This will merge variables with the variables variable
+     * This will merge set in the view with the layout variables
      * 
      * @param array $variables 
      * @access public

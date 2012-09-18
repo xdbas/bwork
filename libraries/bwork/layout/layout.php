@@ -18,43 +18,60 @@
  * @subpackage Bwork_Layout
  * @version v 0.2
  */
-interface Bwork_Layout_Layout {
+interface Bwork_Layout_Layout
+{
 
     /**
-     * This method will attempt to set the layout variable and perform some
-     * checks before doing so
+     * This method will attempt to set a layout template
      *
-     * @abstract
      * @param string $layout
      * @param null $module
      * @access public
-     * @throws Bwork_Layout_Exception
      * @return Bwork_Layout_Default
      */
-    public function setLayout($layout);
+    public function setLayout($layout, $module = null);
 
     /**
-     * @abstract
-     * @return mixed
+     * This will return the current layout
+     *
+     * @access public
+     * @return string
      */
     public function getLayout();
 
     /**
-     * @abstract
-     * @param $content
-     * @return mixed
+     * This will set the content variable
+     *
+     * @param string $content
+     * @access public
+     * @return Bwork_Layout_Default
      */
     public function setContent($content);
 
     /**
-     * @abstract
-     * @return mixed
+     * This will return the current content
+     *
+     * @access public
+     * @return string
      */
     public function getContent();
 
     /**
-     * @abstract
+     * This will include the layout file which therefore should have added
+     * possible view layout content
+     *
+     * @access public
      * @return mixed
      */
     public function fetch();
+
+    /**
+     * This will merge set in the view with the layout variables
+     *
+     * @param array $variables
+     * @access public
+     * @return void
+     */
+    public function mergeVariables(array $variables);
+
 }
