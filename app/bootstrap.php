@@ -14,7 +14,7 @@ class Bootstrap extends Bwork_Bootstrap_AbstractBootstrap {
         $layout = new Bwork_Layout_Default();
         $layout->setLayout('layout.php');
 
-        return new Bwork_Bootstrap_Alias('Bwork_Layout_ILayout', $layout);
+        return new Bwork_Bootstrap_Alias('Bwork_Layout_Layout', $layout);
     }
     
     public function _initHelper()

@@ -6,6 +6,6 @@ class AdminBootstrap extends Bwork_Bootstrap_AbstractBootstrap
         $layout = new Bwork_Layout_Default();
         $layout->setLayout('layout.php', 'admin');
 
-        return new Bwork_Bootstrap_Alias('Bwork_Layout_ILayout', $layout, Bwork_Core_Registry::OVERRIDING);
+        return new Bwork_Bootstrap_Alias('Bwork_Layout_Layout', $layout, Bwork_Core_Registry::OVERRIDING);
     }
 }

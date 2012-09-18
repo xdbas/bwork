@@ -200,7 +200,7 @@ abstract class Bwork_Controller_Action
         $content = $view->fetch();
 
         if($this->layoutEnabled == true) {
-            $layout = Bwork_Core_Registry::getInstance()->getResource('Bwork_Layout_ILayout');
+            $layout = Bwork_Core_Registry::getInstance()->getResource('Bwork_Layout_Layout');
             
             $layout->mergeVariables($view->getVariables());
             $layout->setContent($content);

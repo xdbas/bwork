@@ -33,7 +33,7 @@
  * @subpackage Bwork_Layout
  * @version v 0.2
  */
-class Bwork_Layout_Default implements Bwork_Layout_ILayout
+class Bwork_Layout_Default implements Bwork_Layout_Layout
 {
     
     /**
