@@ -48,12 +48,9 @@ class Bwork_View_Default implements Bwork_View_View
     public function __construct($template = null)
     {
         if($template === null) {
-            $registry = Bwork_Core_Registry::getInstance();
-            $router   = $registry->getResource('Bwork_Router_Router');
+            $router = Bwork_Core_Registry::getInstance()->getResource('Bwork_Router_Router');
 
-            $template_name = $router->controller.DIRECTORY_SEPARATOR.$router->action;
-
-            $this->setView($template_name);
+            $this->setView($router->controller.DIRECTORY_SEPARATOR.$router->action);
         }
         else {
             $this->setView($template);
@@ -77,8 +74,8 @@ class Bwork_View_Default implements Bwork_View_View
         $config   = $registry->getResource('Bwork_Config_Confighandler');
         $router   = $registry->getResource('Bwork_Router_Router');
 
-        $defaultViewExtensions = $config->exists('default_view_extensions')?
-            $config->get('default_view_extensions')
+        $defaultViewExtensions = $config->exists('default_view_extensions')
+            ? $config->get('default_view_extensions')
             : array($config->get('default_view_extension'));
 
         if(($module = $router->module) !== null) {
