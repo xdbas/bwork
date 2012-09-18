@@ -13,13 +13,12 @@
  * Default
  *
  * This class is used to handle regular view templates
- * 
- * @todo change Name of interface to new standard
+ *
  * @package Bwork
  * @subpackage Bwork_View
  * @version v 0.2
  */
-class Bwork_View_Default implements Bwork_View_IView
+class Bwork_View_Default implements Bwork_View_View
 {
     
     /**

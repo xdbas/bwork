@@ -186,15 +186,15 @@ abstract class Bwork_Controller_Action
     /**
      * This will handle the return data retrieved from the action method
      *
-     * @param Bwork_View_IView $view
+     * @param Bwork_View_View $view
      * @throws Bwork_Controller_Exception
      * @access protected
      * @return void
      */
-    protected function handleView(Bwork_View_IView $view)
+    protected function handleView(Bwork_View_View $view)
     {
-        if($view instanceof Bwork_View_IView == false) {
-            throw new Bwork_Controller_Exception('ControllerAction return value should be an instance of Bwork_View_IView');
+        if($view instanceof Bwork_View_View == false) {
+            throw new Bwork_Controller_Exception('ControllerAction return value should be an instance of Bwork_View_View');
         }
         
         $content = $view->fetch();
@@ -222,10 +222,10 @@ abstract class Bwork_Controller_Action
     public function __call($name, $arguments)
     {
         if(substr($name, -6) == 'Action') {
-            throw new Bwork_Controller_Exception(sprintf('Action %s does not exists and has been cought by __call', $name), 404);
+            throw new Bwork_Controller_Exception(sprintf('Action %s does not exists and has been caught by __call', $name), 404);
         }
                 
-        throw new Bwork_Controller_Exception(sprintf('Method %s does not exists and has been cought by __call', $name));
+        throw new Bwork_Controller_Exception(sprintf('Method %s does not exists and has been caught by __call', $name));
     }
     
 }
