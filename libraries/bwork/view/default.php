@@ -110,6 +110,26 @@ class Bwork_View_Default implements Bwork_View_IView
     {
         $this->variables[$key] = $value;
     }
+
+    /**
+     * This will assign variables from an associative array
+     *
+     * @param array $variables
+     * @throws Bwork_View_Exception
+     * @access public
+     * @return void
+     */
+    public function assignArray($variables)
+    {
+        if(is_array($variables) == false
+            && $variables instanceof Traversable == false) {
+            throw new Bwork_View_Exception('assignArray can only handle array or Traversable input');
+        }
+
+        foreach($variables as $key => $value) {
+            $this->assign($key, $value);
+        }
+    }
     
     /**
      * This will return the $variables variable
