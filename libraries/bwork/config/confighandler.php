@@ -36,7 +36,6 @@ final class Bwork_Config_Confighandler
      * Load file method
      *
      * @see Bwork_Config_Handler::loadFile()
-     * @todo: Add Fileinfo for extension
      * @param string $file
      * @throws Bwork_Config_Exception
      * @return Bwork_Config_Confighandler
@@ -44,7 +43,8 @@ final class Bwork_Config_Confighandler
     public function loadFile($file)
     {
         if(is_string($file) === true) {
-            $file_extension = substr($file, strrpos($file, '.') + 1);
+            $path_info = pathinfo($file);
+            $file_extension = $path_info['extension'];
 
             if(array_key_exists($file_extension, $this->parsers)) {
                 $data = $this->parsers[$file_extension]->parse($file);
