@@ -3,7 +3,7 @@ $config['default_controller'] = 'test';
 $config['default_action'] = 'index';
 
 $config['default_view_extensions'] = array('php', 'html', 'xml');
-$config['default_view_extension'] = '.php';
+$config['default_view_extension'] = 'php';
 
 $config['controller_path'] = APPLICATION_PATH.'controllers'.DIRECTORY_SEPARATOR;
 $config['model_path'] = APPLICATION_PATH.'models'.DIRECTORY_SEPARATOR;

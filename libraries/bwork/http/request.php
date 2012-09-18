@@ -17,6 +17,7 @@
  * @package Bwork
  * @subpackage Bwork_Http
  * @version v 0.1
+ * @TODO: make create url function
  */
 class Bwork_Http_Request
 {

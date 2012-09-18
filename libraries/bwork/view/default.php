@@ -41,7 +41,6 @@ class Bwork_View_Default implements Bwork_View_View
      * The constructor method that is used to set a specific view file, will
      * when template param is null use the default values
      *
-     * TODO: Multiple Template Extensions
      * @param string $template
      * @access public
      * @return Bwork_View_Default
@@ -50,12 +49,11 @@ class Bwork_View_Default implements Bwork_View_View
     {
         if($template === null) {
             $registry = Bwork_Core_Registry::getInstance();
-            $config   = $registry->getResource('Bwork_Config_Confighandler');
             $router   = $registry->getResource('Bwork_Router_Router');
 
             $template_name = $router->controller.DIRECTORY_SEPARATOR.$router->action;
 
-            $this->setView($template_name.$config->get('default_view_extension'));
+            $this->setView($template_name);
         }
         else {
             $this->setView($template);
@@ -65,7 +63,9 @@ class Bwork_View_Default implements Bwork_View_View
     /**
      * This method attempts to check if a view file exists with support for 
      * module paths, with and extra fallback to the normal scripts path.
-     * 
+     *
+     * @TODO: Check module if it needs fallback,
+     * @TODO: Check if modules are really initialized
      * @access public
      * @param string $view
      * @throws Bwork_View_Exception
@@ -76,25 +76,51 @@ class Bwork_View_Default implements Bwork_View_View
         $registry = Bwork_Core_Registry::getInstance();
         $config   = $registry->getResource('Bwork_Config_Confighandler');
         $router   = $registry->getResource('Bwork_Router_Router');
-        
+
+        $defaultViewExtensions = $config->exists('default_view_extensions')?
+            $config->get('default_view_extensions')
+            : array($config->get('default_view_extension'));
+
         if(($module = $router->module) !== null) {
             $pathToModule = $config->get('module_path').strtolower($module) . DIRECTORY_SEPARATOR;
             $moduleConfig = $config->get($module);
             $path         = $pathToModule.$moduleConfig['scripts_path'];
-            
-            if(file_exists($path.$view) === true) {
-                $this->view = $path.$view;
+
+            if(($file = $this->loopThroughLocations($path.$view, $defaultViewExtensions)) !== null) {
+                $this->view = $file;
                 return;
             }
         }
-        
-        if(file_exists(($path = $config->get('scripts_path')).$view)) {
-            $this->view = $path.$view;
-            return;
+
+        if(($file = $this->loopThroughLocations($config->get('script_path').$view, $defaultViewExtensions)) !== null) {
+            $this->view = $file;
         }
         else {
-            throw new Bwork_View_Exception(sprintf('View [%s] could not be found', $view));
+            throw new Bwork_View_Exception(
+                sprintf('View [%s] could not be found with any of the following extensions [%s]',
+                    $view,
+                    implode(',', $defaultViewExtensions)
+                )
+            );
         }
+    }
+
+    /**
+     * This function is used to check different locations for a view file and return its filename and path on success
+     *
+     * @param string $viewPath
+     * @param array $extensions
+     * @return string||null
+     */
+    public function loopThroughLocations($viewPath, array $extensions)
+    {
+        foreach($extensions as $ext) {
+            if(Bwork_Loader_ApplicationAutoloader::fileExists($viewPath.'.'.$ext) === true) {
+                return $viewPath.'.'.$ext;
+            }
+        }
+
+        return;
     }
 
     /**
