@@ -18,7 +18,7 @@
  *
  * @package Bwork
  * @subpackage Bwork_Router
- * @version v 0.1
+ * @version v 0.2
  */
 class Bwork_Router_Router
 {
@@ -112,7 +112,6 @@ class Bwork_Router_Router
     /**
      * This is the main function which will handle the full routing process
      *
-     * @TODO: Route via Bwork_Router_Route instead of array()
      * @access public
      * @return void
      */
@@ -122,13 +121,14 @@ class Bwork_Router_Router
 
         if(count($this->handlers) > 0) {
             foreach($this->handlers as $handler) {
-                if($handler->checkRoute($this->uriParams)) {
-                    $params = $handler->getParams($this->requestUri);
+                if($handler->checkRoute($this->uriParams) === true) {
+                    $route = $handler->getParams();
                     
-                    $this->controller   = $params['controller'];
-                    $this->action       = $params['action'];
-                    $this->mockParams   = $params['mockParams'];
-                    $this->module       = $params['module'];
+                    $this->controller   = $route->controller;
+                    $this->action       = $route->action;
+                    $this->module       = $route->module;
+                    $this->mockParams   = $route->mockParams;
+
                     $routed = true;
                     break;
                 }

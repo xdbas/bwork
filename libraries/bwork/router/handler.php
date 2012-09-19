@@ -30,19 +30,20 @@ interface Bwork_Router_Handler
     public function checkRoute(array $uri);
     
     /**
-     * Will return the controller/action/mockparams parameters in array format
-     * this method will only get called when checkRoute returns true
+     * Will return the controller/action/module/mockparams parameters in object format
+     * this method will only get called when checkRoute returns true. Either return
+     * a Bwork_Router_Route- or StdClass object.
      * 
      * Example:
      * <code>
-     * return array(
-     *  'controller'    => 'Controllername',
-     *  'action'        => 'ActionName',
-     *  'module'        => 'admin'
-     *  'mockParams'    => array('1', '2')
+     * return Bwork_Router_Route(
+     *  'Controllername',
+     *  'ActionName',
+     *  'modulename'
+     *  array(1, 2)
      * );
      * </code>
-     * @return array
+     * @return Bwork_Router_Route
      */
     public function getParams();
     
