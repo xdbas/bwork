@@ -59,10 +59,8 @@ class Bwork_View_Default implements Bwork_View_View
     
     /**
      * This method attempts to check if a view file exists with support for 
-     * module paths, with and extra fallback to the normal scripts path.
+     * module paths. It only checks on the initialized module gathered from Routing
      *
-     * @TODO: Check module if it needs fallback,
-     * @TODO: Check if modules are really initialized
      * @access public
      * @param string $view
      * @throws Bwork_View_Exception
@@ -88,11 +86,12 @@ class Bwork_View_Default implements Bwork_View_View
                 return;
             }
         }
-
-        if(($file = $this->loopThroughLocations($config->get('script_path').$view, $defaultViewExtensions)) !== null) {
-            $this->view = $file;
-        }
         else {
+            if(($file = $this->loopThroughLocations($config->get('script_path').$view, $defaultViewExtensions)) !== null) {
+                $this->view = $file;
+                return;
+            }
+
             throw new Bwork_View_Exception(
                 sprintf('View [%s] could not be found with any of the following extensions [%s]',
                     $view,
