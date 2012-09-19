@@ -35,7 +35,7 @@ class Bwork_Core_Registry extends ArrayObject
      * 
      * @access public
      * @static
-     * @return object
+     * @return Bwork_Core_Registry
      */
     public static function getInstance()
     {
