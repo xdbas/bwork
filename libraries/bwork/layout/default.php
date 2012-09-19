@@ -88,15 +88,15 @@ class Bwork_Layout_Default implements Bwork_Layout_Layout
             $pathToModule = $config->get('module_path').strtolower($module) . DIRECTORY_SEPARATOR;
             $moduleConfig = $config->get($module);
             $path         = $pathToModule.$moduleConfig['layouts_path'];
-            
-            if(file_exists($path.$layout)) {
-                $this->layout = $path.$layout;
+
+            if(Bwork_Loader_ApplicationAutoloader::fileExists(($file = $path.$layout)) === true) {
+                $this->layout = $file;
                 return $this;
             }
         }
-        
-        if(file_exists(($path = $config->get('layouts_path')).$layout)) {
-            $this->layout = $path.$layout;
+
+        if(Bwork_Loader_ApplicationAutoloader::fileExists(($file = $config->get('layouts_path').$layout)) === true) {
+            $this->layout = $file;
             return $this;
         }
         else {

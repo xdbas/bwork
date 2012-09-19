@@ -87,7 +87,7 @@ class Bwork_View_Default implements Bwork_View_View
             }
         }
         else {
-            if(($file = $this->loopThroughLocations($config->get('script_path').$view, $defaultViewExtensions)) !== null) {
+            if(($file = $this->loopThroughLocations($config->get('scripts_path').$view, $defaultViewExtensions)) !== null) {
                 $this->view = $file;
                 return;
             }

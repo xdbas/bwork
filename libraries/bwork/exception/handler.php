@@ -34,13 +34,15 @@ class Bwork_Exception_Handler
         $exceptionMessage = $exception->getMessage();
         $exceptionFile    = str_replace(BASE, '', $exception->getFile());
         $exceptionLine    = $exception->getLine();
+        $exceptionTrace   = str_replace(BASE, '', $exception->getTraceAsString());
 
         $message = sprintf(
-            '<strong>%s</strong>: %s <br />File: <strong>%s</strong> (Line: <strong>%s</strong>)',
+            '<strong>%s</strong>: %s <br />File: <strong>%s</strong> (Line: <strong>%s</strong> <br /><br /> %s)',
             get_class($exception),
             $exceptionMessage,
             $exceptionFile,
-            $exceptionLine
+            $exceptionLine,
+            $exceptionTrace
         );
 
         echo '<pre>'.$message.'</pre>';
