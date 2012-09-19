@@ -83,7 +83,7 @@ class Bwork_View_Default implements Bwork_View_View
 
             if(($file = $this->loopThroughLocations($path.$view, $defaultViewExtensions)) !== null) {
                 $this->view = $file;
-                return;
+                 return;
             }
         }
         else {
