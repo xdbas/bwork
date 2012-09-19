@@ -112,7 +112,7 @@ class Bwork_Router_Router
     /**
      * This is the main function which will handle the full routing process
      *
-     * @TODO: Route via Bwork_Router_Route instead of array(); Either cast or change completely
+     * @TODO: Route via Bwork_Router_Route instead of array()
      * @access public
      * @return void
      */
