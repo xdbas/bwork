@@ -96,7 +96,6 @@ class Bwork_Module_Manager implements Bwork_Module_Module
      * @param String $moduleName
      * @throws Bwork_Module_Exception
      * @return void
-     * @TODO: Check if bootstrap file exists, you don't need one
      */
     public function initialize($moduleName)
     {
@@ -111,10 +110,6 @@ class Bwork_Module_Manager implements Bwork_Module_Module
         $bootstrapClassName = ucfirst($moduleName).'Bootstrap';
         $bootstrapFile      = $modulePath.$moduleName.DIRECTORY_SEPARATOR.$bootstrapFileName;
 
-        if(file_exists($bootstrapFile) === false) {
-            throw new Bwork_Module_Exception(sprintf('Bootstrap [%s] was not found in module [%s]', $bootstrapFile, $moduleName));
-        }
-
         $configPath     = $modulePath.$moduleName.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR;
         $configFilename = 'config.php';
         $configFile     = $configPath.$configFilename;
@@ -125,8 +120,13 @@ class Bwork_Module_Manager implements Bwork_Module_Module
 
         $config->loadFile($configFile);
 
-        require_once $bootstrapFile;
-        $bootstrap = new $bootstrapClassName();
+        if(Bwork_Loader_ApplicationAutoloader::fileExists($bootstrapFile) === true) {
+            require_once $bootstrapFile;
+
+            $bootstrap = new ReflectionClass($bootstrapClassName);
+            $bootstrap->newInstance();
+        }
+
     }
 
 }

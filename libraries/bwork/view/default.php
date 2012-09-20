@@ -211,7 +211,8 @@ class Bwork_View_Default implements Bwork_View_View
      * This is the magic method used when a undifined method is called from a 
      * view file and will attempt to retrieve and execute a helper for this
      * method
-     * 
+     *
+     * @TODO: Check Reflection class to init
      * @param string $name
      * @param array $arguments
      * @access public

@@ -25,6 +25,7 @@ class Bwork_Controller_Dispatcher
      * This will dispatch a controller and will perform some checks to prevent
      * failing
      *
+     * @TODO: Check Reflection class to init
      * @param Bwork_Router_Router $router
      * @throws Bwork_Controller_Exception
      * @access public
