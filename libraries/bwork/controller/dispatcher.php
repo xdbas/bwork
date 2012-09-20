@@ -16,7 +16,7 @@
  *
  * @package Bwork
  * @subpackage Bwork_Controller
- * @version v 0.3
+ * @version v 0.4
  */
 class Bwork_Controller_Dispatcher
 {
@@ -25,7 +25,6 @@ class Bwork_Controller_Dispatcher
      * This will dispatch a controller and will perform some checks to prevent
      * failing
      *
-     * @TODO: Check Reflection class to init
      * @param Bwork_Router_Router $router
      * @throws Bwork_Controller_Exception
      * @access public
@@ -58,19 +57,18 @@ class Bwork_Controller_Dispatcher
             $controllerPath = $config->get('controller_path');
         }
 
-        $filePath = $controllerPath.$filename;
-        if(file_exists($filePath) === false
-            || is_file($filePath) === false
-            || is_readable($filePath) === false) {
+        if(Bwork_Loader_ApplicationAutoloader::fileExists(($filePath = $controllerPath.$filename)) === false) {
             throw new Bwork_Controller_Exception(sprintf('[%s] does not exists', $filePath));
         }
         require_once $filePath;
-        
-        $controllerClass = new $controllerName();
-        if($controllerClass instanceof Bwork_Controller_Action === false) {
+
+        $reflectionClass = new ReflectionClass($controllerName);
+
+        if($reflectionClass->isSubclassOf('Bwork_Controller_Action') === false) {
             throw new Bwork_Controller_Exception(sprintf('[%s] have to be an instance of Bwork_Controller_Action', $controllerName));
         }
 
+        $controllerClass = $reflectionClass->newInstance();
         $controllerClass->invoke($router);
         $controllerClass->getResponse()->outputStatus();
     }

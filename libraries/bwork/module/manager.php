@@ -123,8 +123,8 @@ class Bwork_Module_Manager implements Bwork_Module_Module
         if(Bwork_Loader_ApplicationAutoloader::fileExists($bootstrapFile) === true) {
             require_once $bootstrapFile;
 
-            $bootstrap = new ReflectionClass($bootstrapClassName);
-            $bootstrap->newInstance();
+            $reflectionClass = new ReflectionClass($bootstrapClassName);
+            $reflectionClass->newInstance();
         }
 
     }

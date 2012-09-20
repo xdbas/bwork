@@ -63,7 +63,6 @@ class Bwork_Layout_Default implements Bwork_Layout_Layout
      * This method will attempt to set the layout variable and perform some
      * checks before doing so
      *
-     * @TODO: use new file exist method
      * @param string $layout
      * @param null $module
      * @access public
