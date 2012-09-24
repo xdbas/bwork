@@ -28,25 +28,6 @@ class Bwork_Helper_BaseUrl
 {
 
     /**
-     * Holds the default base URI
-     * 
-     * @var String $defaultBaseUrl
-     */
-    private $defaultBaseUrl;
-
-    /**
-     * The construction method is used to get the sub url from the config
-     * and assign it to the defaultBaseUrl var
-     *
-     * @access public
-     * @return Bwork_Helper_BaseUrl
-     */
-    public function __construct()
-    {
-        $this->defaultBaseUrl = Bwork_Core_Registry::getInstance()->getResource('Bwork_Config_Confighandler')->get('sub_url');
-    }
-
-    /**
      * Called by __call() at either a view or layout and is the main function of this helper
      *
      * @access public
@@ -56,7 +37,7 @@ class Bwork_Helper_BaseUrl
      */
     public function baseUrl($url = null, $ssl = false)
     {
-        return ($ssl === true? 'https://' . $_SERVER['SERVER_NAME']:'').$this->defaultBaseUrl.($url !== null? $url:'');
+        return Bwork_Core_Registry::getInstance()->getResource('Bwork_Http_Request')->create($url, $ssl);
     }
     
 }

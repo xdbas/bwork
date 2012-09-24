@@ -16,8 +16,7 @@
  *
  * @package Bwork
  * @subpackage Bwork_Http
- * @version v 0.1
- * @TODO: make create url function
+ * @version v 0.2
  */
 class Bwork_Http_Request
 {
@@ -34,8 +33,17 @@ class Bwork_Http_Request
      * This wil hold the current URI params in array format
      *
      * @var array $params
+     * @access protected
      */
     protected $params;
+
+    /**
+     * This will hold the sub url of the framework.
+     *
+     * @var string $defaultBaseUri
+     * @access protected
+     */
+    protected $defaultBaseUri;
 
     /**
      * The construction method will handle the current URI and add the string
@@ -61,11 +69,29 @@ class Bwork_Http_Request
             $this->params = array();
         }
     }
-    
+
+    /**
+     * This function can be used to create URLs from URIs additionally it can be
+     * set to use https prefix
+     *
+     * @param String $uri
+     * @param Boolean $ssl
+     * @access public
+     * @return String generated Url
+     */
+    public function create($uri = null, $ssl = false)
+    {
+        if(empty($this->defaultBaseUri)) {
+            $this->defaultBaseUri = Bwork_Core_Registry::getInstance()->getResource('Bwork_Config_Confighandler')->get('sub_url');
+        }
+
+        return ($ssl === true? 'https://' . $_SERVER['SERVER_NAME']:'').$this->defaultBaseUri.($uri !== null? $uri:'');
+    }
+
     /**
      * This method is used to retrieve all params
      * 
-     * @param null|string $param
+     * @param String $param
      * @return array Bwork_Http_Request::Params
      */
     public function getParams($param = null)
@@ -102,6 +128,7 @@ class Bwork_Http_Request
     /**
      * This method is used to retrieve all args in associative format
      *
+     * @access public
      * @return array
      */
     public function getArgs()
@@ -124,7 +151,9 @@ class Bwork_Http_Request
      * This method is used to retrieve an argument
      *
      * @param string $key
+     * @param string $default
      * @throws Bwork_Http_Exception
+     * @access public
      * @return string
      */
     public function getArg($key, $default = '')
@@ -151,8 +180,9 @@ class Bwork_Http_Request
     
     /**
      * Used to retrieve value of params
-     * 
-     * @return int
+     *
+     * @access public
+     * @return int Counted parameters
      */
     public function countParams()
     {
@@ -194,6 +224,7 @@ class Bwork_Http_Request
     /**
      * This method is used to get raw post data
      *
+     * @access public
      * @return mixed
      */
     public function rawPost()
@@ -202,8 +233,9 @@ class Bwork_Http_Request
     }
     
     /**
-     * Used to retrieve the url
+     * Used to retrieve the url as a string
      *
+     * @access public
      * @return string Bwork_Http_Request::Params
      */
     public function __toString()

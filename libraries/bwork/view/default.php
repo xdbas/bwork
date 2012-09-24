@@ -212,7 +212,6 @@ class Bwork_View_Default implements Bwork_View_View
      * view file and will attempt to retrieve and execute a helper for this
      * method
      *
-     * @TODO: Check Reflection class to init
      * @param string $name
      * @param array $arguments
      * @access public

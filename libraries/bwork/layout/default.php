@@ -199,7 +199,6 @@ class Bwork_Layout_Default implements Bwork_Layout_Layout
      * this will try to retrieve a helper for this function and execute the
      * helper
      *
-     * @TODO: Check Reflection class to init
      * @param string $name
      * @param array $arguments
      * @access public
