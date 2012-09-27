@@ -64,7 +64,6 @@ class Bwork_Loader_ApplicationAutoloader implements Bwork_Loader_Autoloader
      * @param string $type model|vo
      * @throws Bwork_Loader_Exception
      * @return void
-     * TODO: Rewrite module function ( Now it checks if a module is initialized and when it is it attempts to load from Module paths, Though modules could have same names, Module models/vo's should have their 'module-name_' as prefix: 'admin_testModel()'
      */
     public static function load($filename, $type)
     {
@@ -90,7 +89,9 @@ class Bwork_Loader_ApplicationAutoloader implements Bwork_Loader_Autoloader
             return;
         }
         else {
-            throw new Bwork_Loader_Exception(sprintf('File(%s) [%s] could not be found in any of the checked locations.', $type, $filename));
+            throw new Bwork_Loader_Exception(
+                sprintf('File(%s) [%s] could not be found in any of the checked locations.', $type, $filename
+            ));
         }
     }
 
