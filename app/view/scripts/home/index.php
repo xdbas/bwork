@@ -1,4 +1,2 @@
-<h1>Home &gt; Index</h1>
-<p>Hello, World!</p>
-
-<?php echo $this->testfunction()->rewrite(); ?>
+<h1>It Works</h1>
+<p>Home &gt; Index!</p>
