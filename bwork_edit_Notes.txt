@@ -4,7 +4,7 @@ edit notes Bwork
 
 class XxxxXxxx
 {
-    
+    const $DATA = 1;
 
     public function xxxXxx()
     {
@@ -18,6 +18,10 @@ class XxxxXxxx
         else {
             $class->setValue(1)
                   ->setValue(2);
+
+            return $var === null
+                ? self::$data
+                : 3;
         }
 
     }
@@ -37,5 +41,5 @@ class XxxxXxxx
 
 [
 - add new config
-- Models for modules ModuleName_ModelName?
+- Namespace Helpers same name issue
 ]

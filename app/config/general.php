@@ -1,5 +1,5 @@
 <?php
-$config['default_controller'] = 'test';
+$config['default_controller'] = 'home';
 $config['default_action'] = 'index';
 
 $config['default_view_extensions'] = array('php', 'html', 'xml');

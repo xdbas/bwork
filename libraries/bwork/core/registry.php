@@ -104,7 +104,9 @@ class Bwork_Core_Registry extends ArrayObject
             throw new RuntimeException('Resource is not an object.');
         }
 
-        $name = is_null($alias) || is_string($alias) == false? strtolower(get_class($object)) : strtolower($alias);
+        $name = is_null($alias) || is_string($alias) == false
+            ? strtolower(get_class($object))
+            : strtolower($alias);
         
         if(self::NO_OVERRIDING == $override
             && $this->resourceExists($name)) {
