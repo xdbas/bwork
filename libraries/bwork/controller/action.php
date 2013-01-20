@@ -148,7 +148,7 @@ abstract class Bwork_Controller_Action
         $this->setMockParams($router);
         
         $action = $router->action.'Action';
-        if(in_array($action, get_class_methods($this)) == false) {
+        /*if(in_array($action, get_class_methods($this)) == false) {
            $this->__call($action, array());
         }
         
@@ -158,7 +158,9 @@ abstract class Bwork_Controller_Action
         
         $methodReflection = new ReflectionMethod($this, $action);
         $returnData       = $methodReflection->invoke($this, isset($this->mockParams)? $this->mockParams : null);
-        
+        */
+        $returnData = $this->$action(isset($this->mockParams)? $this->mockParams : null);
+
         if(is_string($returnData) 
             || is_null($returnData)){
             $this->handleString($returnData);
