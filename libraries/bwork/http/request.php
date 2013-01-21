@@ -72,20 +72,23 @@ class Bwork_Http_Request
 
     /**
      * This function can be used to create URLs from URIs additionally it can be
-     * set to use https prefix
+     * set to use https or http prefix
      *
      * @param String $uri
      * @param Boolean $ssl
+     * @param Boolean $absolute
      * @access public
      * @return String generated Url
      */
-    public function create($uri = null, $ssl = false)
+    public function create($uri = null, $ssl = false, $absolute = false)
     {
         if(empty($this->defaultBaseUri)) {
             $this->defaultBaseUri = Bwork_Core_Registry::getInstance()->getResource('Bwork_Config_Confighandler')->get('sub_url');
         }
 
-        return ($ssl === true? 'https://' . $_SERVER['SERVER_NAME']:'').$this->defaultBaseUri.($uri !== null? $uri:'');
+        return ($ssl || $absolute
+            ? ($ssl? 'https://' : ($absolute? 'http://' : '')).$_SERVER['SERVER_NAME']
+            : '').$this->defaultBaseUri.($uri !== null ? $uri : '');
     }
 
     /**
