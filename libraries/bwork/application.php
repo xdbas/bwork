@@ -62,6 +62,7 @@ class Bwork_Application
     }
     
     /**
+     * This function is a pre for _initBootstrap
      * @see Bwork_Application::_initBootstrap
      */
     public static function _initPreBootstrap() 
@@ -121,6 +122,7 @@ class Bwork_Application
     }
 
     /**
+     * This function will ditpatch the framework with the initialized Router
      * @see Bwork_Application::Run
      * @param Bwork_Router_Router $router
      * @return void

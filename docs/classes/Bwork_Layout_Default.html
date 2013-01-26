@@ -1,0 +1,350 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>phpDocumentor » \Bwork_Layout_Default</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">phpDocumentor</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Bwork.html"><i class="icon-folder-open"></i> Bwork</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">0</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">1</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___call" title="__call :: This is the magic method used when a undefined method is called
+this will try to retrieve a helper for this function and execute the
+helper"><span class="description">This is the magic method used when a undefined method is called
+this will try to retrieve a helper for this function and execute the
+helper</span><pre>__call()</pre></a></li>
+<li class="method public "><a href="#method___get" title="__get :: This is the magic method used to retrieve assigned variables set in the
+variables variable"><span class="description">This is the magic method used to retrieve assigned variables set in the
+variables variable</span><pre>__get()</pre></a></li>
+<li class="method public "><a href="#method_display" title="display :: This will immediately attempt to display the layout template file"><span class="description">This will immediately attempt to display the layout template file</span><pre>display()</pre></a></li>
+<li class="method public "><a href="#method_fetch" title="fetch :: This will include the layout file which therefore should have added
+possible view layout content"><span class="description">This will include the layout file which therefore should have added
+possible view layout content</span><pre>fetch()</pre></a></li>
+<li class="method public "><a href="#method_getContent" title="getContent :: This will return the current content"><span class="description">This will return the current content</span><pre>getContent()</pre></a></li>
+<li class="method public "><a href="#method_getLayout" title="getLayout :: This will return the current layout"><span class="description">This will return the current layout</span><pre>getLayout()</pre></a></li>
+<li class="method public "><a href="#method_mergeVariables" title="mergeVariables :: This will merge set in the view with the layout variables"><span class="description">This will merge set in the view with the layout variables</span><pre>mergeVariables()</pre></a></li>
+<li class="method public "><a href="#method_setContent" title="setContent :: This will set the content variable"><span class="description">This will set the content variable</span><pre>setContent()</pre></a></li>
+<li class="method public "><a href="#method_setLayout" title="setLayout :: This method will attempt to set the layout variable and perform some
+checks before doing so"><span class="description">This method will attempt to set the layout variable and perform some
+checks before doing so</span><pre>setLayout()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul></ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="property protected "><a href="#property_content" title="$content :: This will hold the content retrieved from a possible view template"><span class="description"></span><pre>$content</pre></a></li>
+<li class="property protected "><a href="#property_layout" title="$layout :: This will hold the layout template"><span class="description"></span><pre>$layout</pre></a></li>
+<li class="property protected "><a href="#property_variables" title="$variables :: This will hold all variables"><span class="description"></span><pre>$variables</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\Bwork_Layout_Default"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/global.html">global</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/Bwork_Layout_Default.html">Bwork_Layout_Default</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Default</p>
+<div class="details">
+<div class="long_description"><p>This class is used to create a specific wrapper around your regular view
+templates. This should be used to set returning layouts where you normally
+would include a header and footer. Note that a layout file should atleast
+have one line of specific coding.</p>
+
+<p>Example:</p>
+
+<pre><code><!DOCTYPE html>
+<html>
+<head></head>
+<body>
+ <?php echo $this->content; ?>
+</body>
+</html>
+</code></pre></div>
+<table class="table table-bordered">
+<tr>
+<th>package</th>
+<td><a href="../packages/Bwork.Bwork.Layout.html">Bwork</a></td>
+</tr>
+<tr>
+<th>subpackage</th>
+<td>Bwork_Layout</td>
+</tr>
+<tr>
+<th>version</th>
+<td>v 0.2</td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___call"></a><div class="element clickable method public method___call" data-toggle="collapse" data-target=".method___call .collapse">
+<h2>This is the magic method used when a undefined method is called
+this will try to retrieve a helper for this function and execute the
+helper</h2>
+<pre>__call(string $name, array $arguments) : object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$arguments</h4>
+<code>array</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>object</code></div>
+</div></div>
+</div>
+<a id="method___get"></a><div class="element clickable method public method___get" data-toggle="collapse" data-target=".method___get .collapse">
+<h2>This is the magic method used to retrieve assigned variables set in the
+variables variable</h2>
+<pre>__get(string $key) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<a id="method_display"></a><div class="element clickable method public method_display" data-toggle="collapse" data-target=".method_display .collapse">
+<h2>This will immediately attempt to display the layout template file</h2>
+<pre>display() : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_fetch"></a><div class="element clickable method public method_fetch" data-toggle="collapse" data-target=".method_fetch .collapse">
+<h2>This will include the layout file which therefore should have added
+possible view layout content</h2>
+<pre>fetch() : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<a id="method_getContent"></a><div class="element clickable method public method_getContent" data-toggle="collapse" data-target=".method_getContent .collapse">
+<h2>This will return the current content</h2>
+<pre>getContent() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_getLayout"></a><div class="element clickable method public method_getLayout" data-toggle="collapse" data-target=".method_getLayout .collapse">
+<h2>This will return the current layout</h2>
+<pre>getLayout() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_mergeVariables"></a><div class="element clickable method public method_mergeVariables" data-toggle="collapse" data-target=".method_mergeVariables .collapse">
+<h2>This will merge set in the view with the layout variables</h2>
+<pre>mergeVariables(array $variables) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$variables</h4>
+<code>array</code>
+</div>
+</div></div>
+</div>
+<a id="method_setContent"></a><div class="element clickable method public method_setContent" data-toggle="collapse" data-target=".method_setContent .collapse">
+<h2>This will set the content variable</h2>
+<pre>setContent(string $content) : <a href="../classes/Bwork_Layout_Default.html">\Bwork_Layout_Default</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$content</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Bwork_Layout_Default.html">\Bwork_Layout_Default</a></code></div>
+</div></div>
+</div>
+<a id="method_setLayout"></a><div class="element clickable method public method_setLayout" data-toggle="collapse" data-target=".method_setLayout .collapse">
+<h2>This method will attempt to set the layout variable and perform some
+checks before doing so</h2>
+<pre>setLayout(string $layout, null $module) : <a href="../classes/Bwork_Layout_Default.html">\Bwork_Layout_Default</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$layout</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$module</h4>
+<code>null</code>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/Bwork_Layout_Exception.html">\Bwork_Layout_Exception</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Bwork_Layout_Default.html">\Bwork_Layout_Default</a></code></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_content"> </a><div class="element clickable property protected property_content" data-toggle="collapse" data-target=".property_content .collapse">
+<h2></h2>
+<pre>$content : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>protected</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_layout"> </a><div class="element clickable property protected property_layout" data-toggle="collapse" data-target=".property_layout .collapse">
+<h2></h2>
+<pre>$layout : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>protected</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_variables"> </a><div class="element clickable property protected property_variables" data-toggle="collapse" data-target=".property_variables .collapse">
+<h2></h2>
+<pre>$variables : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-01-26T20:55:25+01:00.<br></footer></div>
+</div>
+</body>
+</html>

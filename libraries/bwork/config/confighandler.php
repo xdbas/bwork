@@ -84,7 +84,7 @@ final class Bwork_Config_Confighandler
      *
      * @access public
      * @param string $ext
-     * @param Bwork_config_Parser $parser
+     * @param Bwork_Config_Parser $parser
      * @throws Bwork_Config_Exception
      * @return Bwork_Config_Confighandler
      */

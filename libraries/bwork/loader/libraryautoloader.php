@@ -9,6 +9,7 @@
  * @license http://creativecommons.org/licenses/by-nc-sa/3.0/
  */
 
+require_once 'bwork/loader/autoloader.php';
 /**
  * LibraryAutoloader
  *
@@ -19,7 +20,6 @@
  * @subpackage Bwork_Loader
  * @version v 0.2
  */
-require_once 'bwork/loader/autoloader.php';
 class Bwork_Loader_LibraryAutoloader implements Bwork_Loader_Autoloader
 {
 

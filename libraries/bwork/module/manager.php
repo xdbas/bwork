@@ -33,7 +33,7 @@ class Bwork_Module_Manager implements Bwork_Module_Module
      * This method can be used to add a series of modules
      * 
      * @access public
-     * @param Array $modules
+     * @param array $modules
      * @throws Bwork_Module_Exception
      * @return void
      */

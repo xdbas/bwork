@@ -24,7 +24,7 @@ interface Bwork_Router_Handler
     /**
      * Will attempt to resolve if there is a specified route set for parameter $url
      *
-     * @param Array $uri
+     * @param array $uri
      * @return boolean
      */
     public function checkRoute(array $uri);
