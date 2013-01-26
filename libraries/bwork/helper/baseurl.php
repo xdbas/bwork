@@ -31,13 +31,16 @@ class Bwork_Helper_BaseUrl
      * Called by __call() at either a view or layout and is the main function of this helper
      *
      * @access public
-     * @param String $url
+     * @param String $uri
      * @param Boolean $ssl
+     * @param Boolean $absolute
      * @return String Generated base url
      */
-    public function baseUrl($url = null, $ssl = false)
+    public function baseUrl($uri = null, $ssl = false, $absolute = false)
     {
-        return Bwork_Core_Registry::getInstance()->getResource('Bwork_Http_Request')->create($url, $ssl);
+        return Bwork_Core_Registry::getInstance()
+            ->getResource('Bwork_Http_Request')
+            ->create($uri, $ssl, $absolute);
     }
     
 }

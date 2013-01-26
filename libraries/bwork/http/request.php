@@ -225,12 +225,12 @@ class Bwork_Http_Request
     }
 
     /**
-     * This method is used to get raw post data
+     * This method is used to retrieve the put data
      *
      * @access public
      * @return mixed
      */
-    public function rawPost()
+    public function put()
     {
         return file_get_contents('php://input');
     }
