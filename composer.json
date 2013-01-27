@@ -2,7 +2,7 @@
     "name": "bwork/bwork",
     "type": "library",
     "description": "PHP MVC Framework",
-    "keywords": ["mvc","framework"],
+    "keywords": ["mvc","framework", "Bwork"],
     "homepage": "https://github.com/xdbas/bwork",
     "authors": [
         {
@@ -14,5 +14,8 @@
     ],
     "require": {
         "php": ">=5.2.0"
-    }
+    },
+    "support": {
+        "issues": "https://github.com/xdbas/bwork/issues"
+    },
 }
