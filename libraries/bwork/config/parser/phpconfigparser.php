@@ -41,7 +41,7 @@ final class Bwork_Config_Parser_PHPConfigParser
             throw new Bwork_Config_Exception(sprintf('%s is not a file or readable.', $file));
         }
 
-        require_once $file;
+        $config = array_merge($config, require_once $file);
 
         return $config;
     }
