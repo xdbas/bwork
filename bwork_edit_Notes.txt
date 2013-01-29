@@ -1,45 +1,15 @@
-edit notes Bwork
+#Multiple config files (application general database)
+#Docblocks in config files
+#Support for multiple Database Types for PDO
+#Project encoding support
+#Database Charset Encoding support
+#Redesigned helpers.. Static approach
+###Fix for same names in different namespaces
+#Filter support
+#RESTful routing
+#project Helpers (functions)
 
-- Coding style change(example) [
+#MySQLi Data model
 
-class XxxxXxxx
-{
-    const $DATA = 1;
-
-    public function xxxXxx()
-    {
-
-        if(true
-            || false !== true) {
-            return new array(
-                'str' => null
-            );
-        }
-        else {
-            $class->setValue(1)
-                  ->setValue(2);
-
-            return $var === null
-                ? self::$data
-                : 3;
-        }
-
-    }
-}
-
-]
-
-- http request return null getarg instead of error throwing or have option to set it off.
-- 1 registry getInstance when used multiply times
-- New Data MySQLi
-
-- edit interface name View/Layout
-
-- Css links added as helper
-- pagination class added to libs
-- pagination added as helper
-
-[
-- add new config
-- Namespace Helpers same name issue
-]
+#ASSETS helper
+#Pagination helper
