@@ -5,9 +5,13 @@
 #Database Charset Encoding support
 #Redesigned helpers.. Static approach
 ###Fix for same names in different namespaces
-#Filter support
+#Controller/action Filter support (Before/After)
 #RESTful routing
-#project Helpers (functions)
+#project Helpers (functions)(traits?)
+#make Controllers loadable via autoloader
+#Make view via static approach
+#View Template must be defined instead of resolving
+#Layout support for string return in controller
 
 #MySQLi Data model
 
