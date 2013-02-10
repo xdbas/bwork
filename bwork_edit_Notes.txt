@@ -9,9 +9,12 @@
 #RESTful routing
 #project Helpers (functions)(traits?)
 #make Controllers loadable via autoloader
+#Rework Autoloaders with directory adding and mapping
 #Make view via static approach
 #View Template must be defined instead of resolving
 #Layout support for string return in controller
+
+#Controller extends BaseController instead of Bwork_Controller_Action (abstract)
 
 #MySQLi Data model
 
