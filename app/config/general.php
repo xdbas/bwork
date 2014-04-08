@@ -20,6 +20,14 @@ return array(
 
     'sub_url'                 => '/',
 
+    'dev_env'                 => false,
+
+    '404_page'           => array(
+        'controller' => 'home',
+        'action'     => 'display404',
+        'module'     => null
+    ),
+
     'database' => array(
         'host'        => '127.0.0.1',
         'dbname'      => 'bwork',
