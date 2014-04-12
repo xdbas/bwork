@@ -1,21 +1,21 @@
 #Multiple config files (application general database)
 #Docblocks in config files
 #Support for multiple Database Types for PDO
-#Project encoding support
-#Database Charset Encoding support
+
 #Redesigned helpers.. Static approach
 ###Fix for same names in different namespaces
+
 #Controller/action Filter support (Before/After)
 #RESTful routing
-#project Helpers (functions)(traits?)
-#make Controllers loadable via autoloader
+
+
 #Rework Autoloaders with directory adding and mapping
 #Make view via static approach
 #View Template must be defined instead of resolving
+
+
 #Layout support for string return in controller
 
-
-#rework Error handling
 
 #Controller extends BaseController instead of Bwork_Controller_Action (abstract)
 

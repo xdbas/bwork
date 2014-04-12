@@ -12,60 +12,66 @@
 /**
  * Application
  *
- * This class contains system startup function that will not need saving in 
+ * This class contains system startup function that will not need saving in
  * the registry
  *
  * @package Bwork
  * @subpackage Bwork
  * @version v 0.4
  */
-class Bwork_Application 
+class Bwork_Application
 {
-    
+
     /**
      * This function will require the autoloader class and initialize the object
-     * 
+     *
      * @static
      * @access public
      * @return void
      */
-    public static function _initAutoloader() 
+    public static function _initAutoloader()
     {
         require_once 'bwork/loader/libraryautoloader.php';
-        spl_autoload_register(array(
-            'Bwork_Loader_LibraryAutoloader', 'autoload'
-        ));
+        spl_autoload_register(
+            array(
+                'Bwork_Loader_LibraryAutoloader',
+                'autoload'
+            )
+        );
 
         require_once 'bwork/loader/applicationautoloader.php';
-        spl_autoload_register(array(
-            'Bwork_Loader_ApplicationAutoloader', 'autoload'
-        ));
+        spl_autoload_register(
+            array(
+                'Bwork_Loader_ApplicationAutoloader',
+                'autoload'
+            )
+        );
     }
-    
+
     /**
      * This will initialize the bootstrap files where the system bootstrap is used
      * for system processes and the normal bootstrap is called from the
      * application
-     * 
+     *
      * @access public
      * @static
      * @return void
      */
-    public static function _initBootstrap() 
+    public static function _initBootstrap()
     {
         self::_initPreBootstrap();
-        
-        if(file_exists(APPLICATION_PATH.'bootstrap.php')) {
-            require_once APPLICATION_PATH.'bootstrap.php';
+
+        if (file_exists(APPLICATION_PATH . 'bootstrap.php')) {
+            require_once APPLICATION_PATH . 'bootstrap.php';
             $bootstrap = new Bootstrap();
         }
     }
-    
+
     /**
      * This function is a pre for _initBootstrap
      * @see Bwork_Application::_initBootstrap
      */
-    public static function _initPreBootstrap() 
+    public static function _initPreBootstrap()
     {
         $bootstrap = new Bwork_Bootstrap_Bootstrap();
     }
@@ -80,8 +86,9 @@ class Bwork_Application
      */
     public static function runTimeChecks()
     {
-        if(defined('APPLICATION_PATH') === false 
-            || defined('LIBRARY_PATH') === false) {
+        if (defined('APPLICATION_PATH') === false
+            || defined('LIBRARY_PATH') === false
+        ) {
             throw new RuntimeException ('APPLICATION_PATH And LIBRARY_PATH has to be defined for a stable run.');
         }
     }
@@ -95,29 +102,46 @@ class Bwork_Application
      */
     public static function initExceptionHandler()
     {
-        require_once 'bwork/exception/handler.php';
-        set_exception_handler(array("Bwork_Exception_Handler", "onException"));
+        set_exception_handler(
+            function ($e) {
+                require_once 'bwork/exception/handler.php';
+                Bwork_Exception_Handler::handleException($e);
+            }
+        );
+
+        set_error_handler(
+            function ($code, $error, $file, $line) {
+                require_once 'bwork/exception/handler.php';
+                Bwork_Exception_Handler::handleNormalError($code, $error, $file, $line);
+            }
+        );
+
+        register_shutdown_function(
+            function () {
+                require_once 'bwork/exception/handler.php';
+                Bwork_Exception_Handler::handleShutdown();
+            }
+        );
     }
 
-    
     /**
      * The main application function used to dispatch the project
-     * 
+     *
      * @static
      * @access public
      * @return void
      */
-    public static function Run() 
+    public static function Run()
     {
         self::runTimeChecks();
         self::initExceptionHandler();
 
         self::_initAutoloader();
         self::_initBootstrap();
-        
+
         $router = Bwork_Core_Registry::getInstance()->getResource('Bwork_Router_Router');
         $router->route();
-        
+
         self::Dispatch($router);
     }
 
@@ -127,10 +151,10 @@ class Bwork_Application
      * @param Bwork_Router_Router $router
      * @return void
      */
-    public static function Dispatch(Bwork_Router_Router $router) 
+    public static function Dispatch(Bwork_Router_Router $router)
     {
         $dispatcher = new Bwork_Controller_Dispatcher();
         $dispatcher->dispatch($router);
     }
-    
+
 }
