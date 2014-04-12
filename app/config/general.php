@@ -28,11 +28,14 @@ return array(
         'module'     => null
     ),
 
+    'encoding' => 'UTF-8',
+
     'database' => array(
         'host'        => '127.0.0.1',
         'dbname'      => 'bwork',
         'username'    => 'root',
         'password'    => 'root',
         'port'        => '3306',
+        'charset'     => 'utf8',
     ),
 );

@@ -21,7 +21,7 @@
  */
 abstract class Bwork_Data_PDO implements Bwork_Data_Interface
 {
-    
+
     /**
      * This will hold the PDO object
      *
@@ -41,11 +41,17 @@ abstract class Bwork_Data_PDO implements Bwork_Data_Interface
     public function  __construct()
     {
 
-        $dbParams   = Bwork_Core_Registry::GetInstance()
-                        ->getResource('Bwork_Config_Confighandler')
-                        ->get('database');
-        $dsn        = sprintf('mysql:dbname=%s;host=%s;port=%s', $dbParams['dbname'], $dbParams['host'], $dbParams['port']);
-        
+        $dbParams = Bwork_Core_Registry::GetInstance()
+            ->getResource('Bwork_Config_Confighandler')
+            ->get('database');
+        $dsn = sprintf(
+            'mysql:dbname=%s;host=%s;port=%s;charset=%s;',
+            $dbParams['dbname'],
+            $dbParams['host'],
+            $dbParams['port'],
+            $dbParams['charset']
+        );
+
         $username = $dbParams['username'];
         $password = $dbParams['password'];
 
@@ -53,8 +59,9 @@ abstract class Bwork_Data_PDO implements Bwork_Data_Interface
             $this->db = new PDO($dsn, $username, $password);
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        }
-        catch(PDOException $e) {
+
+            $this->db->exec(sprintf("set names %s", $dbParams['charset']));
+        } catch (PDOException $e) {
             throw new Bwork_Data_Exception('PDO Error: Failed connecting to database.');
         }
     }
@@ -81,5 +88,5 @@ abstract class Bwork_Data_PDO implements Bwork_Data_Interface
     {
         return $this->db;
     }
-    
+
 }

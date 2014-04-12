@@ -20,39 +20,54 @@
  */
 class Bwork_Http_Response
 {
-    
+
     /**
-     * This will hold all the content assigned from the dispatcher which 
+     * This will hold all the content assigned from the dispatcher which
      * retrieves its data from a controller
-     * 
+     *
      * @var string $body
-     * @access public 
+     * @access public
      */
     public $body;
-    
+
     /**
-     * This will hold a status code possible set in a controller its default 
+     * This will hold the content type for http response
+     *
+     * @var string $contentType
+     * @access public
+     */
+    public $contentType = 'text/html';
+
+    /**
+     * This will hold the content charset type for the http response
+     *
+     * @var string
+     */
+    public $charset = 'UTF-8';
+
+    /**
+     * This will hold a status code possible set in a controller its default
      * value is 200
      *
      * @var int $statusCode
      * @access public
      */
     public $statusCode = 200;
-    
+
     /**
-     * This will hold the status message possible set in a controller its 
+     * This will hold the status message possible set in a controller its
      * default value is 'OK'
      *
      * @var string $statusMessage
      */
     public $statusMessage = 'OK';
-    
+
     /**
      * This is een array with possible header statuses that will be used in the
      * set status function
      *
      * @var array $response
-     * @access protected 
+     * @access protected
      */
     protected $response = array(
         100 => 'Continue',
@@ -96,7 +111,7 @@ class Bwork_Http_Response
         504 => 'Gateway Timeout',
         505 => 'HTTP Version Not Supported',
     );
-    
+
     /**
      * This method is used to set the content ready for output
      *
@@ -111,6 +126,22 @@ class Bwork_Http_Response
     }
 
     /**
+     * @param string $contentType
+     */
+    public function setContentType($contentType)
+    {
+        $this->contentType = $contentType;
+    }
+
+    /**
+     * @param string $charset
+     */
+    public function setCharset($charset)
+    {
+        $this->charset = $charset;
+    }
+
+    /**
      * This function will attempt to set a status for the header information it
      * is possible to choose from the predefined array.
      *
@@ -122,30 +153,32 @@ class Bwork_Http_Response
      */
     public function setStatus($code, $description = null)
     {
-        if(array_key_exists($code, $this->response)) {
+        if (array_key_exists($code, $this->response)) {
             $description = $this->response[$code];
+        } else {
+            if ($description === null) {
+                throw new Bwork_Http_Exception(sprintf('Code not found, please define a description for [%s]', $code));
+            }
         }
-        else if($description === null) {
-            throw new Bwork_Http_Exception(sprintf('Code not found, please define a description for [%s]', $code));
-        }
-        
-        $this->statusCode    = $code;
+
+        $this->statusCode = $code;
         $this->statusMessage = $description;
 
         return $this;
     }
-    
+
     /**
      * This will essentially use the status code and message to output header
      * information and echo the content.
-     * 
+     *
      * @access public
      * @return void
      */
     public function outputStatus()
     {
+        header(sprintf('Content-Type: %s; charset=%s', $this->contentType, $this->charset));
         header(sprintf('HTTP/1.1 %d %s', $this->statusCode, $this->statusMessage));
         echo $this->body;
     }
-    
+
 }
