@@ -3,8 +3,8 @@
 return array(
     'route' => array(
         'home/routetest' => array(
-            'controller'    => 'test',
-            'action'        => 'test',
+            'controller'    => 'home',
+            'action'        => 'index',
             'module'        => null,
             'mockParams'    => null
         )

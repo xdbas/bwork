@@ -179,6 +179,7 @@ class Bwork_Http_Response
         header(sprintf('Content-Type: %s; charset=%s', $this->contentType, $this->charset));
         header(sprintf('HTTP/1.1 %d %s', $this->statusCode, $this->statusMessage));
         echo $this->body;
+        exit;
     }
 
 }
