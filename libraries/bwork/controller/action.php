@@ -141,11 +141,17 @@ abstract class Bwork_Controller_Action
         return $this;
     }
 
+    /**
+     *
+     */
     public function beforeFilter()
     {
 
     }
 
+    /**
+     *
+     */
     public function afterFilter()
     {
 
@@ -167,7 +173,7 @@ abstract class Bwork_Controller_Action
         $this->setMockParams($router);
 
         $action = $router->action . 'Action';
-        $this->beforeFilter();
+
         $returnData = $this->$action(isset($this->mockParams) ? $this->mockParams : null);
 
         if (is_string($returnData)
@@ -194,6 +200,13 @@ abstract class Bwork_Controller_Action
      */
     protected function handleString($content = null)
     {
+        if ($this->layoutEnabled == true) {
+            $layout = Bwork_Core_Registry::getInstance()->getResource('Bwork_Layout_Layout');
+            $layout->setContent($content);
+
+            $content = $layout->fetch();
+        }
+
         $this->response->setBody($content);
     }
 
