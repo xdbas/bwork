@@ -56,11 +56,17 @@ abstract class Bwork_Data_PDO implements Bwork_Data_Interface
         $password = $dbParams['password'];
 
         try {
-            $this->db = new PDO($dsn, $username, $password);
-            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $this->db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+            $this->db = new PDO(
+                $dsn,
+                $username,
+                $password,
+                array(
+                    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES " . $dbParams['charset'],
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ
+                )
+            );
 
-            $this->db->exec(sprintf("set names %s", $dbParams['charset']));
         } catch (PDOException $e) {
             throw new Bwork_Data_Exception('PDO Error: Failed connecting to database.');
         }

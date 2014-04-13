@@ -8,7 +8,6 @@
 
 
 #Rework Autoloaders with directory adding and mapping
-#Make view via static approach
 
 #View Template must be defined instead of resolving
 
