@@ -22,7 +22,7 @@
 final class Bwork_Router_Handler_Default
     implements Bwork_Router_Handler
 {
-    
+
     /**
      * Will store the route with the parameters gained when resolving a route
      *
@@ -40,12 +40,12 @@ final class Bwork_Router_Handler_Default
      */
     public function checkRoute(array $uri)
     {
-        $uri    = implode('/', $uri);
+        $uri = implode('/', $uri);
         $config = Bwork_Core_Registry::getInstance()->getResource('Bwork_Config_Confighandler');
-        
-        if($config->exists('route')) {
+
+        if ($config->exists('route')) {
             $routes = $config->get('route');
-            if(array_key_exists($uri, $routes)) {
+            if (array_key_exists($uri, $routes)) {
 
                 $route = $routes[$uri];
                 $this->route = new Bwork_Router_Route(
@@ -58,10 +58,10 @@ final class Bwork_Router_Handler_Default
                 return true;
             }
         }
-        
+
         return false;
     }
-    
+
     /**
      * Will return the resolved Params used for dispatching
      *

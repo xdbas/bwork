@@ -142,19 +142,26 @@ abstract class Bwork_Controller_Action
     }
 
     /**
+     * The before filter gets called before the action
+     * When the before filter returns a string or a layout
+     * the action will not be invoked
      *
+     * Even though this is not an abstract method it does not contain
+     * any logic. This method should be overwritten in the subclass.
+     *
+     * @access public
      */
     public function beforeFilter()
     {
-
+        return;
     }
 
     /**
-     *
+     * @todo: Think about logic
      */
     public function afterFilter()
     {
-
+        return;
     }
 
     /**
@@ -162,27 +169,30 @@ abstract class Bwork_Controller_Action
      *
      * @param Bwork_Router_Router $router
      * @access public
+     * @final
      * @throws Bwork_Controller_Exception
      * @return void
      */
-    public function invoke(Bwork_Router_Router $router)
+    final public function invoke(Bwork_Router_Router $router)
     {
-        $this->router = $router;
-
         Bwork_Controller_Action::__construct();
+        $this->router = $router;
         $this->setMockParams($router);
 
-        $action = $router->action . 'Action';
+        $response = $this->beforeFilter();
 
-        $returnData = $this->$action(isset($this->mockParams) ? $this->mockParams : null);
+        if ($response === null) {
+            $action = $router->action . 'Action';
+            $response = $this->$action($this->mockParams);
+        }
 
-        if (is_string($returnData)
-            || is_null($returnData)
+        if ($response === null
+            || is_string($response) === true
         ) {
-            $this->handleString($returnData);
+            $this->handleString($response);
         } else {
-            if (is_object($returnData)) {
-                $this->handleView($returnData);
+            if ($response instanceof Bwork_View_View === true) {
+                $this->handleView($response);
             } else {
                 throw new Bwork_Controller_Exception('Return type from controllerAction should either be a string or an object');
             }

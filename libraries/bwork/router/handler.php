@@ -20,7 +20,7 @@
  */
 interface Bwork_Router_Handler
 {
-    
+
     /**
      * Will attempt to resolve if there is a specified route set for parameter $url
      *
@@ -28,12 +28,12 @@ interface Bwork_Router_Handler
      * @return boolean
      */
     public function checkRoute(array $uri);
-    
+
     /**
      * Will return the controller/action/module/mockparams parameters in object format
      * this method will only get called when checkRoute returns true. Either return
      * a Bwork_Router_Route- or StdClass object.
-     * 
+     *
      * Example:
      * <code>
      * return Bwork_Router_Route(
@@ -46,5 +46,5 @@ interface Bwork_Router_Handler
      * @return Bwork_Router_Route
      */
     public function getParams();
-    
+
 }

@@ -1,6 +1,6 @@
 <?php
 
-class HomeController extends Bwork_Controller_Action {
+class HomeController extends BaseController {
 
     public function indexAction() {
         return new Bwork_View_Default();

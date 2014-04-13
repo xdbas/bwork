@@ -18,13 +18,13 @@
  * @subpackage Bwork_Router_Handler
  * @version v 0.3
  */
-final class Bwork_Router_Handler_Module 
+final class Bwork_Router_Handler_Module
     implements Bwork_Router_Handler
 {
-    
+
     /**
      * Will store the route with the parameters gained when resolving a route
-     * 
+     *
      * @var array
      * @access protected
      */
@@ -39,31 +39,32 @@ final class Bwork_Router_Handler_Module
      */
     public function checkRoute(array $uri)
     {
-        $registry      = Bwork_Core_Registry::getInstance();
-        $config        = $registry->getResource('Bwork_Config_Confighandler');
+        $registry = Bwork_Core_Registry::getInstance();
+        $config = $registry->getResource('Bwork_Config_Confighandler');
         $moduleManager = $registry->getResource('Bwork_Module_Manager');
 
         $modules = $moduleManager->getModules();
 
-        if(count($modules) < 1
-            || count($uri) < 1) {
+        if (count($modules) < 1
+            || count($uri) < 1
+        ) {
             return false;
         }
 
-        foreach($modules as $module) {
-            if($module == strtolower($uri[0])) {
+        foreach ($modules as $module) {
+            if ($module == strtolower($uri[0])) {
                 $moduleManager->initialize($module);
                 $configModule = $config->get($module);
 
                 $this->route = new Bwork_Router_Route(
-                    isset($uri[1])? $uri[1] : $configModule['default_controller'],
-                    isset($uri[2])? $uri[2] : $configModule['default_action'],
+                    isset($uri[1]) ? $uri[1] : $configModule['default_controller'],
+                    isset($uri[2]) ? $uri[2] : $configModule['default_action'],
                     $module
                 );
 
                 return true;
             }
-        }   	
+        }
     }
 
     /**

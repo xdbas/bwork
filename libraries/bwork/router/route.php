@@ -66,8 +66,8 @@ class Bwork_Router_Route
     public function __construct($controller, $action, $module = null, $mockParams = array())
     {
         $this->controller = $controller;
-        $this->action     = $action;
-        $this->module     = $module;
+        $this->action = $action;
+        $this->module = $module;
         $this->mockParams = $mockParams;
     }
 }
