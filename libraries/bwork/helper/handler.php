@@ -15,6 +15,7 @@
  * This class is used to handle helpers used in the view it will attempt to 
  * check for an existing helper and execute its main function.
  *
+ * @deprecated
  * @package Bwork
  * @subpackage Bwork_Helper
  * @version v 0.1
@@ -52,6 +53,7 @@ class Bwork_Helper_Handler
      * @static
      * @access public
      * @return void
+     * @deprecated
      */
     public static function registerNamespace($namespace) 
     {
@@ -74,6 +76,7 @@ class Bwork_Helper_Handler
      * @access public
      * @static
      * @return boolean
+     * @deprecated
      */
     public static function checkPath($path) 
     {
@@ -88,6 +91,7 @@ class Bwork_Helper_Handler
      * @access public
      * @static
      * @return object
+     * @deprecated
      */
     public static function retrieveHelper($helper) 
     {
@@ -107,7 +111,8 @@ class Bwork_Helper_Handler
      * @param string $helper
      * @access protected
      * @static
-     * @return boolean 
+     * @return boolean
+     * @deprecated
      */
     protected static function requireHelperFile($helper) 
     {
@@ -133,7 +138,8 @@ class Bwork_Helper_Handler
      * @param string $helper
      * @access protected
      * @static
-     * @return boolean 
+     * @return boolean
+     * @deprecated
      */
     protected static function isAssigned($helper) 
     {
