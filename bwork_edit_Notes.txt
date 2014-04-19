@@ -12,7 +12,13 @@
 #View Template must be defined instead of resolving
 
 
-#MySQLi Data model
-
 #ASSETS helper
 #Pagination helper
+
+
+##Namespace framework
+##Add PSR-0 File structure
+##ADD PSR-0 Autoloading
+
+
+https://github.com/php-fig/fig-standards
