@@ -1,4 +1,5 @@
 <?php
+namespace Bwork;
 /**
  * Bwork Framework
  *
@@ -19,7 +20,7 @@
  * @subpackage Bwork
  * @version v 0.4
  */
-class Bwork_Application
+class Application
 {
 
     /**
@@ -31,21 +32,9 @@ class Bwork_Application
      */
     public static function _initAutoloader()
     {
-        require_once 'bwork/loader/libraryautoloader.php';
-        spl_autoload_register(
-            array(
-                'Bwork_Loader_LibraryAutoloader',
-                'autoload'
-            )
-        );
-
-        require_once 'bwork/loader/applicationautoloader.php';
-        spl_autoload_register(
-            array(
-                'Bwork_Loader_ApplicationAutoloader',
-                'autoload'
-            )
-        );
+        require_once 'Autoloader.php';
+        $autoloader = new Autoloader(__NAMESPACE__, LIBRARY_PATH);
+        $autoloader->register();
     }
 
     /**
@@ -61,10 +50,10 @@ class Bwork_Application
     {
         self::_initPreBootstrap();
 
-        if (file_exists(APPLICATION_PATH . 'bootstrap.php')) {
-            require_once APPLICATION_PATH . 'bootstrap.php';
-            $bootstrap = new Bootstrap();
-        }
+//        if (file_exists(APPLICATION_PATH . 'bootstrap.php')) {
+//            require_once APPLICATION_PATH . 'bootstrap.php';
+//            $bootstrap = new Bootstrap();
+//        }
     }
 
     /**
@@ -73,7 +62,7 @@ class Bwork_Application
      */
     public static function _initPreBootstrap()
     {
-        $bootstrap = new Bwork_Bootstrap_Bootstrap();
+        (new Bootstrap\LibraryBootstrap());
     }
 
     /**
@@ -81,7 +70,7 @@ class Bwork_Application
      *
      * @access public
      * @static
-     * @throws RuntimeException
+     * @throws \RuntimeException
      * @return void
      */
     public static function runTimeChecks()
@@ -89,7 +78,7 @@ class Bwork_Application
         if (defined('APPLICATION_PATH') === false
             || defined('LIBRARY_PATH') === false
         ) {
-            throw new RuntimeException ('APPLICATION_PATH And LIBRARY_PATH has to be defined for a stable run.');
+            throw new \RuntimeException ('APPLICATION_PATH And LIBRARY_PATH has to be defined for a stable run.');
         }
     }
 
@@ -105,21 +94,21 @@ class Bwork_Application
         set_exception_handler(
             function ($e) {
                 require_once 'bwork/exception/handler.php';
-                Bwork_Exception_Handler::handleException($e);
+                Exception\Handler::handleException($e);
             }
         );
 
         set_error_handler(
             function ($code, $error, $file, $line) {
                 require_once 'bwork/exception/handler.php';
-                Bwork_Exception_Handler::handleNormalError($code, $error, $file, $line);
+                Exception\Handler::handleNormalError($code, $error, $file, $line);
             }
         );
 
         register_shutdown_function(
             function () {
                 require_once 'bwork/exception/handler.php';
-                Bwork_Exception_Handler::handleShutdown();
+                Exception\Handler::handleShutdown();
             }
         );
     }
@@ -138,6 +127,7 @@ class Bwork_Application
 
         self::_initAutoloader();
         self::_initBootstrap();
+        exit;
 
         $router = Bwork_Core_Registry::getInstance()->getResource('Bwork_Router_Router');
         $router->route();

@@ -1,95 +1,70 @@
 <?php
-/**
- * Bwork Framework
- *
- * @package Bwork
- * @subpackage Bwork_Bootstrap
- * @author Bas van Manen <basje1[at]gmail.com>
- * @version $id: Bwork Framework v 0.1
- * @license http://creativecommons.org/licenses/by-nc-sa/3.0/
- */
+namespace Bwork\Bootstrap;
+
+    /**
+     * Bwork Framework
+     *
+     * @package Bwork
+     * @subpackage Bwork_Bootstrap
+     * @author Bas van Manen <basje1[at]gmail.com>
+     * @version $id: Bwork Framework v 0.1
+     * @license http://creativecommons.org/licenses/by-nc-sa/3.0/
+     */
 
 /**
- * Bootstrap
+ * AbstractBootstrap
  *
- * This class will initialize a few system processes that need saving in the
- * registry object and should therefore not be executed by the user.
+ * This class will execute all class methods starting with _init from its
+ * children and will when its return type equals an object add it to the
+ * Registry.
  *
  * @package Bwork
  * @subpackage Bwork_Bootstrap
- * @uses Bwork_Bootstrap_AbstractBootstrap
- * @version v 0.1
+ * @version v 0.2
+ * @abstract
  */
-class Bwork_Bootstrap_Bootstrap extends Bwork_Bootstrap_AbstractBootstrap
+abstract class Bootstrap
 {
 
     /**
-     * This will create the Http Request object
+     * The construction method that handles the class function
      *
      * @access public
-     * @return Bwork_Http_Request
+     * @throws \Exception
+     * @return \Bwork\Bootstrap\Bootstrap
      */
-    public function _initHttpRequest()
+    public function __construct()
     {
-        $httpRequest = new Bwork_Http_Request();
+        $methods = get_class_methods($this);
 
-        return $httpRequest;
-    }
+        foreach ($methods as $key => $value) {
+            if (substr(strtolower($value), 0, 5) == '_init') {
 
-    /**
-     * This create the Http Response object
-     *
-     * @access public
-     * @return Bwork_Http_Response
-     */
-    public function _initHttpResponse()
-    {
-        $httpResponse = new Bwork_Http_Response();
+                $methodReflection = new ReflectionMethod($this, $value);
+                $returnData = $methodReflection->invoke($this);
 
-        return $httpResponse;
-    }
+                if ($returnData !== null) {
+                    if (is_object($returnData) === false) {
+                        throw new \Exception(sprintf(
+                            'The return data of %s should be either null or an object.',
+                            $value
+                        ));
+                    }
 
-    /**
-     * This will create the Config handler and assign default parsers.
-     *
-     * @access public
-     * @return Bwork_Config_Confighandler
-     */
-    public function _initConfig()
-    {
-        $config = new Bwork_Config_Confighandler();
+                    if ($returnData instanceof Bwork_Bootstrap_Alias) {
+                        Bwork_Core_Registry::getInstance()->setResource(
+                            $returnData->object,
+                            $returnData->name,
+                            $returnData->override
+                        );
+                    } else {
+                        Bwork_Core_Registry::getInstance()->setResource($returnData);
+                    }
+                }
 
-        $config->setParser('php', new Bwork_Config_Parser_PHPConfigParser())
-            ->setParser('xml', new Bwork_Config_Parser_XMLConfigParser())
-            ->setParser('ini', new Bwork_Config_Parser_IniConfigParser())
-            ->loadFile(APPLICATION_PATH . 'config' . DIRECTORY_SEPARATOR . 'general.php');
+            }
+        }
 
-        return $config;
-    }
-
-    public function _initSettings()
-    {
-        $config = Bwork_Core_Registry::getInstance()->getResource('Bwork_Config_Confighandler');
-        $response = Bwork_Core_Registry::getInstance()->getResource('Bwork_Http_Response');
-
-        $response->setCharset($config->get('encoding'));
-    }
-
-    /**
-     * This will create the router object and assign the default handler
-     *
-     * @access public
-     * @return Bwork_Router_Router
-     */
-    public function _initRouter()
-    {
-        $router = new Bwork_Router_Router(
-            Bwork_Core_Registry::getInstance()->getResource('Bwork_Http_Request')
-        );
-        $router->setHandler(new Bwork_Router_Handler_Default())
-            ->setHandler(new Bwork_Router_Handler_Module());
-
-        return $router;
     }
 
 }

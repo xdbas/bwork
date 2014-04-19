@@ -1,4 +1,6 @@
 <?php
+namespace Bwork\Exception;
+
 /**
  * Bwork Framework
  *
@@ -19,19 +21,23 @@
  * @subpackage Bwork_Exception
  * @version v 0.2
  */
-class Bwork_Exception_Handler
+class Handler
 {
 
-    public static $errorCodes = array(
+    public static $errorCodes = [
         1 => 'E_ERROR',
         2 => 'E_WARNING',
         4 => 'E_PARSE',
         8 => 'E_NOTICE',
+        16 => 'E_CORE_ERROR',
+        32 => 'E_CORE_WARNING',
+        64 => 'E_COMPILE_ERROR',
+        128 => 'E_COMPILE_WARNING',
         256 => 'E_USER_ERROR',
         512 => 'E_USER_WARNING',
         1024 => 'E_USER_NOTICE',
         16348 => 'E_USER_DEPRECATED',
-    );
+    ];
 
     public static function errorCode($code)
     {
@@ -45,11 +51,11 @@ class Bwork_Exception_Handler
      *
      * @static
      * @access public
-     * @param Exception $exception
+     * @param \Exception $exception
      * @param string $file
      * @param int $line
      */
-    public static function handleException(Exception $exception, $file = null, $line = null)
+    public static function handleException(\Exception $exception, $file = null, $line = null)
     {
         $exceptionMessage = $exception->getMessage();
         $exceptionLine = $line !== null
@@ -93,7 +99,7 @@ class Bwork_Exception_Handler
             return;
         }
 
-        static::handleException(new Exception($error, $code), $file, $line);
+        static::handleException(new \Exception($error, $code), $file, $line);
     }
 
     /**
@@ -110,7 +116,7 @@ class Bwork_Exception_Handler
             $line = null;
 
             extract($error, EXTR_OVERWRITE);
-            static::handleException(new Exception($message, $type), $file, $line);
+            static::handleException(new \Exception($message, $type), $file, $line);
         }
     }
 
