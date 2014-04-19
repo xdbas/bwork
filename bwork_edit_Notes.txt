@@ -19,6 +19,7 @@
 ##Namespace framework
 ##Add PSR-0 File structure
 ##ADD PSR-0 Autoloading
+##ADD PSR-1/2 Code style
 
 
 https://github.com/php-fig/fig-standards
